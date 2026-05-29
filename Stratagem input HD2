@@ -27,6 +27,18 @@ def on_press(key):
             tap(Key.up)
             tap(Key.left)
             tap(Key.right)
+        
+        elif getattr(key, 'vk', None) == 99:
+            print("Hellbomb registered")
+
+            tap(Key.down)
+            tap(Key.up)
+            tap(Key.left)
+            tap(Key.down)
+            tap(Key.up)
+            tap(Key.right)
+            tap(Key.down)
+            tap(Key.up)
 
     except AttributeError:
         pass
