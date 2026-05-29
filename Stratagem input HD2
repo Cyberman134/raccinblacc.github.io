@@ -1,31 +1,35 @@
-import pyautogui as pag
 from pynput import keyboard
+from pynput.keyboard import Key, Controller
 
+kb = Controller()
+
+def tap(key):
+    kb.press(key)
+    kb.release(key)
 
 def on_press(key):
-    print("Key pressed:", key,
-          "vk=", getattr(key, "vk", None),
-          "char=", getattr(key, "char", None))
     try:
-        if getattr(key, 'vk') and key.vk == 97:
-            print("\nReinforce registered")
-            pag.press('up')
-            pag.press('down')
-            pag.press('right')
-            pag.press('left')
-            pag.press('up')
-        elif getattr(key, 'vk') and key.vk == 98:
-            print("\nRailgun registered")
-            pag.press('down')
-            pag.press('right')
-            pag.press('down')
-            pag.press('up')
-            pag.press('left')
-            pag.press('right')
+        if getattr(key, 'vk', None) == 97:
+            print("Reinforce registered")
+
+            tap(Key.up)
+            tap(Key.down)
+            tap(Key.right)
+            tap(Key.left)
+            tap(Key.up)
+
+        elif getattr(key, 'vk', None) == 98:
+            print("Railgun registered")
+
+            tap(Key.down)
+            tap(Key.right)
+            tap(Key.down)
+            tap(Key.up)
+            tap(Key.left)
+            tap(Key.right)
+
     except AttributeError:
         pass
-
-
 
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
