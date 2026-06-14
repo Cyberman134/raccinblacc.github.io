@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+
+<!-- =========================================================
+   1. CSS START
+========================================================= -->
+<style>
+/*
+SHIT Å GJØRE:
+- Litt generelt:
+   - Lag rom mellom overskrift og pages
+   - Sideoppsett
+   - Se litt på fargeoppsettet
+   - Mørkemodus
+
+- Spice opp ukeplan-siden
+   - Gjør ting med sideoppsett
+
+- Lage css-ordning for hoveddivene
+- Spice opp andre enn ukeplan-siden
+- Den jevla timeplanen
+- Se litt på hemmelig-siden
+
+*/
+ * { margin: 0; padding: 0; }
+ h1 { text-align: center; font-size: 9vh; font-family: verdana; } 
+ h2 { font-size: 250%; font-family: verdana; margin: 0; padding: 10px; } 
+ b { font-size: 120%; font-family: 'Arial Black'; }
+ 
+ hh {font-size:50%}
+ titles { font-size: 140%; padding: 0px;}
+ 
+  html, body {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+  } 
+ 
+  html {
+   scroll-behavior: smooth;
+   scroll-padding-top: 120px; /* adjust to navbar height */
+  } 
+
+ /* Oppsett */
+ .city {
+   background-color: lightseagreen;
+   color: solid black;
+   border: 2px solid black;
+   margin: 0px;
+   padding: 0px;
+  }
+ .spcity {
+   background-color: lightseagreen;
+   color: black;
+   border: 2px solid black;
+   padding: 1rem;
+   position: fixed;
+   top: 0;
+   width: 100%;
+   height: 20vh;
+  }
+
+  /* Nav bar */
+
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav li {
+    cursor: pointer;
+    user-select: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: rgb(32, 178, 170);
+    font-family: 'Century Gothic';
+    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
+    border: 2px rgb(32, 178, 170) solid;
+    font-size: 2vh;
+    width: 8em;  
+    text-align: center;
+  }
+
+ nav li:hover {
+    background-color: turquoise;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
+    border: 2px solid rgb(36, 36, 36);
+    width: 10em;
+    text-align: center;
+  }
+
+  /*Sidebar*/
+
+  .sidebar {
+    flex: 1 1 0;
+    background-color: lightseagreen;
+    max-width: 300px;
+    height: 60vh;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+    position: sticky;
+    z-index: inherit;
+    left: 4px;
+    top: calc(var(--spcity-height, 0px) + 10px);
+    align-self: flex-start;
+  }
+
+  .sidebar h3 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar .menu {
+    margin: 0 -1rem;
+  }
+
+  .sidebar .menu .menu-item {
+    padding: 1em;
+    display: block;
+    text-decoration: none;
+    transition: 0.2s linear;
+  }
+
+  .sidebar .menu .menu-item:hover,
+  .sidebar .menu .menu-item:is-active {
+    background-color: rgb(243, 245, 245);
+    color: rgb(238, 238, 238);
+    border-right: 5px solid black;
+    transition: 0.2s linear;
+  }
+
+  aside {
+    float: none; /* float breaks sticky behavior inside flex layout */
+  }
+
+  /*Pages and subpages*/
+
+ .page {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+ }
+
+ #page1.active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+  .hidden { display: none;}
+  .active { display: inline-block;}
+  .subpage { display: none; }
+  .subpage.active { display: inline-block; } 
+ 
+  /*active and inactive nav buttons*/
+
+  .pagenavin {
+   font-family: 'Century Gothic'; 
+   display: inline-block; 
+   text-decoration: none; 
+   color: black;
+   } 
+ 
+  .pagenava {
+   font-family: 'Century Gothic'; 
+   display: inline-block; 
+   text-decoration: none; 
+   color: black;
+   background-color: darkturquoise; 
+   border-radius: 5px;
+   text-align: center;
+   border: 2px solid black;
+   width: 25vh;
+  }
+
+  /*scroll button*/
+
+ #myBtn {
+   opacity: 0;
+   visibility: hidden;
+   transform: translateY(20px); /* start slightly below */
+   transition: opacity 0.3s ease, transform 0.3s ease;
+   position: fixed;
+   bottom: 20px;
+   right: 30px;
+   z-index: 99;
+   font-size: 18px;
+   border: none;
+   outline: none;
+   background-color: darkturquoise;
+   color: white;
+   cursor: pointer;
+   padding: 15px;
+   border-radius: 4px;
+ } 
+ 
+ #myBtn.show {
+   opacity: 1;
+   visibility: visible;
+   transform: translateY(0); /* slide into place */
+ }
+
+ /* the planner shit i struggled with. fuck load placements */
+
+ #planner {
+  flex: 1 1 0;
+  min-inline-size: 0;
+  width: 100%;
+ }
+
+ #planner > div {
+  margin-left: auto;
+  margin-right: 0;
+  width: min(100%);
+  max-width: 100%;
+ }
+
+ #page1 table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+  #page1 td {
+    border: 1px solid black;
+    vertical-align: top;
+    padding: 8px;
+  }
+
+  #page1 th {
+    border: 1px solid black;
+    vertical-align: top;
+    padding: 8px;
+    font-size: 120%
+  }
+
+#page1 .active-week{
+  scroll-margin-top: var(--spcity-height, 120px);
+}
+#page1 .active-week .date-cell {
+  background-color: turquoise;
+}
+
+#page1 .inactive-week .date-cell {
+  background-color: lightseagreen;
+}
+
+#page1 .past-week .date-cell {
+  background-color: lightslategray;
+}
+
+#page1 .active-week h2 {
+  background-color: turquoise;
+  border: 2px solid black; 
+}
+
+#page1 .inactive-week h2 {
+  background-color: lightseagreen;
+  border: 2px solid black; 
+}
+
+#page1 .past-week h2 {
+  background-color: lightslategray;
+  border: 2px solid black; 
+}
+
+#page1 .active-week table {
+  border: 1px solid black
+}
+
+#page1 .inactive-week table {
+  border: 1px solid black;
+}
+
+#page1 .past-week table {
+  border: 1px solid black;
+}
+
+#page1 .active-week th {
+  background-color: turquoise;
+}
+
+#page1 .past-week th {
+  background-color: lightslategray;
+}
+
+#page1 .inactive-week th {
+  background-color: lightseagreen;
+}
+
+#page1 .active-week .weekend-row td:not(.date-cell) {
+  background-color: rgba(64, 224, 208, 0.3);
+}
+
+#page1 .inactive-week .weekend-row td:not(.date-cell) {
+  background-color: rgba(32, 178, 170, 0.3);
+}
+
+#page1 .past-week .weekend-row td:not(.date-cell) {
+  background-color: rgba(119, 136, 153, 0.3);
+}
+ </style>
+<!-- =========================================================
+   1. CSS STOP
+========================================================= -->
+
+
+
+<script>
+/* =========================================================
+   2. JS START
+========================================================= */
+
+// Update nav button styles based on active page
+function updateNavActive(pageId) {
+  const ids = ['page1','page2','page3','page4'];
+  ids.forEach(id => {
+    const btn = document.getElementById(id + 'Button');
+    if (!btn) return;
+    if (pageId === id) {
+      btn.classList.remove('pagenavin');
+      btn.classList.add('pagenava');
+    } else {
+      btn.classList.remove('pagenava');
+      btn.classList.add('pagenavin');
+    }
+  });
+}
+
+//Pages
+function showPage(pageId) {
+
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p =>
+        p.classList.remove('active')
+    );
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Show da pages
+    document.getElementById(pageId).classList.add('active');
+   // ensure nav reflects the initial active page
+  updateNavActive(pageId);
+  // get the navbar gap
+  (function syncNavOffsets(){
+    function updateNavOffset(){
+      const nav = document.querySelector('.spcity');
+      const navHeight = nav ? nav.offsetHeight : 0;
+      document.documentElement.style.setProperty('--spcity-height', navHeight + 'px');
+      document.documentElement.style.setProperty('scroll-padding-top', navHeight + 'px');
+      document.body.style.paddingTop = navHeight + 10 +'px';
+    }
+    updateNavOffset();
+    window.addEventListener('resize', updateNavOffset);
+  })();
+  // Update nav button colours
+  updateNavActive(pageId);
+
+    // Reset secret button when returning to P1
+    if (pageId === "page1") {
+        clickCount = 0;
+        document.getElementById("secretButton").style.display = "none";
+    }
+    // Stopper Tetris hvis man forlater Hemmelig-siden
+    if (pageId !== "Hemmelig") {
+        TETRIS.stop();
+        tetrisStarted = false;
+    }
+    if (pageId === "Hemmelig" && document.getElementById("tetris").classList.contains("active")) {
+    TETRIS.init();
+    }
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    TETRIS.stop();
+    tetrisStarted = false;
+  }
+});
+
+//stopper tetris om ute av webside
+function showSubpage(subpageId) {
+
+    document.querySelectorAll('.subpage').forEach(p =>
+        p.classList.remove('active')
+    );
+
+    document.getElementById(subpageId).classList.add('active');
+    if (subpageId !== "tetris") {
+        TETRIS.stop();
+        tetrisStarted = false;
+    }
+}
+
+//'Nåværende' knapp
+	function passive(x) {
+	  x.style.backgroundColor = "darkturquoise";
+	}
+
+	function lightup(x) {
+	  x.style.backgroundColor = "turquoise";
+	}
+
+	function scrollToSection(e, el) {
+   e.preventDefault();
+   const id = el.getAttribute("href").substring(1);
+   const target = document.getElementById(id);
+   const nav = document.querySelector('.spcity');
+   const navHeight = nav ? nav.offsetHeight : 0;
+   if (target) {
+     const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8; // small gap
+     window.scrollTo({ top, behavior: 'smooth' });
+   }
+}
+
+//Topp-knapp
+document.addEventListener("DOMContentLoaded", function () {
+  // ensure nav reflects the initial active page
+  updateNavActive('page1');
+  // Keep scroll offsets in sync with the actual sticky nav height
+  (function syncNavOffsets(){
+    function updateNavOffset(){
+      const nav = document.querySelector('.spcity');
+      const navHeight = nav ? nav.offsetHeight : 0;
+      document.documentElement.style.setProperty('--spcity-height', navHeight + 'px');
+      document.documentElement.style.setProperty('scroll-padding-top', navHeight + 'px');
+      document.body.style.paddingTop = navHeight + 10 + 'px';
+    }
+    updateNavOffset();
+    window.addEventListener('resize', updateNavOffset);
+  })();
+	  const mybutton = document.getElementById("myBtn");
+
+	  window.addEventListener("scroll", function () {
+	    if (window.scrollY > 20) {
+	  mybutton.classList.add("show");
+	} else {
+	  mybutton.classList.remove("show");
+	}
+	  });
+	
+	  mybutton.addEventListener("click", function () {
+	    window.scrollTo({ top: 0, behavior: "smooth" });
+	  });
+	
+
+
+//Hemmelig
+  let clickCount = 0;
+
+  const title = document.getElementById("P1head");
+  const button = document.getElementById("secretButton");
+
+  title.addEventListener("click", () => {
+    clickCount++;
+
+    if (clickCount >= 3) {
+      button.style.display = "inline-block";
+    }
+  });
+});
+
+/* =========================================================
+   2. JS STOP
+========================================================= */
+</script>
+</head>
+
+<body style="background-color:teal;">
+<button onclick="topFunction()" id="myBtn" title="Go to top">Til toppen</button>
+<title>Ukeplan 2025-2026</title>
+
+
+<!-- =========================================================
+   3. UKEPLAN
+========================================================= -->
+
+
+<nav class="spcity">
+  <h1 id="P1head" style="cursor:pointer; user-select: none;">Ukeplan 2025-2026</h1>
+
+<ul>
+<li id="page1Button"
+  onclick="showPage('page1')"> Ukeplan
+</li> 
+
+<li id="page2Button"
+  onclick="showPage('page2')"> Ekstra info ukeplan
+</li> 
+
+<li id="page3Button"
+  onclick="showPage('page3')"> Timeplan
+</li> 
+
+<li id="page4Button"
+  onclick="showPage('page4')">  Kodeoppdateringer
+</li> 
+
+<li id="secretButton" style="display: none;"
+  onclick="showPage('Hemmelig')">  Effektiv jobbmiljø
+</li>
+</ul>
+</nav>
+
+
+
+<!--SLUTT AV GENERELL OPPSETT-->
+<div id="page1" class="page active">
+<aside class="sidebar"> 
+  <h3>DA WEEKS</h3>
+  <nav class="menu">
+    <a href="#active-week" 
+     class="menu-item"
+     style="font-family: 'Century Gothic'; 
+            background-color: darkturquoise; 
+            border: 2px solid black; 
+            padding: 10px 10px; 
+            color: black;"
+            onmousemove="lightup(this)"
+            onmouseout="passive(this)"
+            onclick="scrollToSection(event, this)"
+            title="Nåværende uke">KLIKK FOR NÅVÆRENDE UKE</a>
+    <a href "#" class="menu-item">På deg</a>
+    <a href "#"  class="menu-item">Din lille</a>
+    <a href "#"  class="menu-item">Sei</a>
+    <a href "#"  class="menu-item">Sei</a>
+    <a href "#"  class="menu-item">Sei</a>
+    <a href "#"  class="menu-item">Sei</a>
+    <a href "#"  class="menu-item">Sei</a>
+    <a href "#"  class="menu-item">Sei</a>
+    <a href "#"  class="menu-item">Sei</a>
+    <a href "#"  class="menu-item">Sei</a>
+  </nav>
+</aside>
+
+
+<div id="planner"></div>
+<script>
+/* =========================================================
+   3.1 DATABASE
+========================================================= */
+const weeks = [
+
+  {
+    id: "Uke25",
+    title: "Uke 25",
+    startDate: "2026-06-15",
+    days: 7
+  },
+  {
+    id: "Uke24",
+    title: "Uke 24",
+    startDate: "2026-06-08",
+    days: 7
+  },
+  {
+    id: "Uke23",
+    title: "Uke 23",
+    startDate: "2026-06-01",
+    days: 7
+  },
+  {
+    id: "Uke22",
+    title: "Uke 22",
+    startDate: "2026-05-25",
+    days: 7
+  },
+  {
+    id: "Uke21",
+    title: "Uke 21",
+    startDate: "2026-05-18",
+    days: 7
+  },
+  {
+    id: "Uke20",
+    title: "Uke 20",
+    startDate: "2026-05-11",
+    days: 7
+  },
+  {
+    id: "Uke19",
+    title: "Uke 19",
+    startDate: "2026-05-04",
+    days: 7
+  },
+];
+
+const events = [ 
+  { date: "2026- ", type: " ", text: " " },
+/*19*/
+  { date: "2026-05-04", type: "info", text: "Bytte makker" },
+  { date: "2026-05-04", type: "test", text: "Presentere Engelsk (1)" },
+  { date: "2026-05-04", type: "homework", text: "Tysk 2 oppg." },
+  { date: "2026-05-06", type: "info", text: "(De som deltar) 14:00-17:00 Matte med ungdomsskole" },
+  { date: "2026-05-06", type: "info", text: "Tysk 2 møt i sølvkrona" },
+  { date: "2026-05-07", type: "homework", text: "Norsk Drama oppg. ON" },
+  { date: "2026-05-07", type: "test", text: "Presentere Engelsk (2)" },
+  { date: "2026-05-07", type: "test", text: "Geo befolkning og klima første utkast" },
+  { date: "2026-05-08", type: "test", text: "Matte terminprøve" },
+  { date: "2026-05-08", type: "info", text: "Matte fagdag" },
+/*20*/
+  { date: "2026-05-11", type: "test", text: "Engelsk presentasjon (3)" },
+  { date: "2026-05-12", type: "info", text: "(De som deltar) 14:00-17:00 Matte med ungdomsskole" },
+  { date: "2026-05-12", type: "test", text: "Nat.Fag bioteknologi presentasjon" },
+  { date: "2026-05-13", type: "info", text: "Nat.Fag standpunkt" },
+  { date: "2026-05-13", type: "test", text: "Nat.Fag bioteknologi presentasjon (siste gruppe)" },
+  { date: "2026-05-14", type: "fri", text: "Kristi himmelfartsdag (FRI!)" },
+  { date: "2026-05-15", type: "fri", text: "Inneklemt dag (FRI!)" },
+  { date: "2026-05-15", type: "test", text: "Geo befolkning og klima innlevering" },
+/*21*/
+  { date: "2026-05-19", type: "info", text: "Eksamen" },
+  { date: "2026-05-19", type: "test", text: "Geo befolkning og klima gruppepresentasjon" },
+  { date: "2026-05-20", type: "info", text: "Nat.Fag karljohansvern hoppekreps" },
+  { date: "2026-05-20", type: "test", text: "Tysk 2 skriveøkt" },
+  { date: "2026-05-21", type: "test", text: "Sam.Fag Arbeids- og næringsliv prøve" },
+  { date: "2026-05-21", type: "info", text: "Jobb hjemme i Engelsk" },
+  { date: "2026-05-22", type: "fri", text: "Ingen fagdag (FRI!)" },
+/*22*/
+  { date: "2026-05-25", type: "fri", text: "Andre pinsedag (FRI!)" },
+  { date: "2026-05-26", type: "info", text: "2STF presenterer ToF2 prosjekter" },
+  { date: "2026-05-26", type: "info", text: "Starten av å rydde klasserom og ToF-rom" },
+  { date: "2026-05-26", type: "test", text: "Vise frem ToF produkt (1)" },
+  { date: "2026-05-27", type: "info", text: "Studenter viser prosjekter på bakkenteigen" },
+  { date: "2026-05-27", type: "test", text: "Vise frem ToF produkt (2)" },
+  { date: "2026-05-27", type: "test", text: "Valgfri matteprøve" },
+  { date: "2026-05-29", type: "info", text: "Tysk 2 fagdag" },
+  { date: "2026-05-29", type: "info", text: "Muntlig eksamen øving" },
+/*23*/
+  { date: "2026-06-03", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-04", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-05", type: "fri", text: "Avspasering (FRI!)" },
+/*24*/
+  { date: "2026-06-08", type: "info", text: "Parkdag og aktiviteter (10:00 - 12:30)" },
+  { date: "2026-06-09", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-10", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-11", type: "info", text: "Sølvkrona (12:00 - 13:30)" },
+  { date: "2026-06-12", type: "fri", text: "Avspasering (FRI!)" },
+/*25*/
+  { date: "2026-06-15", type: "info", text: "Sølvkrona (10:00 - 11:00)" },
+  { date: "2026-06-15", type: "info", text: "Bokinnlevering (11:15)" },
+  { date: "2026-06-16", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-17", type: "info", text: "Sølvkrona (12:00 - 13:00)" },
+  { date: "2026-06-18", type: "info", text: "Turdag" },
+  { date: "2026-06-19", type: "info", text: "Siste skoledag (09:00 - ca. 11:00)" },
+];
+
+/* =========================================================
+   3.2 HELPERS
+========================================================= */
+function addDays(dateStr, days) {
+  const d = new Date(dateStr);
+  d.setDate(d.getDate() + days);
+  return d.toISOString().split("T")[0];
+}
+
+function formatDisplay(dateStr) {
+  const d = new Date(dateStr);
+  const days = ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"];
+  return `${String(d.getDate()).padStart(2, "0")}.${String(d.getMonth()+1).padStart(2,"0")} (${days[d.getDay()]})`;
+}
+
+/* =========================================================
+   3.3 BUILD TABLE AUTOMATICALLY
+========================================================= */
+const planner = document.getElementById("planner");
+
+let html = "";
+
+weeks.forEach(week => {
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const weekStart = new Date(week.startDate);
+  weekStart.setHours(0, 0, 0, 0);
+
+  const weekEnd = new Date(week.startDate);
+  weekEnd.setHours(0, 0, 0, 0);
+  weekEnd.setDate(weekEnd.getDate() + week.days - 1);
+
+  const isPastWeek = today > weekEnd;
+  const isCurrentWeek = today >= weekStart && today <= weekEnd;
+  const isFutureWeek = today < weekStart;
+
+  html += `
+  <div class="${
+  isCurrentWeek ? 'active-week'
+  : isPastWeek ? 'past-week'
+  : 'inactive-week'
+  }"
+     id="${isCurrentWeek ? 'active-week' : week.id}"
+     style="background:white; margin-bottom:40px;">
+
+
+  <h2>${week.title}</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th><titles>Dag</titles></th>
+        <th><titles>Info</titles></th>
+        <th><titles>Innlevering / Prøve / Presentasjon</titles></th>
+        <th><titles>Lekse</titles></th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+
+  for (let i = 0; i < week.days; i++) {
+
+    const date = addDays(week.startDate, i);
+    const d = new Date(date);
+    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+
+    html += `
+      <tr class="${isWeekend ? 'weekend-row' : ''}">
+        <td class="date-cell" data-date="${date}" width="10.6%">
+          <b>${formatDisplay(date)}</b>
+        </td>
+       <td data-date="${date}" data-type="info fri"></td>
+       <td data-date="${date}" data-type="test"></td>
+       <td data-date="${date}" data-type="homework"></td>
+      </tr>
+    `;
+  }
+
+  html += `
+      </tbody>
+    </table>
+    </div>
+  `;
+
+});
+
+planner.innerHTML = html;
+
+/* =========================================================
+   3.4 INJECT EVENTS
+========================================================= */
+events.forEach(e => {
+  const targets = document.querySelectorAll(
+    `[data-date="${e.date}"][data-type*="${e.type}"]`
+  );
+
+  targets.forEach(el => {
+    const div = document.createElement("div");
+    div.textContent = "• " + e.text;
+
+    if (e.type === "test") div.style.color = "red";
+    if (e.type === "homework") div.style.color = "blue";
+    if (e.type === "fri") {
+    div.style.backgroundColor = "darkturquoise";
+    div.style.display = "inline-block";
+    div.style.color = "white";
+    div.style.padding = "2px";
+    }
+
+    el.appendChild(div);
+  });
+});
+
+/* =========================================================
+   3.5 HIGHLIGHT TODAY 
+========================================================= */
+const today = new Date().toISOString().split("T")[0];
+
+document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
+  el.style.backgroundColor = "#9CECEB";
+});
+</script>
+
+</div>
+</div>
+
+<!-- =========================================================
+   3. UKEPLAN (P1) STOP
+========================================================= -->
+
+<!-- =========================================================
+   4. EKSTRA INFO UKEPLAN (P2) START
+========================================================= -->
+
+<div id="page2" class="page">
+ <div class="city">
+  <h1>Ekstra info</h1>
+    
+<button class="pagenavin"
+  onclick="showPage('page1')"> Ukeplan
+</button> 
+
+<button class="pagenava"
+  onclick="showPage('page2')"> Ekstra info ukeplan
+</button> 
+
+<button class="pagenavin"
+  onclick="showPage('page3')"> Timeplan
+</button> 
+
+<button class="pagenavin"
+  onclick="showPage('page4')">  Kodeoppdateringer
+</button> 
+</div> 
+
+<br>
+<div style="background-color:white;">
+  <h2 style="background-color:lightseagreen;">Ekstra info:</h2>
+    <ul>
+     <li><p>Uke 12 + 13 er tverrfaglig bærekraftuker</p></li>
+     <li><p>01.05 er frist på å søke VG2 i VIGO</p></li>
+     <li><p>14.05-15.05 og 25.05 er feriedager</p></li>
+     <li><p>Tentamener starter rundt uke 19 og 20</p></li>
+     <li><p>Sommerferie er uke 24, 19.06</p></li>
+     <li><p>Neste år endres timeplan: 60min-økter og 5min pluss på slutten av dagen</p></li>
+     <li>(Tysk, norsk, ToF, Gym, matte planer i OneNote/Teams)</li>
+    </ul>
+     <hr>
+  </div>
+
+ <div style="background-color:white;">
+  <h2 style="background-color:lightseagreen;">Ekstra info til ukeplanoppsett:</h2>
+    <ul>
+     <li><p>"<i>Dette</i>" er et eksempel på 'Info'</p></li>
+     <li><p><span style="color:red">"<i>Dette</i>"</span> er et eksempel på 'Innlevering (osv...)'</p></li>
+     <li><p><span style="color:blue">"<i>Dette</i>"</span> er et eksempel på 'Lekse'</p></li>
+     <li><p><span style="color:white; 
+			 background-color: darkturquoise;
+			 display: inline-block;
+			 padding: 2px">"<i>Dette</i>"</span> er et eksempel på 'Fri'</p></li>
+    </ul>
+     <hr>
+  </div>
+
+
+</div>
+<!-- =========================================================
+   4. EKSTRA INFO UKEPLAN (P2) STOP
+========================================================= -->
+
+
+
+<!-- =========================================================
+   6. OPPDATERINGER (P4) START
+========================================================= -->
+
+<div id="page4" class="page">
+  <div class="city">
+   <h1>Oppdateringer</h1>
+    
+<button class="pagenavin"
+  onclick="showPage('page1')"> Ukeplan
+</button> 
+
+<button class="pagenavin"
+  onclick="showPage('page2')"> Ekstra info ukeplan
+</button> 
+
+<button class="pagenavin"
+  onclick="showPage('page3')"> Timeplan
+</button> 
+
+<button class="pagenava"
+  onclick="showPage('page4')">  Kodeoppdateringer
+</button> 
+
+</div> 
+
+<br>
+
+
+<div style="background-color:white;">
+  <h2 style="background-color:lightseagreen;">24.05.2026: 1.4</h2>
+    <ul>
+      <li><b>Nytt easter egg lagt til:</b></li>
+        <ul>
+          <li><p>Endringer under denne siden</p></li>
+        <ul>
+          <li><p>Hint: se om du finner noe rart på side 1 og klikk det 3 ganger</p></li>
+        </ul>
+        </ul>
+    </ul>
+     <hr>
+  </div>
+
+<br>
+
+<div style="background-color:white;">
+  <h2 style="background-color:lightseagreen;">18.05.2026: 1.3</h2>
+    <ul>
+      <li><b>Ny oppsett under 'Ukeplan':</b></li>
+        <ul>
+          <li><p>Strukturen til 'Ukeplan' innlegg har endret seg til en mer forståelig format</p></li>
+            <ul>
+             <li><p>Nåværende dag lyser opp</p></li>
+             <li><p>Opplegg er nå delt inn i kategoriene 'Info', 'Innleveringer (osv.)' og 'Lekser' med 'Fri' som en underkategori av 'Info'</p></li>
+               <ul>
+                 <li><p>De ulike kategoriene har fått hver sin egen skriftfarge/bakgrunnsfarge</p></li>
+                  <ul>
+                   <li><p>Og har blitt tydeligere forklart under 'Ekstra info ukeplan'</p></li>
+                 </ul>
+               </ul>
+            </ul>
+          <li><p>Nåværende uke skifter nå automatisk slik at den ikke trengs å endres manuelt lenger</p></li>
+          <li><p>Usynlige kodeendringer er gjort slik at timeplanen kan endres via en database</p></li>
+        </ul>
+      <li><b>Usynlige kodejusteringer:</b></li>
+        <ul>
+          <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
+        </ul>
+      <li><b>Annet:</b></li>
+         <ul>
+           <li><p>'Timeplan' har blitt endret under kodejusteringene ved CSS krangel i filen (++?) og jeg har slitt i flere dager med å få fikse det. Det virket ikke, og jeg må kanskje lage den om igjen. Per nå, vil timeplanen se litt rar ut. Dette håper jeg å fikse i neste oppdatering.</p></li>
+         </ul>
+    </ul>
+     <hr>
+  </div>
+
+
+<br>
+
+
+<div style="background-color:white;">
+  <h2 style="background-color:lightseagreen;">27.04.2026: 1.2</h2>
+    <ul>
+      <li><b>Ny side 'Timeplan' er lagt til:</b></li>
+        <ul>
+          <li><p>Under 'Timeplan' er det lagt til en generell, fast timeplan til året</p></li>
+        </ul>
+      <li><b>'Til toppen' knapp lagt til:</b></li>
+        <ul>
+          <li><p>Dersom du skroller lang nok ned, vil en 'Til toppen' knapp poppe opp på nederst til høyre side</p></li>
+        </ul>
+      <li><b>Usynlige kodejusteringer:</b></li>
+        <ul>
+          <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
+        </ul>
+    </ul>
+     <hr>
+  </div>
+
+<br>
+
+  <div style="background-color:white;">
+  <h2 style="background-color:lightseagreen;">16.04.2026: 1.1</h2>
+    <ul>
+     <li><b>Flere sider er lagt til:</b></li>
+      <ul>
+       <li><p>Ny side 'Ekstra info ukeplan' er lagt til</p></li>
+        <ul>
+         <li><p>'Ekstra info' fra ukeplan flyttet til den nye siden 'Ekstra info ukeplan'</p></li>
+        </ul>
+       <li><p>Ny side 'Kodeoppdateringer' er lagt til</p></li>
+      </ul>
+     <li><b>'Nåværende uke' knapp oppdatert:</b></li>
+      <ul>
+       <li><p>Knappen er nå en knapp istedenfor en link</p></li>
+        <ul>
+         <li><p>Knappen lyser opp når muspeker går over den</p></li>
+         <li><p>Knappen har fått en tittel når muspeker går over den lenge</p></li>
+        </ul>
+       <li><p>Smooth scroll</p></li>
+       <li><p>Linken til knappen er blokkert slik at man ikke automatisk kommer til uken etter refresh med den nye koden</p></li>
+        <ul>
+         <li><p>OBS! Slett '/#Uke16' (eller liknende) i linken din for å se denne effekten</p></li>
+        </ul>
+      </ul>
+    </ul>
+     <hr>
+  </div>
+
+</div>
+
+<!-- =========================================================
+   6. OPPDATERINGER (P4) STOP
+========================================================= -->
