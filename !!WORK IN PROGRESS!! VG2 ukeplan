@@ -364,8 +364,25 @@ function showPage(pageId) {
     updateNavOffset();
     window.addEventListener('resize', updateNavOffset);
   })();
+  function mainHeader(){
+    const Phead = document.getElementById('Phead');
+    if (!Phead) return;
+    if (pageId === 'page1') {
+      Phead.textContent = "Ukeplan 2STF 2026-2027";
+    } else if (pageId === 'page2') {
+      Phead.textContent = "Ekstra info";
+    } else if (pageId === 'page3') {
+      Phead.textContent = "Timeplan 2STF 2026-2027";
+    } else if (pageId === 'page4') {
+      Phead.textContent = "Oppdateringer";
+    } else if (pageId === 'Hemmelig') {
+      Phead.textContent = "Arbeidsområdet";
+    } else {
+      Phead.textContent = "Ukeplan 2026-2027";
+    }
+  }
   // Update nav button colours
-  updateNavActive(pageId);
+  mainHeader();
 
     // Reset secret button when returning to P1
     if (pageId === "page1") {
@@ -458,7 +475,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //Hemmelig
   let clickCount = 0;
 
-  const title = document.getElementById("P1head");
+  const title = document.getElementById("Phead");
   const button = document.getElementById("secretButton");
 
   title.addEventListener("click", () => {
@@ -487,8 +504,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 <nav class="spcity">
-  <h1 id="P1head" style="cursor:pointer; user-select: none;">Ukeplan 2025-2026</h1>
-
+  <h1 id="Phead" style="cursor:pointer; user-select: none;">Ukeplan 2STF 2026-2027</h1>
+  <br>
+  <br>
+  <div>
 <ul>
 <li id="page1Button"
   onclick="showPage('page1')"> Ukeplan
@@ -509,7 +528,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <li id="secretButton" style="display: none;"
   onclick="showPage('Hemmelig')">  Effektiv jobbmiljø
 </li>
-</ul>
+</ul></div>
 </nav>
 
 
@@ -791,27 +810,7 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 ========================================================= -->
 
 <div id="page2" class="page">
- <div class="city">
-  <h1>Ekstra info</h1>
-    
-<button class="pagenavin"
-  onclick="showPage('page1')"> Ukeplan
-</button> 
 
-<button class="pagenava"
-  onclick="showPage('page2')"> Ekstra info ukeplan
-</button> 
-
-<button class="pagenavin"
-  onclick="showPage('page3')"> Timeplan
-</button> 
-
-<button class="pagenavin"
-  onclick="showPage('page4')">  Kodeoppdateringer
-</button> 
-</div> 
-
-<br>
 <div style="background-color:white;">
   <h2 style="background-color:lightseagreen;">Ekstra info:</h2>
     <ul>
@@ -853,29 +852,6 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 ========================================================= -->
 
 <div id="page4" class="page">
-  <div class="city">
-   <h1>Oppdateringer</h1>
-    
-<button class="pagenavin"
-  onclick="showPage('page1')"> Ukeplan
-</button> 
-
-<button class="pagenavin"
-  onclick="showPage('page2')"> Ekstra info ukeplan
-</button> 
-
-<button class="pagenavin"
-  onclick="showPage('page3')"> Timeplan
-</button> 
-
-<button class="pagenava"
-  onclick="showPage('page4')">  Kodeoppdateringer
-</button> 
-
-</div> 
-
-<br>
-
 
 <div style="background-color:white;">
   <h2 style="background-color:lightseagreen;">24.05.2026: 1.4</h2>
