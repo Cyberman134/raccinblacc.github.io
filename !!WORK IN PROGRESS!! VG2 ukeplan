@@ -83,7 +83,7 @@ SHIT Å GJØRE:
     transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
     border: 2px rgb(32, 178, 170) solid;
     font-size: 2vh;
-    width: 8em;  
+    width: 10em;  
     text-align: center;
   }
 
@@ -92,8 +92,12 @@ SHIT Å GJØRE:
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
     border: 2px solid rgb(36, 36, 36);
-    width: 10em;
+    width: 11em;
     text-align: center;
+  }
+
+  #secretButton{
+    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
   }
 
   /*Sidebar*/
@@ -384,15 +388,12 @@ function showPage(pageId) {
   // Update nav button colours
   mainHeader();
 
-    // Reset secret button when returning to P1
-    if (pageId === "page1") {
-        clickCount = 0;
-        document.getElementById("secretButton").style.display = "none";
-    }
     // Stopper Tetris hvis man forlater Hemmelig-siden
     if (pageId !== "Hemmelig") {
         TETRIS.stop();
         tetrisStarted = false;
+        clickCount = 0;
+        document.getElementById("secretButton").style.display = "none";
     }
     if (pageId === "Hemmelig" && document.getElementById("tetris").classList.contains("active")) {
     TETRIS.init();
@@ -481,8 +482,11 @@ document.addEventListener("DOMContentLoaded", function () {
   title.addEventListener("click", () => {
     clickCount++;
 
-    if (clickCount >= 3) {
+    if (clickCount % 2 !== 0 && clickCount >= 3) {
       button.style.display = "inline-block";
+    }
+    else {
+     button.style.display = "none";
     }
   });
 });
