@@ -21,7 +21,8 @@ Universelt:
    - Fikse opp på nav+header-baren
 
 - Mørkemodus
-  - Propagandamodus?
+  - Propagandamodus? 
+  - Chevron shit med meny
 
 - Spice opp ukeplan-siden
    - Gjør ting med sideoppsett
@@ -29,6 +30,8 @@ Universelt:
 - Fikse opp i de andre sidene enn ukeplanen
   - Den jevla timeplanen
   - Se litt på hemmelig-siden  
+
+<a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 */
  :root { 
   --background: teal;
@@ -45,9 +48,7 @@ Universelt:
   --info-colour: var(--text-colour);
   --innl-colour: red;
   --lekse-colour: blue;
-
-  /* Specialised: */
-  --header-background: var(--secondary-outline);
+  --active-day: #9CECEB;
  }
 
  .darkmode {
@@ -65,18 +66,21 @@ Universelt:
   --info-colour: var(--text-colour);
   --innl-colour: rgb(2, 114, 2);
   --lekse-colour: rgb(0, 201, 124);
+  --active-day: #30a07e;
 
-  /* Specialised: */
-  --header-background: var(--lightup-primary);
+  /* Special */
+  --black: black;
  }
 
- * { margin: 0; padding: 0; color: var(--text-colour); transition: 0.2s linear;}
- h1 { text-align: center; font-size: 9vh; font-family: verdana; } 
+ * { margin: 0; padding: 0; color: var(--text-colour); transition: 0.2s linear; height: auto; width: auto;}
+ br { user-select: none;}
+ h1 { text-align: center; font-size: 8vh; font-family: verdana; } 
  h2 { font-size: 250%; font-family: verdana; margin: 0; padding: 10px; } 
  b { font-size: 120%; font-family: 'Arial Black'; }
  a { all: revert; }
  li { all: revert; color: var(--text-colour); }
  ul { all: revert; color: var(--text-colour); }
+ header { display: flex; font-size: 20%; text-align: center; margin: 0; gap: 1rem;}
  
  hh {font-size:50%}
  titles { font-size: 140%; padding: 0px;}
@@ -116,15 +120,26 @@ Universelt:
   #Phead {
     cursor: pointer; 
     user-select: none;
+    color: var(--text-colour);
+    margin: 0;
     text-shadow:
-    5px 5px 20px var(--header-background); 
+    1px 0px 2px var(--text-colour), 
+    0px 0px 4px var(--screen-background); 
+  }
+
+  .darkmode #Phead {
+    color: var(--text-colour);
+    text-shadow:
+    1px 0px 2px var(--black), 
+    0px 0px 10px var(--lightup-primary), 
+    0px 0px 20px var(--lightup-primary); 
   }
 
   /* Darkmode */
 
   #theme-switch {
-    height: 50px;
-    width: 50px;
+    height: 6vh;
+    width: 6vh;
     padding: 2px var(--background);
     border-radius: 50%;
     position: fixed;
@@ -158,6 +173,14 @@ Universelt:
 
   #theme-switch:hover {
     transform: scale(1.05);
+  }
+
+  #Layer_1 {
+    background-color: white;
+    border-radius: 30%;
+    border-top-right-radius: 25%;
+    border-bottom-left-radius: 2%;
+    margin-left: 10rem;
   }
 
   #theme-switch svg {
@@ -323,8 +346,6 @@ Universelt:
    padding: 15px;
    border-radius: 4px;
  } 
- 
-
  
  #myBtn:hover {
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -498,11 +519,11 @@ function showPage(pageId) {
     if (pageId === 'page1') {
       Phead.textContent = "Ukeplan 2STF 2026-2027";
     } else if (pageId === 'page2') {
-      Phead.textContent = "Ekstra info";
+      Phead.textContent = "Ekstra info til ukeplan";
     } else if (pageId === 'page3') {
       Phead.textContent = "Timeplan 2STF 2026-2027";
     } else if (pageId === 'page4') {
-      Phead.textContent = "Oppdateringer";
+      Phead.textContent = "Kodeoppdateringer";
     } else if (pageId === 'Hemmelig') {
       Phead.textContent = "Arbeidsområdet";
     } else {
@@ -633,7 +654,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <title>Ukeplan 2025-2026</title>
 
 <div class="spcity">
-<header >
+<header>
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
   <h1 id="Phead">Ukeplan 2STF 2026-2027</h1>
   <button id="theme-switch" title="Bytt tema">
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
@@ -661,9 +683,10 @@ themeSwitch.addEventListener("click",  () =>{
   darkmode !== "active" ? enableDarkmode() : disableDarkmode()
 })
   </script>
-  <br>
-  <br>
+  
 </header>
+<br>
+<br>
 <nav>
 <ul>
 <li id="page1Button"
@@ -671,7 +694,7 @@ themeSwitch.addEventListener("click",  () =>{
 </li> 
 
 <li id="page2Button"
-  onclick="showPage('page2')"> Ekstra info ukeplan
+  onclick="showPage('page2')"> Ekstra info
 </li> 
 
 <li id="page3Button"
@@ -679,11 +702,11 @@ themeSwitch.addEventListener("click",  () =>{
 </li> 
 
 <li id="page4Button"
-  onclick="showPage('page4')">  Kodeoppdateringer
+  onclick="showPage('page4')">  Oppdateringer
 </li> 
 
 <li id="HemmeligButton" style="display: none;"
-  onclick="showPage('Hemmelig')">  Effektiv jobbmiljø
+  onclick="showPage('Hemmelig')">  Effektivt jobbmiljø
 </li>
 </ul>
 </nav>
@@ -732,7 +755,12 @@ themeSwitch.addEventListener("click",  () =>{
    4.1 DATABASE
 ========================================================= */
 const weeks = [
-
+  {
+    id: "Uke26",
+    title: "Uke 26",
+    startDate: "2026-06-22",
+    days: 7
+  },
   {
     id: "Uke25",
     title: "Uke 25",
@@ -957,10 +985,9 @@ events.forEach(e => {
 const today = new Date().toISOString().split("T")[0];
 
 document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
-  el.style.backgroundColor = "#9CECEB";
+  el.style.backgroundColor = "var(--active-day)";
 });
-</script>
-
+</script> 
 </div>
 </div>
 
