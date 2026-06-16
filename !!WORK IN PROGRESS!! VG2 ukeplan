@@ -10,25 +10,73 @@
 <style>
 /*
 SHIT Å GJØRE:
-- Litt generelt:
-   - Lag rom mellom overskrift og pages
-   - Sideoppsett
-   - Se litt på fargeoppsettet
-   - Mørkemodus
+
+Universelt:
+   - Se å få den nav+header-baren litt animert
+
+- Se litt på fargeoppsettet
+   - Se dypere inn i tabell css
+   - Overskriftbakgrunn i lysmodus
+   - Lage css-ordning for hoveddivene
+   - Fikse opp på nav+header-baren
+
+- Mørkemodus
+  - Propagandamodus?
 
 - Spice opp ukeplan-siden
    - Gjør ting med sideoppsett
 
-- Lage css-ordning for hoveddivene
-- Spice opp andre enn ukeplan-siden
-- Den jevla timeplanen
-- Se litt på hemmelig-siden
-
+- Fikse opp i de andre sidene enn ukeplanen
+  - Den jevla timeplanen
+  - Se litt på hemmelig-siden  
 */
- * { margin: 0; padding: 0; }
+ :root { 
+  --background: teal;
+  --base-comp: lightseagreen;
+  --lightup-primary: turquoise;
+  --lightup-secondary: darkturquoise;
+  --screen-background: white;
+  --text-colour: black;
+  --outline-colour: black;
+  --secondary-outline: rgb(36, 36, 36);
+
+  /* For the planner: */
+  --fri-colour: var(--lightup-primary);
+  --info-colour: var(--text-colour);
+  --innl-colour: red;
+  --lekse-colour: blue;
+
+  /* Specialised: */
+  --header-background: var(--secondary-outline);
+ }
+
+ .darkmode {
+  --background: #091413;
+  --base-comp: #044A42;
+  --lightup-primary: #408A71;
+  --lightup-secondary: #285A48;
+  --screen-background: rgb(23, 26, 25);
+  --text-colour: white;
+  --outline-colour: white;
+  --secondary-outline: rgb(187, 187, 187);
+
+  /* For the planner: */
+  --fri-colour: var(--lightup-primary);
+  --info-colour: var(--text-colour);
+  --innl-colour: rgb(2, 114, 2);
+  --lekse-colour: rgb(0, 201, 124);
+
+  /* Specialised: */
+  --header-background: var(--lightup-primary);
+ }
+
+ * { margin: 0; padding: 0; color: var(--text-colour); transition: 0.2s linear;}
  h1 { text-align: center; font-size: 9vh; font-family: verdana; } 
  h2 { font-size: 250%; font-family: verdana; margin: 0; padding: 10px; } 
  b { font-size: 120%; font-family: 'Arial Black'; }
+ a { all: revert; }
+ li { all: revert; color: var(--text-colour); }
+ ul { all: revert; color: var(--text-colour); }
  
  hh {font-size:50%}
  titles { font-size: 140%; padding: 0px;}
@@ -44,23 +92,96 @@ SHIT Å GJØRE:
    scroll-padding-top: 120px; /* adjust to navbar height */
   } 
 
+  body {
+    background-color: var(--background);
+  }
+
  /* Oppsett */
  .city {
-   background-color: lightseagreen;
-   color: solid black;
-   border: 2px solid black;
+   background-color: var(--base-comp);
+   border: 2px var(--outline-colour);
    margin: 0px;
    padding: 0px;
   }
  .spcity {
-   background-color: lightseagreen;
-   color: black;
-   border: 2px solid black;
+   background-color: var(--base-comp);
+   border: 2px var(--outline-colour);
    padding: 1rem;
    position: fixed;
    top: 0;
    width: 100%;
    height: 20vh;
+  }
+
+  #Phead {
+    cursor: pointer; 
+    user-select: none;
+    text-shadow:
+    5px 5px 20px var(--header-background); 
+  }
+
+  /* Darkmode */
+
+  #theme-switch {
+    height: 50px;
+    width: 50px;
+    padding: 2px var(--background);
+    border-radius: 50%;
+    position: fixed;
+    display: flex;
+    top: 20px;
+    right: 20px;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--text-colour);
+    transition: border-color 0.3s ease, transform 0.5s ease;;
+    overflow: hidden;
+    cursor: pointer; 
+  }
+
+  #theme-switch::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--background) 50%, var(--base-comp) 50%);
+    transform: rotate(0deg);
+    transition: transform 0.5s ease;
+    z-index: -1;
+    
+  }
+
+  /* DARK MODE ROTATION */
+  .darkmode #theme-switch::before {
+    transform: rotate(180deg);
+  }
+
+  #theme-switch:hover {
+    transform: scale(1.05);
+  }
+
+  #theme-switch svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    fill: var(--secondary-outline);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  #theme-switch svg:last-child {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  .darkmode #theme-switch svg:first-child {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  .darkmode #theme-switch svg:last-child {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   /* Nav bar */
@@ -78,25 +199,25 @@ SHIT Å GJØRE:
     user-select: none;
     padding: 10px 20px;
     border-radius: 5px;
-    background-color: rgb(32, 178, 170);
+    background-color: var(--base-comp);
     font-family: 'Century Gothic';
     transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
-    border: 2px rgb(32, 178, 170) solid;
+    border: 2px var(--base-comp) solid;
     font-size: 2vh;
     width: 10em;  
     text-align: center;
   }
 
  nav li:hover {
-    background-color: turquoise;
+    background-color: var(--lightup-primary);
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
-    border: 2px solid rgb(36, 36, 36);
+    border: 2px solid var(--secondary-outline);
     width: 11em;
     text-align: center;
   }
 
-  #secretButton{
+  #HemmeligButton{
     transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
   }
 
@@ -104,7 +225,7 @@ SHIT Å GJØRE:
 
   .sidebar {
     flex: 1 1 0;
-    background-color: lightseagreen;
+    background-color: var(--base-comp);
     max-width: 300px;
     height: 60vh;
     padding: 2rem 1rem;
@@ -140,7 +261,7 @@ SHIT Å GJØRE:
   .sidebar .menu .menu-item:is-active {
     background-color: rgb(243, 245, 245);
     color: rgb(238, 238, 238);
-    border-right: 5px solid black;
+    border-right: 5px solid var(--outline-colour);
     transition: 0.2s linear;
   }
 
@@ -169,24 +290,16 @@ SHIT Å GJØRE:
   .subpage { display: none; }
   .subpage.active { display: inline-block; } 
  
-  /*active and inactive nav buttons*/
-
-  .pagenavin {
-   font-family: 'Century Gothic'; 
-   display: inline-block; 
-   text-decoration: none; 
-   color: black;
-   } 
+  /*active nav buttons*/
  
   .pagenava {
    font-family: 'Century Gothic'; 
    display: inline-block; 
    text-decoration: none; 
-   color: black;
-   background-color: darkturquoise; 
+   background-color: var(--lightup-secondary); 
    border-radius: 5px;
    text-align: center;
-   border: 2px solid black;
+   border: 2px solid var(--outline-colour);
    width: 25vh;
   }
 
@@ -196,7 +309,7 @@ SHIT Å GJØRE:
    opacity: 0;
    visibility: hidden;
    transform: translateY(20px); /* start slightly below */
-   transition: opacity 0.3s ease, transform 0.3s ease;
+   transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
    position: fixed;
    bottom: 20px;
    right: 30px;
@@ -204,13 +317,21 @@ SHIT Å GJØRE:
    font-size: 18px;
    border: none;
    outline: none;
-   background-color: darkturquoise;
+   background-color: var(--lightup-secondary);
    color: white;
    cursor: pointer;
    padding: 15px;
    border-radius: 4px;
  } 
  
+
+ 
+ #myBtn:hover {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  background-color: var(--lightup-primary);
+  transform: scale(2.05);
+ }
+
  #myBtn.show {
    opacity: 1;
    visibility: visible;
@@ -236,6 +357,7 @@ SHIT Å GJØRE:
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  background-color: var(--screen-background);
 }
 
   #page1 td {
@@ -255,11 +377,11 @@ SHIT Å GJØRE:
   scroll-margin-top: var(--spcity-height, 120px);
 }
 #page1 .active-week .date-cell {
-  background-color: turquoise;
+  background-color: var(--lightup-primary);
 }
 
 #page1 .inactive-week .date-cell {
-  background-color: lightseagreen;
+  background-color: var(--base-comp);
 }
 
 #page1 .past-week .date-cell {
@@ -267,12 +389,12 @@ SHIT Å GJØRE:
 }
 
 #page1 .active-week h2 {
-  background-color: turquoise;
+  background-color: var(--lightup-primary);
   border: 2px solid black; 
 }
 
 #page1 .inactive-week h2 {
-  background-color: lightseagreen;
+  background-color: var(--base-comp);
   border: 2px solid black; 
 }
 
@@ -294,7 +416,7 @@ SHIT Å GJØRE:
 }
 
 #page1 .active-week th {
-  background-color: turquoise;
+  background-color: var(--lightup-primary);
 }
 
 #page1 .past-week th {
@@ -302,7 +424,7 @@ SHIT Å GJØRE:
 }
 
 #page1 .inactive-week th {
-  background-color: lightseagreen;
+  background-color: var(--base-comp);
 }
 
 #page1 .active-week .weekend-row td:not(.date-cell) {
@@ -316,6 +438,8 @@ SHIT Å GJØRE:
 #page1 .past-week .weekend-row td:not(.date-cell) {
   background-color: rgba(119, 136, 153, 0.3);
 }
+
+/* Page2 css */
  </style>
 <!-- =========================================================
    1. CSS STOP
@@ -327,10 +451,10 @@ SHIT Å GJØRE:
 /* =========================================================
    2. JS START
 ========================================================= */
-
+let clickCount = 0;
 // Update nav button styles based on active page
 function updateNavActive(pageId) {
-  const ids = ['page1','page2','page3','page4'];
+  const ids = ['page1','page2','page3','page4', 'Hemmelig'];
   ids.forEach(id => {
     const btn = document.getElementById(id + 'Button');
     if (!btn) return;
@@ -351,11 +475,11 @@ function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p =>
         p.classList.remove('active')
     );
+    clickCount = 0;
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Show da pages
     document.getElementById(pageId).classList.add('active');
    // ensure nav reflects the initial active page
-  updateNavActive(pageId);
   // get the navbar gap
   (function syncNavOffsets(){
     function updateNavOffset(){
@@ -382,7 +506,7 @@ function showPage(pageId) {
     } else if (pageId === 'Hemmelig') {
       Phead.textContent = "Arbeidsområdet";
     } else {
-      Phead.textContent = "Ukeplan 2026-2027";
+      Phead.textContent = "2STF 2026-2027";
     }
   }
   // Update nav button colours
@@ -392,12 +516,14 @@ function showPage(pageId) {
     if (pageId !== "Hemmelig") {
         TETRIS.stop();
         tetrisStarted = false;
-        clickCount = 0;
-        document.getElementById("secretButton").style.display = "none";
+        document.getElementById("HemmeligButton").style.display = "none";
+    } else {
+        document.getElementById("HemmeligButton").style.display = "inline-block";
     }
     if (pageId === "Hemmelig" && document.getElementById("tetris").classList.contains("active")) {
     TETRIS.init();
     }
+  updateNavActive(pageId);
 }
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
@@ -422,11 +548,11 @@ function showSubpage(subpageId) {
 
 //'Nåværende' knapp
 	function passive(x) {
-	  x.style.backgroundColor = "darkturquoise";
+	  x.style.backgroundColor = "var(--lightup-secondary)";
 	}
 
 	function lightup(x) {
-	  x.style.backgroundColor = "turquoise";
+	  x.style.backgroundColor = "var(--lightup-primary)";
 	}
 
 	function scrollToSection(e, el) {
@@ -474,44 +600,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //Hemmelig
-  let clickCount = 0;
 
   const title = document.getElementById("Phead");
-  const button = document.getElementById("secretButton");
+  const button = document.getElementById("HemmeligButton");
+  
 
   title.addEventListener("click", () => {
     clickCount++;
-
-    if (clickCount % 2 !== 0 && clickCount >= 3) {
+    const activePageId = document.querySelector('.page.active')?.id;
+    
+    if (activePageId === 'Hemmelig' || clickCount >= 3 && clickCount % 2 !== 0){
       button.style.display = "inline-block";
     }
     else {
-     button.style.display = "none";
+      button.style.display = "none";
     }
   });
 });
-
 /* =========================================================
    2. JS STOP
 ========================================================= */
 </script>
 </head>
 
-<body style="background-color:teal;">
+
+<!-- =========================================================
+   3. MAIN LAYOUT
+========================================================= -->
+
+<body>
 <button onclick="topFunction()" id="myBtn" title="Go to top">Til toppen</button>
 <title>Ukeplan 2025-2026</title>
 
+<div class="spcity">
+<header >
+  <h1 id="Phead">Ukeplan 2STF 2026-2027</h1>
+  <button id="theme-switch" title="Bytt tema">
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+  </button>
+    <script>
+    //Darkmode
+let darkmode = localStorage.getItem('darkmode') 
+const themeSwitch = document.getElementById('theme-switch')
 
-<!-- =========================================================
-   3. UKEPLAN
-========================================================= -->
+const enableDarkmode = () => {
+  document.body.classList.add('darkmode')
+  localStorage.setItem('darkmode', "active")
+} 
 
+const disableDarkmode = () => {
+  document.body.classList.remove('darkmode')
+  localStorage.removeItem('darkmode')
+} 
 
-<nav class="spcity">
-  <h1 id="Phead" style="cursor:pointer; user-select: none;">Ukeplan 2STF 2026-2027</h1>
+if(darkmode === "active") enableDarkmode()
+
+themeSwitch.addEventListener("click",  () =>{
+  darkmode = localStorage.getItem('darkmode')
+  darkmode !== "active" ? enableDarkmode() : disableDarkmode()
+})
+  </script>
   <br>
   <br>
-  <div>
+</header>
+<nav>
 <ul>
 <li id="page1Button"
   onclick="showPage('page1')"> Ukeplan
@@ -529,15 +682,21 @@ document.addEventListener("DOMContentLoaded", function () {
   onclick="showPage('page4')">  Kodeoppdateringer
 </li> 
 
-<li id="secretButton" style="display: none;"
+<li id="HemmeligButton" style="display: none;"
   onclick="showPage('Hemmelig')">  Effektiv jobbmiljø
 </li>
-</ul></div>
+</ul>
 </nav>
+</div>
+
+<!-- =========================================================
+   3. MAIN LAYOUT STOP
+========================================================= -->
 
 
-
-<!--SLUTT AV GENERELL OPPSETT-->
+<!-- =========================================================
+   4. UKEPLAN
+========================================================= -->
 <div id="page1" class="page active">
 <aside class="sidebar"> 
   <h3>DA WEEKS</h3>
@@ -545,7 +704,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <a href="#active-week" 
      class="menu-item"
      style="font-family: 'Century Gothic'; 
-            background-color: darkturquoise; 
+            background-color: var(--lightup-secondary); 
             border: 2px solid black; 
             padding: 10px 10px; 
             color: black;"
@@ -570,7 +729,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="planner"></div>
 <script>
 /* =========================================================
-   3.1 DATABASE
+   4.1 DATABASE
 ========================================================= */
 const weeks = [
 
@@ -678,7 +837,7 @@ const events = [
 ];
 
 /* =========================================================
-   3.2 HELPERS
+   4.2 HELPERS
 ========================================================= */
 function addDays(dateStr, days) {
   const d = new Date(dateStr);
@@ -693,7 +852,7 @@ function formatDisplay(dateStr) {
 }
 
 /* =========================================================
-   3.3 BUILD TABLE AUTOMATICALLY
+   4.3 BUILD TABLE AUTOMATICALLY
 ========================================================= */
 const planner = document.getElementById("planner");
 
@@ -722,7 +881,7 @@ weeks.forEach(week => {
   : 'inactive-week'
   }"
      id="${isCurrentWeek ? 'active-week' : week.id}"
-     style="background:white; margin-bottom:40px;">
+     style="background:var(--screen-background); margin-bottom:40px;">
 
 
   <h2>${week.title}</h2>
@@ -768,7 +927,7 @@ weeks.forEach(week => {
 planner.innerHTML = html;
 
 /* =========================================================
-   3.4 INJECT EVENTS
+   4.4 INJECT EVENTS
 ========================================================= */
 events.forEach(e => {
   const targets = document.querySelectorAll(
@@ -779,10 +938,10 @@ events.forEach(e => {
     const div = document.createElement("div");
     div.textContent = "• " + e.text;
 
-    if (e.type === "test") div.style.color = "red";
-    if (e.type === "homework") div.style.color = "blue";
+    if (e.type === "test") div.style.color = "var(--innl-colour)";
+    if (e.type === "homework") div.style.color = "var(--lekse-colour)";
     if (e.type === "fri") {
-    div.style.backgroundColor = "darkturquoise";
+    div.style.backgroundColor = "var(--lightup-primary)";
     div.style.display = "inline-block";
     div.style.color = "white";
     div.style.padding = "2px";
@@ -793,7 +952,7 @@ events.forEach(e => {
 });
 
 /* =========================================================
-   3.5 HIGHLIGHT TODAY 
+   4.5 HIGHLIGHT TODAY 
 ========================================================= */
 const today = new Date().toISOString().split("T")[0];
 
@@ -806,11 +965,11 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 </div>
 
 <!-- =========================================================
-   3. UKEPLAN (P1) STOP
+   4. UKEPLAN (P1) STOP
 ========================================================= -->
 
 <!-- =========================================================
-   4. EKSTRA INFO UKEPLAN (P2) START
+   5. EKSTRA INFO UKEPLAN (P2) START
 ========================================================= -->
 
 <div id="page2" class="page">
@@ -833,12 +992,12 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
   <h2 style="background-color:lightseagreen;">Ekstra info til ukeplanoppsett:</h2>
     <ul>
      <li><p>"<i>Dette</i>" er et eksempel på 'Info'</p></li>
-     <li><p><span style="color:red">"<i>Dette</i>"</span> er et eksempel på 'Innlevering (osv...)'</p></li>
-     <li><p><span style="color:blue">"<i>Dette</i>"</span> er et eksempel på 'Lekse'</p></li>
-     <li><p><span style="color:white; 
-			 background-color: darkturquoise;
+     <li><p>"<i style="color:var(--innl-colour);">Dette</i>" er et eksempel på 'Innlevering (osv...)'</p></li>
+     <li><p>"<i style="color:var(--lekse-colour);">Dette</i>" er et eksempel på 'Lekse'</p></li>
+     <li><p>"<i style="color:white; 
+			 background-color: var(--fri-colour);
 			 display: inline-block;
-			 padding: 2px">"<i>Dette</i>"</span> er et eksempel på 'Fri'</p></li>
+			 padding: 2px">Dette</i>" er et eksempel på 'Fri'</p></li>
     </ul>
      <hr>
   </div>
@@ -846,7 +1005,7 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 
 </div>
 <!-- =========================================================
-   4. EKSTRA INFO UKEPLAN (P2) STOP
+   5. EKSTRA INFO UKEPLAN (P2) STOP
 ========================================================= -->
 
 
@@ -962,3 +1121,371 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 <!-- =========================================================
    6. OPPDATERINGER (P4) STOP
 ========================================================= -->
+
+<!-- =========================================================
+   7. HEMMELIG (P?) START
+========================================================= -->
+<div id="Hemmelig" class="page">
+  <div class="city">
+   <h1>Arbeidsområdet</h1>
+    
+<button class="pagenavin"
+  onclick="showPage('page1')"> Ukeplan
+</button> 
+
+<button class="pagenavin"
+  onclick="showPage('page2')"> Ekstra info ukeplan
+</button> 
+
+<button class="pagenavin"
+  onclick="showPage('page3')"> Timeplan
+</button> 
+
+<button class="pagenavin"
+  onclick="showPage('page4')">  Kodeoppdateringer
+</button> 
+
+<button class="pagenava">  Effektivt jobbmiljø
+</button> 
+
+</div> 
+
+
+
+<!-- =========================================================
+   7.1 HTML SPILL
+========================================================= -->
+<div id="spill">
+ <br>
+
+<!-- =========================================================
+   7.1.1 TETRIS
+========================================================= -->
+<button onclick="showSubpage('tetris'); startTetris()" style="font-size:150%">
+  Tetris
+</button>
+
+<div style="padding:10px">
+<div id="tetris" class="subpage">
+<div style="color:white; text-align:center; font-family:Arial;">
+  <p id="scoreBoard">Score: 0</p>
+  <p style="font-size: 50%">+10 per blokk<br>
+     +100 for 1 linje<br>
+     +300 for 2 linjer<br>
+     +500 for 3 linjer<br>
+     +800 for 4 linjer</p>
+</div>
+  <canvas width="300" height="500"></canvas>
+</div>
+</div>
+
+
+<style>
+#tetris {
+  display: none;
+  background: black;
+  padding: 10px;
+  width: 420px;
+  border: 2px solid white;
+}
+
+#tetris.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#tetris canvas {
+  display: block;
+  margin: auto;
+  background: black;
+  border: 2px solid white;
+}
+
+#spill body {
+  overflow: hidden;
+}
+</style>
+<!-- =========================================================
+   7.1.2 TETRIS JS
+========================================================= -->
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
+<script>
+let tetrisStarted = false;
+let lastTime = 0;
+let dropInterval = 1000; // ms
+
+function startTetris() {
+  if (tetrisStarted) return;
+
+  tetrisStarted = true;
+
+  setTimeout(() => {
+    TETRIS.init();
+  }, 50);
+}
+
+const TETRIS = {
+  running: false,
+  canvas: null,
+  score: 0,
+  animationId: null,
+  ctx: null,
+  grid: [],
+  blockSize: 25,
+  width: 12,
+  height: 20,
+  piece: null,
+  x: 0,
+  y: 0,
+  speed: 30,
+
+  shapes: [
+    [[1,1,1],[0,1,0]],
+    [[1,1],[1,1]],
+    [[1,1,1,1]],
+    [[1,1,0],[0,1,1]],
+    [[0,1,1],[1,1,0]],
+    [[1,1,0],[1,0,0],[1,0,0]],
+    [[0,1,1],[0,0,1],[0,0,1]],
+  ],
+
+  init() {
+  this.stop();
+
+  this.canvas = document.querySelector("#tetris canvas");
+  this.ctx = this.canvas.getContext("2d");
+
+  this.grid = Array.from({ length: this.height }, () =>
+    Array(this.width).fill(0)
+  );
+
+  this.spawn();
+
+  this.running = true;
+  this.loop();
+
+  this.bindControls(); 
+},
+
+bindControls() {
+  if (this.controlsHandler) return;
+
+  this.controlsHandler = (e) => {
+    if (!tetrisStarted) return;
+
+    if (["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp"].includes(e.key)) {
+      e.preventDefault();
+    }
+
+    if (e.key === "ArrowLeft") this.move(-1, 0);
+    if (e.key === "ArrowRight") this.move(1, 0);
+    if (e.key === "ArrowDown") this.move(0, 1);
+    if (e.key === "ArrowUp") this.rotate();
+  };
+
+  document.addEventListener("keydown", this.controlsHandler);
+},
+
+clearLines() {
+  let linesCleared = 0;
+
+  for (let y = this.height - 1; y >= 0; y--) {
+    if (this.grid[y].every(cell => cell)) {
+      this.grid.splice(y, 1);
+      this.grid.unshift(Array(this.width).fill(0));
+      y++;
+      linesCleared++;
+    }
+  }
+
+
+  if (linesCleared > 0) {
+    // klassisk Tetris scoring
+    const points = [0, 100, 300, 500, 800];
+    this.score += points[linesCleared] || (linesCleared * 200);
+    this.speed = Math.max(5, 30 - Math.floor(this.score / 1000));
+
+    document.getElementById("scoreBoard").textContent =
+      "Score: " + this.score;
+  }
+},
+
+  spawn() {
+    this.piece = this.shapes[Math.floor(Math.random() * this.shapes.length)];
+    this.x = 4;
+    this.y = 0;
+
+if (!this.fits(this.x, this.y, this.piece)) {
+  alert("GAME OVER");
+  this.reset();
+    }
+  },
+
+  fits(px, py, piece) {
+    for (let y = 0; y < piece.length; y++) {
+      for (let x = 0; x < piece[y].length; x++) {
+        if (piece[y][x]) {
+          let nx = px + x;
+          let ny = py + y;
+
+          if (
+            nx < 0 ||
+            nx >= this.width ||
+            ny >= this.height ||
+            this.grid[ny]?.[nx]
+          ) return false;
+        }
+      }
+    }
+    return true;
+  },
+
+lock() {
+  let blocksPlaced = 0;
+
+  for (let y = 0; y < this.piece.length; y++) {
+    for (let x = 0; x < this.piece[y].length; x++) {
+      if (this.piece[y][x]) {
+        this.grid[this.y + y][this.x + x] = 1;
+        blocksPlaced++;
+      }
+    }
+  }
+
+  // poeng når brikken plasseres
+  this.score += 10;
+
+  this.clearLines();
+  this.spawn();
+},
+
+  move(dx, dy) {
+    if (this.fits(this.x + dx, this.y + dy, this.piece)) {
+      this.x += dx;
+      this.y += dy;
+    } else if (dy === 1) {
+      this.lock();
+    }
+  },
+
+  rotate() {
+    const rotated = this.piece[0].map((_, i) =>
+      this.piece.map(row => row[i]).reverse()
+    );
+
+    if (this.fits(this.x, this.y, rotated)) {
+      this.piece = rotated;
+    }
+  },
+
+  draw() {
+this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // grid
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        if (this.grid[y][x]) {
+          this.drawBlock(x, y);
+        }
+      }
+    }
+
+    // piece
+    for (let y = 0; y < this.piece.length; y++) {
+      for (let x = 0; x < this.piece[y].length; x++) {
+        if (this.piece[y][x]) {
+          this.drawBlock(this.x + x, this.y + y);
+        }
+      }
+    }
+  },
+
+  drawBlock(x, y) {
+    this.ctx.fillStyle = "white";
+    this.ctx.fillRect(
+      x * this.blockSize,
+      y * this.blockSize,
+      this.blockSize - 2,
+      this.blockSize - 2
+    );
+  },
+
+ loop() {
+  if (!this.running) return;
+
+  this.update();
+  this.draw();
+
+  this.animationId = requestAnimationFrame(() => this.loop());
+},
+
+reset() {
+  this.stop();
+
+  this.grid = Array.from({ length: this.height }, () =>
+    Array(this.width).fill(0)
+  );
+
+  this.score = 0;
+  this.speed = 30;
+
+  document.getElementById("scoreBoard").textContent = "Score: 0";
+
+  this.spawn();
+
+  this.running = true;
+  this.loop();
+},
+
+  update() {
+  this.dropCounter = (this.dropCounter || 0) + 1;
+
+   if (this.dropCounter > this.speed) {
+    this.move(0, 1);
+    this.dropCounter = 0;
+   }
+  },
+
+stop() {
+  this.running = false;
+
+  if (this.animationId) {
+    cancelAnimationFrame(this.animationId);
+    this.animationId = null;
+  }
+
+  this.dropCounter = 0;
+
+  if (this.controlsHandler) {
+    document.removeEventListener("keydown", this.controlsHandler);
+    this.controlsHandler = null;
+  }
+},
+};
+</script>
+   </div>
+<br>
+<!-- =========================================================
+   7.1.2 PLACEHOLDER SPILL
+========================================================= -->
+
+<button class="pagenavin" onclick="showSubpage('yolo')" style="font-size:150%"> 
+      Placeholder (klikk for å lukke tetris)
+  </button> 
+<br>
+  <div id="yolo" class="subpage">
+ <p>heihei</p>
+  </div>
+
+
+</div>
+<!-- =========================================================
+   7. HEMMELIG (P?) STOP
+========================================================= -->
+</body>
+</html>
