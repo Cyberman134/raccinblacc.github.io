@@ -82,8 +82,28 @@ converter: https://www.aconvert.com/image/png-to-svg/
  a { all: revert; }
  li { all: revert; color: var(--text-colour); }
  ul { all: revert; color: var(--text-colour); }
+
  header { display: flex; font-size: 20%; text-align: center; margin: 0; gap: 1rem;}
- 
+ footer { 
+    bottom: 0px; 
+    width: 100%; 
+    text-align: center; 
+    position: fixed; 
+    background-color: var(--base-comp); 
+    height: fit-content; 
+    display: flex; 
+    justify-content: center;
+  }
+
+  #non-license {
+    height: 13px;
+    width: 13px;
+    fill: var(--text-colour);
+    margin-right: -3px;
+    margin-bottom: -2px;
+  }
+
+
  hh {font-size:50%}
  titles { font-size: 140%; padding: 0px;}
  
@@ -185,7 +205,6 @@ converter: https://www.aconvert.com/image/png-to-svg/
     border-bottom-left-radius: 2%;
     margin-left: clamp(50px, 10rem, 5vw);
     height: fit-content;
-
   }
 
   #theme-switch svg {
@@ -255,7 +274,8 @@ converter: https://www.aconvert.com/image/png-to-svg/
     flex: 1 1 0;
     background-color: var(--base-comp);
     max-width: 300px;
-    height: 60vh;
+    range: auto;
+    max-height: 55vh;
     padding: 2rem 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -656,7 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <body>
 <button onclick="topFunction()" id="myBtn" title="Go to top">Til toppen</button>
-<title>Ukeplan 2025-2026</title>
+<title>Ukeplan 2STF 2026-2027</title>
 
 <div class="spcity">
 <header>
@@ -716,6 +736,18 @@ themeSwitch.addEventListener("click",  () =>{
 </ul>
 </nav>
 </div>
+
+<footer>
+  <br>
+  <p> Uoffisiell 
+  <br>
+  
+  <span style="font-size:12px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+     Uoffisiell side | Horten VGS: Miljø- og teknologilinje 
+    <svg id="non-license" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m722-352-56-56q26-32 40-70t14-82q0-100-70-170t-170-70q-44 0-82 14t-70 40l-56-56q42-36 95-57t113-21q133 0 226.5 93.5T800-560q0 60-21 113t-57 95ZM580-494 414-660q14-9 31-14.5t35-5.5q50 0 85 35t35 85q0 18-5.5 35T580-494ZM240-40v-308q-38-44-59-97t-21-115q0-29 4.5-55.5T180-668L56-792l56-56 736 736-56 56-72-70v86l-240-80-240 80Zm240-280q11 0 21-1t21-3L244-602q-2 11-3 21t-1 21q0 100 70 170t170 70ZM320-150l160-54 160 54v-56l-52-54q-26 9-52.5 14.5T480-240q-44 0-84-11t-76-31v132Zm160-66Z"/></svg>
+     2026-2027 | Designet av 
+    <a href="https://github.com/Cyberman134" style="font-family:'Courier New', Courier, monospace;">RaccInBlacc</a></span></p>
+</footer>
 
 <!-- =========================================================
    3. MAIN LAYOUT STOP
