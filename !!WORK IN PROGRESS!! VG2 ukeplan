@@ -31,7 +31,9 @@ Universelt:
   - Den jevla timeplanen
   - Se litt på hemmelig-siden  
 
-<a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+google svg (liten takk for å ha gjort det enkelt): https://fonts.google.com/icons
+svg edit (initiell png): <a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+converter: https://www.aconvert.com/image/png-to-svg/
 */
  :root { 
   --background: teal;
