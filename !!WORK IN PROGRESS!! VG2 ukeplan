@@ -74,7 +74,7 @@ Universelt:
 
  * { margin: 0; padding: 0; color: var(--text-colour); transition: 0.2s linear; height: auto; width: auto;}
  br { user-select: none;}
- h1 { text-align: center; font-size: 8vh; font-family: verdana; } 
+ h1 { text-align: center; font-size: 4.5vw; font-family: verdana; } 
  h2 { font-size: 250%; font-family: verdana; margin: 0; padding: 10px; } 
  b { font-size: 120%; font-family: 'Arial Black'; }
  a { all: revert; }
@@ -114,13 +114,14 @@ Universelt:
    position: fixed;
    top: 0;
    width: 100%;
-   height: 20vh;
+   height: fit-content;
   }
 
   #Phead {
     cursor: pointer; 
     user-select: none;
     color: var(--text-colour);
+    text-wrap-mode: wrap;
     margin: 0;
     text-shadow:
     1px 0px 2px var(--text-colour), 
@@ -180,7 +181,9 @@ Universelt:
     border-radius: 30%;
     border-top-right-radius: 25%;
     border-bottom-left-radius: 2%;
-    margin-left: 10rem;
+    margin-left: clamp(50px, 10rem, 5vw);
+    height: fit-content;
+
   }
 
   #theme-switch svg {
