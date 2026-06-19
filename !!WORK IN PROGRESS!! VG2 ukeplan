@@ -147,14 +147,16 @@ converter: https://www.aconvert.com/image/png-to-svg/
   }
 
  .spcity.down {
-   padding-bottom: 0;
+   padding-bottom: 3px;
   }
 
   #Phead {
     cursor: pointer; 
     user-select: none;
+    width: fit-content;
     color: var(--text-colour);
-    margin: 0;
+    float: left;
+    text-wrap: balance;
     text-shadow:
     1px 0px 2px var(--text-colour), 
     0px 0px 4px var(--screen-background); 
@@ -263,10 +265,10 @@ converter: https://www.aconvert.com/image/png-to-svg/
     border-radius: 5px;
     background-color: var(--base-comp);
     font-family: 'Century Gothic';
-    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease, margin 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, width 0.2s ease, margin 0.2s ease, font-size 0.2s ease;
     border: 2px var(--base-comp) solid;
-    font-size: 1.5vw;
-    width: 12vw;
+    font-size: 1.2vw;
+    width: 9.4vw;
     height: fit-content;
     text-align: center;
   }
@@ -275,18 +277,27 @@ converter: https://www.aconvert.com/image/png-to-svg/
     font-size: 1.4vw;
     padding: 0.9vw 1.4vw;
     margin-top: -10px;
+    font-size: 0.9vw;
   }
 
  nav li:hover {
     background-color: var(--lightup-primary);
     border: 2px solid var(--secondary-outline);
-    width: 14vw;
+    width: 12vw;
+  }
+
+  .down nav li:hover {
+    width: 10vw;
   }
 
   .pagenava {
    background-color: var(--lightup-secondary);
    border: 2px solid var(--outline-colour);
-   width: 15vw;
+   width: 13vw;
+  }
+
+  .down .pagenava {
+    width: 11vw;
   }
 
   #HemmeligButton {
@@ -311,6 +322,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
     left: 4px;
     top: calc(var(--spcity-height, 0px) + 10px);
     align-self: flex-start;
+    overflow-y: auto;
   }
 
   .sidebar h3 {
@@ -657,11 +669,12 @@ document.addEventListener("DOMContentLoaded", function () {
   })
   //Da button
 	  window.addEventListener("scroll", function () {
-	    if (window.scrollY > 20) {
-	  mybutton.classList.add("show");
-	} else {
-	  mybutton.classList.remove("show");
-	}
+	    (window.scrollY > 20) ?
+	      mybutton.classList.add("show")
+	       
+      : 
+	      mybutton.classList.remove("show")
+  	  
 	  });
 	
 	  mybutton.addEventListener("click", function () {
