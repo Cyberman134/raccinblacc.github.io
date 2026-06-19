@@ -51,6 +51,9 @@ converter: https://www.aconvert.com/image/png-to-svg/
   --innl-colour: red;
   --lekse-colour: blue;
   --active-day: #9CECEB;
+
+  /* Special */
+  --black: black;
  }
 
  .darkmode {
@@ -82,6 +85,10 @@ converter: https://www.aconvert.com/image/png-to-svg/
  a { all: revert; }
  li { all: revert; color: var(--text-colour); }
  ul { all: revert; color: var(--text-colour); }
+
+ .darkmode a {
+  color: lightseagreen;
+ }
 
  header { display: flex; font-size: 20%; text-align: center; margin: 0; gap: 1rem;}
  footer { 
@@ -131,19 +138,22 @@ converter: https://www.aconvert.com/image/png-to-svg/
   }
  .spcity {
    background-color: var(--base-comp);
-   border: 2px var(--outline-colour);
-   padding: 1rem;
+   border-bottom: 2px solid var(--black);
+   padding-bottom: 1rem;
    position: fixed;
    top: 0;
    width: 100%;
    height: fit-content;
   }
 
+ .spcity.down {
+   padding-bottom: 0;
+  }
+
   #Phead {
     cursor: pointer; 
     user-select: none;
     color: var(--text-colour);
-    text-wrap-mode: wrap;
     margin: 0;
     text-shadow:
     1px 0px 2px var(--text-colour), 
@@ -156,6 +166,20 @@ converter: https://www.aconvert.com/image/png-to-svg/
     1px 0px 2px var(--black), 
     0px 0px 10px var(--lightup-primary), 
     0px 0px 20px var(--lightup-primary); 
+  }
+
+  .down #Phead {
+    font-size: calc(4.5vw - 10px);
+  }
+
+  #Layer_1 {
+    background-color: white;
+    border-radius: 30%;
+    border-top-right-radius: 25%;
+    border-bottom-left-radius: 2%;
+    margin-left: clamp(50px, 10rem, 5vw);
+    height: fit-content;
+    width: fit-content;
   }
 
   /* Darkmode */
@@ -198,15 +222,6 @@ converter: https://www.aconvert.com/image/png-to-svg/
     transform: scale(1.05);
   }
 
-  #Layer_1 {
-    background-color: white;
-    border-radius: 30%;
-    border-top-right-radius: 25%;
-    border-bottom-left-radius: 2%;
-    margin-left: clamp(50px, 10rem, 5vw);
-    height: fit-content;
-  }
-
   #theme-switch svg {
     position: absolute;
     top: 50%;
@@ -244,27 +259,37 @@ converter: https://www.aconvert.com/image/png-to-svg/
   nav li {
     cursor: pointer;
     user-select: none;
-    padding: 10px 20px;
+    padding: 1vw 1.5vw;
     border-radius: 5px;
     background-color: var(--base-comp);
     font-family: 'Century Gothic';
-    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease, margin 0.3s ease;
     border: 2px var(--base-comp) solid;
-    font-size: 2vh;
-    width: 10em;  
+    font-size: 1.5vw;
+    width: 12vw;
+    height: fit-content;
     text-align: center;
+  }
+
+  .down nav li {
+    font-size: 1.4vw;
+    padding: 0.9vw 1.4vw;
+    margin-top: -10px;
   }
 
  nav li:hover {
     background-color: var(--lightup-primary);
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
     border: 2px solid var(--secondary-outline);
-    width: 11em;
-    text-align: center;
+    width: 14vw;
   }
 
-  #HemmeligButton{
+  .pagenava {
+   background-color: var(--lightup-secondary);
+   border: 2px solid var(--outline-colour);
+   width: 15vw;
+  }
+
+  #HemmeligButton {
     transition: background-color 0.3s ease, transform 0.3s ease, width 0.3s ease;
   }
 
@@ -337,19 +362,6 @@ converter: https://www.aconvert.com/image/png-to-svg/
   .active { display: inline-block;}
   .subpage { display: none; }
   .subpage.active { display: inline-block; } 
- 
-  /*active nav buttons*/
- 
-  .pagenava {
-   font-family: 'Century Gothic'; 
-   display: inline-block; 
-   text-decoration: none; 
-   background-color: var(--lightup-secondary); 
-   border-radius: 5px;
-   text-align: center;
-   border: 2px solid var(--outline-colour);
-   width: 25vh;
-  }
 
   /*scroll button*/
 
@@ -629,8 +641,21 @@ document.addEventListener("DOMContentLoaded", function () {
     updateNavOffset();
     window.addEventListener('resize', updateNavOffset);
   })();
+  //Spcity
+    let lastScrollTop = window.scrollY || document.documentElement.scrollTop;
 	  const mybutton = document.getElementById("myBtn");
+    const spcity = document.getElementById("spcity");
 
+  window.addEventListener('scroll', function() {
+      // Get the current scroll position
+    const currentScroll = window.scrollY || document.documentElement.scrollTop;
+    (currentScroll > lastScrollTop) ?
+      spcity.classList.add("down")
+    :
+      spcity.classList.remove("down")
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  })
+  //Da button
 	  window.addEventListener("scroll", function () {
 	    if (window.scrollY > 20) {
 	  mybutton.classList.add("show");
@@ -643,7 +668,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    window.scrollTo({ top: 0, behavior: "smooth" });
 	  });
 	
-
+  
 
 //Hemmelig
 
@@ -678,7 +703,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <button onclick="topFunction()" id="myBtn" title="Go to top">Til toppen</button>
 <title>Ukeplan 2STF 2026-2027</title>
 
-<div class="spcity">
+<div id="spcity" class="spcity">
 <header>
   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
   <h1 id="Phead">Ukeplan 2STF 2026-2027</h1>
@@ -743,9 +768,9 @@ themeSwitch.addEventListener("click",  () =>{
   <br>
   
   <span style="font-size:12px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-     Uoffisiell side | Horten VGS: Miljø- og teknologilinje 
+     Uoffisiell side | Horten VGS: Miljø- og teknologilinje | 
     <svg id="non-license" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m722-352-56-56q26-32 40-70t14-82q0-100-70-170t-170-70q-44 0-82 14t-70 40l-56-56q42-36 95-57t113-21q133 0 226.5 93.5T800-560q0 60-21 113t-57 95ZM580-494 414-660q14-9 31-14.5t35-5.5q50 0 85 35t35 85q0 18-5.5 35T580-494ZM240-40v-308q-38-44-59-97t-21-115q0-29 4.5-55.5T180-668L56-792l56-56 736 736-56 56-72-70v86l-240-80-240 80Zm240-280q11 0 21-1t21-3L244-602q-2 11-3 21t-1 21q0 100 70 170t170 70ZM320-150l160-54 160 54v-56l-52-54q-26 9-52.5 14.5T480-240q-44 0-84-11t-76-31v132Zm160-66Z"/></svg>
-     2026-2027 | Designet av 
+     2026-2027 Designet av 
     <a href="https://github.com/Cyberman134" style="font-family:'Courier New', Courier, monospace;">RaccInBlacc</a></span></p>
 </footer>
 
@@ -772,6 +797,7 @@ themeSwitch.addEventListener("click",  () =>{
             onmouseout="passive(this)"
             onclick="scrollToSection(event, this)"
             title="Nåværende uke">KLIKK FOR NÅVÆRENDE UKE</a>
+    <a href "#" class="menu-item">Hei</a>
     <a href "#" class="menu-item">På deg</a>
     <a href "#"  class="menu-item">Din lille</a>
     <a href "#"  class="menu-item">Sei</a>
