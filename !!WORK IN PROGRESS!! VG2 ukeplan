@@ -13,6 +13,7 @@ SHIT Å GJØRE:
 
 Universelt:
    - Se å få den nav+header-baren litt animert
+   - Få nav offset til å være normal når man går inn og ut av tabben (reset nav offset hver gang man scroller eller hver gang man går inn)
 
 - Se litt på fargeoppsettet
    - Se dypere inn i tabell css
@@ -41,6 +42,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   --lightup-primary: turquoise;
   --lightup-secondary: darkturquoise;
   --screen-background: white;
+  --screen-secondary: var(--base-comp);
   --text-colour: black;
   --outline-colour: black;
   --secondary-outline: rgb(36, 36, 36);
@@ -53,7 +55,6 @@ converter: https://www.aconvert.com/image/png-to-svg/
   --active-day: #9CECEB;
 
   /* Special */
-  --black: black;
  }
 
  .darkmode {
@@ -62,6 +63,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   --lightup-primary: #408A71;
   --lightup-secondary: #285A48;
   --screen-background: rgb(23, 26, 25);
+  --screen-secondary: rgb(36, 36, 36);
   --text-colour: white;
   --outline-colour: white;
   --secondary-outline: rgb(187, 187, 187);
@@ -74,7 +76,6 @@ converter: https://www.aconvert.com/image/png-to-svg/
   --active-day: #30a07e;
 
   /* Special */
-  --black: black;
  }
 
  * { margin: 0; padding: 0; color: var(--text-colour); transition: 0.2s linear; height: auto; width: auto;}
@@ -100,6 +101,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
     height: fit-content; 
     display: flex; 
     justify-content: center;
+    z-index: 98;
   }
 
   #non-license {
@@ -138,12 +140,13 @@ converter: https://www.aconvert.com/image/png-to-svg/
   }
  .spcity {
    background-color: var(--base-comp);
-   border-bottom: 2px solid var(--black);
+   border-bottom: 2px solid var(black);
    padding-bottom: 1rem;
    position: fixed;
    top: 0;
    width: 100%;
    height: fit-content;
+   z-index: 10;
   }
 
  .spcity.down {
@@ -165,7 +168,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   .darkmode #Phead {
     color: var(--text-colour);
     text-shadow:
-    1px 0px 2px var(--black), 
+    1px 0px 2px var(black), 
     0px 0px 10px var(--lightup-primary), 
     0px 0px 20px var(--lightup-primary); 
   }
@@ -211,7 +214,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
     background: linear-gradient(45deg, var(--background) 50%, var(--base-comp) 50%);
     transform: rotate(0deg);
     transition: transform 0.5s ease;
-    z-index: -1;
+    z-index: -3;
     
   }
 
@@ -226,6 +229,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
 
   #theme-switch svg {
     position: absolute;
+    z-index: 3;
     top: 50%;
     left: 50%;
     fill: var(--secondary-outline);
@@ -318,7 +322,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
     gap: 1rem;
     align-items: flex-start;
     position: sticky;
-    z-index: inherit;
+    z-index: 1;
     left: 4px;
     top: calc(var(--spcity-height, 0px) + 10px);
     align-self: flex-start;
@@ -509,6 +513,73 @@ converter: https://www.aconvert.com/image/png-to-svg/
   background-color: rgba(119, 136, 153, 0.3);
 }
 
+#updatedate {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 110%;
+  text-shadow: 
+   0px 0px 5px white;
+}
+
+#updatedate::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;          /* length of line to the right */
+  height: 7px;
+  background: linear-gradient(to right, var(--background), var(--base-comp), white);
+  z-index: -1;
+}
+
+#page4 h2 {
+  color: var(--text-colour);
+  position: relative;
+  z-index: 1;
+  background: var(--screen-secondary);
+}
+
+#page4 h2::before {
+  content: '';
+  background: linear-gradient(to right, var(--text-colour), var(--screen-secondary));
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#page4 h2::after {
+  content: '';
+  background: linear-gradient(to right, var(--text-colour), var(--screen-secondary));
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#page4 div {
+  background: var(--screen-background);
+  border-bottom: 2px solid var(--outline-colour);
+  margin-bottom: 3em;
+}
+
+#page4 ul {
+  padding: 1em;
+  padding-left: 1.5rem;
+  padding-top: 0.5em;
+  margin-top: 0em;
+}
+
+#page4 b {
+  padding: 1em;
+  padding-left: 0.5em;
+}
+
 /* Page2 css */
  </style>
 <!-- =========================================================
@@ -557,7 +628,7 @@ function showPage(pageId) {
       const navHeight = nav ? nav.offsetHeight : 0;
       document.documentElement.style.setProperty('--spcity-height', navHeight + 'px');
       document.documentElement.style.setProperty('scroll-padding-top', navHeight + 'px');
-      document.body.style.paddingTop = navHeight + 10 +'px';
+      document.body.style.paddingTop = navHeight + 15 +'px';
     }
     updateNavOffset();
     window.addEventListener('resize', updateNavOffset);
@@ -1116,30 +1187,63 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 <!-- =========================================================
    6. OPPDATERINGER (P4) START
 ========================================================= -->
-
 <div id="page4" class="page">
 
-<div style="background-color:white;">
-  <h2 style="background-color:lightseagreen;">24.05.2026: 1.4</h2>
+
+<p id="updatedate">XX.XX.2026</p>
+<div>
+  <h2>2.0</h2>
+  <b>Generell utseende:</b>
     <ul>
-      <li><b>Nytt easter egg lagt til:</b></li>
+      <li>Lagt til svg-er (ikoner)</li>
+      <li>Endret layout på sidene:</li>
+      <li>Lagt til konstante header + navbar (toppen) og footer (nederst)</li>
+        <ul>
+          <li>Oppdateringer</li>
+        </ul>
+    </ul>
+  <b>Spesifike visuelle funksjoner:</b>
+    <ul>
+      <li>Header + navbar, sidebar og footer følger etter scrollen til siden</li>
+      <li>Knapper har blitt mer reaktive</li>
+      <li>Generelt mange animasjoner</li>
+      <li>Lagt til en knapp for fargeemneskifte</li>
+    </ul>
+  <b>Fikset:</b>
+    <ul>
+      <li>Hemmelig-knappen har nå en mer konstant måte å komme opp på</li>
+        <ul>
+          <li>3 klikk for å poppe opp</li>
+          <li>1 klikk for å forsvinne på siden/komme tilbake etter å ha forsvunnet</li>
+        </ul>
+    </ul>
+  <b>Andre kodejusteringer som ikke er like visuelle om de ikke er borte</b> 
+    <ul>
+      <li>f.eks kompensasjoner for den følgende layouten</li>
+    </ul>
+  <b>Usynlige kodejusteringer:</b>
+    <ul>
+      <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
+    </ul>
+</div>
+
+<p id="updatedate">24.05.2026</p>
+<div>
+  <h2>1.4</h2>
+      <b>Nytt easter egg lagt til:</b>
         <ul>
           <li><p>Endringer under denne siden</p></li>
         <ul>
           <li><p>Hint: se om du finner noe rart på side 1 og klikk det 3 ganger</p></li>
         </ul>
         </ul>
-    </ul>
-     <hr>
   </div>
 
-<br>
-
-<div style="background-color:white;">
-  <h2 style="background-color:lightseagreen;">18.05.2026: 1.3</h2>
-    <ul>
-      <li><b>Ny oppsett under 'Ukeplan':</b></li>
-        <ul>
+<p id="updatedate">18.05.2026</p>
+<div>
+  <h2>1.3</h2>
+    <b>Ny oppsett under 'Ukeplan':</b>
+      <ul>
           <li><p>Strukturen til 'Ukeplan' innlegg har endret seg til en mer forståelig format</p></li>
             <ul>
              <li><p>Nåværende dag lyser opp</p></li>
@@ -1158,22 +1262,22 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
         <ul>
           <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
         </ul>
-      <li><b>Annet:</b></li>
+          <li><b>Annet:</b></li>
          <ul>
            <li><p>'Timeplan' har blitt endret under kodejusteringene ved CSS krangel i filen (++?) og jeg har slitt i flere dager med å få fikse det. Det virket ikke, og jeg må kanskje lage den om igjen. Per nå, vil timeplanen se litt rar ut. Dette håper jeg å fikse i neste oppdatering.</p></li>
          </ul>
-    </ul>
-     <hr>
-  </div>
+    
+</div>
 
 
-<br>
+ 
 
 
-<div style="background-color:white;">
-  <h2 style="background-color:lightseagreen;">27.04.2026: 1.2</h2>
-    <ul>
-      <li><b>Ny side 'Timeplan' er lagt til:</b></li>
+<p id="updatedate">27.04.2026</p>
+<div>
+  <h2>1.2</h2>
+    
+      <b>Ny side 'Timeplan' er lagt til:</b>
         <ul>
           <li><p>Under 'Timeplan' er det lagt til en generell, fast timeplan til året</p></li>
         </ul>
@@ -1185,17 +1289,17 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
         <ul>
           <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
         </ul>
-    </ul>
-     <hr>
-  </div>
+    
+</div>
 
-<br>
+ 
 
-  <div style="background-color:white;">
-  <h2 style="background-color:lightseagreen;">16.04.2026: 1.1</h2>
-    <ul>
-     <li><b>Flere sider er lagt til:</b></li>
-      <ul>
+
+<p id="updatedate">16.04.2026</p>
+<div>
+ <h2>1.1</h2>
+    <b>Flere sider er lagt til:</b>
+     <ul>
        <li><p>Ny side 'Ekstra info ukeplan' er lagt til</p></li>
         <ul>
          <li><p>'Ekstra info' fra ukeplan flyttet til den nye siden 'Ekstra info ukeplan'</p></li>
@@ -1215,8 +1319,6 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
          <li><p>OBS! Slett '/#Uke16' (eller liknende) i linken din for å se denne effekten</p></li>
         </ul>
       </ul>
-    </ul>
-     <hr>
   </div>
 
 </div>
