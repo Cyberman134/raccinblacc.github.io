@@ -12,18 +12,19 @@
 SHIT Å GJØRE:
 
 Universelt:
-   - Se å få den nav+header-baren litt animert
-   - Få nav offset til å være normal når man går inn og ut av tabben (reset nav offset hver gang man scroller eller hver gang man går inn)
+   - Se å få den nav+header-baren litt animert ||ferdig
+   - Få nav offset til å være normal når man går inn og ut av tabben (reset nav offset hver gang man scroller eller hver gang man går inn) ||ferdig
+   - Chevron shit med meny
 
 - Se litt på fargeoppsettet
    - Se dypere inn i tabell css
-   - Overskriftbakgrunn i lysmodus
    - Lage css-ordning for hoveddivene
-   - Fikse opp på nav+header-baren
+   - Fikse opp på nav+header-baren ||ferdig
 
 - Mørkemodus
+  - Andre moduser
   - Propagandamodus? 
-  - Chevron shit med meny
+  - Overskriftbakgrunn i lysmodus
 
 - Spice opp ukeplan-siden
    - Gjør ting med sideoppsett
@@ -102,6 +103,11 @@ converter: https://www.aconvert.com/image/png-to-svg/
     display: flex; 
     justify-content: center;
     z-index: 98;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    border-top: 1px solid black;
   }
 
   #non-license {
@@ -147,6 +153,9 @@ converter: https://www.aconvert.com/image/png-to-svg/
    width: 100%;
    height: fit-content;
    z-index: 10;
+   border-bottom-left-radius: 5%;
+   border-bottom-right-radius: 5%;
+   border-bottom: 2px solid black;
   }
 
  .spcity.down {
@@ -168,9 +177,9 @@ converter: https://www.aconvert.com/image/png-to-svg/
   .darkmode #Phead {
     color: var(--text-colour);
     text-shadow:
-    1px 0px 2px var(black), 
-    0px 0px 10px var(--lightup-primary), 
-    0px 0px 20px var(--lightup-primary); 
+    1px 0px 0px var(black), 
+    1px 1px 10px var(--lightup-primary), 
+    1px 1px 20px var(--lightup-primary); 
   }
 
   .down #Phead {
@@ -513,7 +522,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   background-color: rgba(119, 136, 153, 0.3);
 }
 
-#updatedate {
+.updatedate {
   position: relative;
   z-index: 1;
   color: white;
@@ -523,7 +532,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
    0px 0px 5px white;
 }
 
-#updatedate::after {
+.updatedate::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -562,7 +571,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   left: 0;
 }
 
-#page4 div {
+#page4 p + div {
   background: var(--screen-background);
   border-bottom: 2px solid var(--outline-colour);
   margin-bottom: 3em;
@@ -578,6 +587,52 @@ converter: https://www.aconvert.com/image/png-to-svg/
 #page4 b {
   padding: 1em;
   padding-left: 0.5em;
+}
+
+#oppDivKnapp {
+  display: flex;
+  justify-content: center;
+}
+
+#oppdKnapp {
+  cursor: pointer;
+  user-select: none;
+  padding: 1vw 1.5vw;
+  border-radius: 5px;
+  background-color: var(--lightup-secondary);
+  font-family: 'Century Gothic';
+  transition: background-color 0.5s ease, border 0.5s ease, transform 0.2s ease, padding 0.2s ease, margin 0.2s ease, font-size 0.2s ease;
+  border: 2px var(--outline-colour) solid;
+  font-size: 2vw;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+}
+
+#oppdKnapp:hover {
+  background-color: var(--lightup-primary);
+  border: 2px solid var(--secondary-outline);
+  padding: 1vw 1.9vw;
+}
+
+#tidligereOppd {
+  transition: all 0.5s ease;
+}
+
+#oppdKnapp.pagenava {
+  background-color: var(--lightup-primary);
+  border: 2px solid var(--outline-colour);
+  padding: 1vw 1.9vw;
+}
+
+.TV {
+  fill: var(--text-colour);
+  height: 1em;
+  width: 1em;
+}
+
+.TV.going {
+  transform: rotate(180deg);
 }
 
 /* Page2 css */
@@ -609,6 +664,14 @@ function updateNavActive(pageId) {
   });
 }
 
+function updateNavOffset(){
+  const nav = document.querySelector('.spcity');
+  const navHeight = nav ? nav.offsetHeight : 0;
+  document.documentElement.style.setProperty('--spcity-height', navHeight + 'px');
+  document.documentElement.style.setProperty('scroll-padding-top', navHeight + 'px');
+  document.body.style.paddingTop = navHeight + 15 + 'px';
+}
+
 //Pages
 function showPage(pageId) {
 
@@ -620,19 +683,8 @@ function showPage(pageId) {
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Show da pages
     document.getElementById(pageId).classList.add('active');
-   // ensure nav reflects the initial active page
-  // get the navbar gap
-  (function syncNavOffsets(){
-    function updateNavOffset(){
-      const nav = document.querySelector('.spcity');
-      const navHeight = nav ? nav.offsetHeight : 0;
-      document.documentElement.style.setProperty('--spcity-height', navHeight + 'px');
-      document.documentElement.style.setProperty('scroll-padding-top', navHeight + 'px');
-      document.body.style.paddingTop = navHeight + 15 +'px';
-    }
-    updateNavOffset();
-    window.addEventListener('resize', updateNavOffset);
-  })();
+   // ensure nav reflects the current page state
+  updateNavOffset();
   function mainHeader(){
     const Phead = document.getElementById('Phead');
     if (!Phead) return;
@@ -712,19 +764,17 @@ function showSubpage(subpageId) {
 document.addEventListener("DOMContentLoaded", function () {
   // ensure nav reflects the initial active page
   updateNavActive('page1');
-  // Keep scroll offsets in sync with the actual sticky nav height
-  (function syncNavOffsets(){
-    function updateNavOffset(){
-      const nav = document.querySelector('.spcity');
-      const navHeight = nav ? nav.offsetHeight : 0;
-      document.documentElement.style.setProperty('--spcity-height', navHeight + 'px');
-      document.documentElement.style.setProperty('scroll-padding-top', navHeight + 'px');
-      document.body.style.paddingTop = navHeight + 10 + 'px';
-    }
-    updateNavOffset();
+  updateNavOffset();
+
+  const nav = document.querySelector('.spcity');
+  if (nav && typeof ResizeObserver !== 'undefined') {
+    const observer = new ResizeObserver(updateNavOffset);
+    observer.observe(nav);
+  } else {
     window.addEventListener('resize', updateNavOffset);
-  })();
-  //Spcity
+  }
+
+  //Spcity down function
     let lastScrollTop = window.scrollY || document.documentElement.scrollTop;
 	  const mybutton = document.getElementById("myBtn");
     const spcity = document.getElementById("spcity");
@@ -772,6 +822,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
 /* =========================================================
    2. JS STOP
 ========================================================= */
@@ -847,12 +898,10 @@ themeSwitch.addEventListener("click",  () =>{
 </div>
 
 <footer>
-  <br>
-  <p> Uoffisiell 
-  <br>
+ 
   
   <span style="font-size:12px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-     Uoffisiell side | Horten VGS: Miljø- og teknologilinje | 
+     Uoffisiell side | Til bruk for Horten VGS: Miljø- og teknologilinje | 
     <svg id="non-license" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m722-352-56-56q26-32 40-70t14-82q0-100-70-170t-170-70q-44 0-82 14t-70 40l-56-56q42-36 95-57t113-21q133 0 226.5 93.5T800-560q0 60-21 113t-57 95ZM580-494 414-660q14-9 31-14.5t35-5.5q50 0 85 35t35 85q0 18-5.5 35T580-494ZM240-40v-308q-38-44-59-97t-21-115q0-29 4.5-55.5T180-668L56-792l56-56 736 736-56 56-72-70v86l-240-80-240 80Zm240-280q11 0 21-1t21-3L244-602q-2 11-3 21t-1 21q0 100 70 170t170 70ZM320-150l160-54 160 54v-56l-52-54q-26 9-52.5 14.5T480-240q-44 0-84-11t-76-31v132Zm160-66Z"/></svg>
      2026-2027 Designet av 
     <a href="https://github.com/Cyberman134" style="font-family:'Courier New', Courier, monospace;">RaccInBlacc</a></span></p>
@@ -1190,14 +1239,19 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 <div id="page4" class="page">
 
 
-<p id="updatedate">XX.XX.2026</p>
+<p class="updatedate">XX.XX.2026</p>
 <div>
   <h2>2.0</h2>
   <b>Generell utseende:</b>
     <ul>
       <li>Lagt til svg-er (ikoner)</li>
-      <li>Endret layout på sidene:</li>
+      <li>Generelt mange animasjoner</li>
       <li>Lagt til konstante header + navbar (toppen) og footer (nederst)</li>
+        <ul>
+          <li>Toppen minsker seg når man scroller ned </li>
+          <li>Og forstørres igjen når man scroller opp</li>
+        </ul>
+      <li>Endret layout på sidene:</li>
         <ul>
           <li>Oppdateringer</li>
         </ul>
@@ -1206,8 +1260,8 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
     <ul>
       <li>Header + navbar, sidebar og footer følger etter scrollen til siden</li>
       <li>Knapper har blitt mer reaktive</li>
-      <li>Generelt mange animasjoner</li>
       <li>Lagt til en knapp for fargeemneskifte</li>
+      <li>Lagt til en knapp for gamle oppdateringer</li>
     </ul>
   <b>Fikset:</b>
     <ul>
@@ -1227,7 +1281,18 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
     </ul>
 </div>
 
-<p id="updatedate">24.05.2026</p>
+<div id="oppDivKnapp">
+<button id="oppdKnapp"> Tidligere versjoner 
+  <svg class="TV More" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-345 240-585l56-56 184 183 184-183 56 56-240 240Z"/></svg>
+</button>
+</div>
+
+<div id="tidligereOppd">
+<br>
+<br>
+
+
+<p class="updatedate">24.05.2026</p>
 <div>
   <h2>1.4</h2>
       <b>Nytt easter egg lagt til:</b>
@@ -1239,7 +1304,7 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
         </ul>
   </div>
 
-<p id="updatedate">18.05.2026</p>
+<p class="updatedate">18.05.2026</p>
 <div>
   <h2>1.3</h2>
     <b>Ny oppsett under 'Ukeplan':</b>
@@ -1269,11 +1334,7 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
     
 </div>
 
-
- 
-
-
-<p id="updatedate">27.04.2026</p>
+<p class="updatedate">27.04.2026</p>
 <div>
   <h2>1.2</h2>
     
@@ -1292,10 +1353,7 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
     
 </div>
 
- 
-
-
-<p id="updatedate">16.04.2026</p>
+<p class="updatedate">16.04.2026</p>
 <div>
  <h2>1.1</h2>
     <b>Flere sider er lagt til:</b>
@@ -1319,8 +1377,27 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
          <li><p>OBS! Slett '/#Uke16' (eller liknende) i linken din for å se denne effekten</p></li>
         </ul>
       </ul>
-  </div>
+</div>
 
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<script>
+  // Tidligere opdateringer knapp
+const oppdKnapp = document.getElementById('oppdKnapp')
+const oppdSide = document.getElementById('tidligereOppd')
+const TV = document.querySelectorAll('.TV')
+oppdSide.classList.toggle("hidden");
+
+oppdKnapp.onclick = () => {
+  oppdSide.classList.toggle("hidden");
+  oppdKnapp.classList.toggle("pagenava");
+  TV.forEach(tv => tv.classList.toggle('going'));
+}
+</script>
 </div>
 
 <!-- =========================================================
