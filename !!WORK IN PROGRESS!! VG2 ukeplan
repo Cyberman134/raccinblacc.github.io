@@ -15,9 +15,10 @@ Universelt:
    - Se å få den nav+header-baren litt animert ||ferdig
    - Få nav offset til å være normal når man går inn og ut av tabben (reset nav offset hver gang man scroller eller hver gang man går inn) ||ferdig
    - Chevron shit med meny
+   - Få mobil til å funke
 
 - Se litt på fargeoppsettet
-   - Se dypere inn i tabell css
+   - Se dypere inn i planner css
    - Lage css-ordning for hoveddivene
    - Fikse opp på nav+header-baren ||ferdig
 
@@ -32,6 +33,8 @@ Universelt:
 - Fikse opp i de andre sidene enn ukeplanen
   - Den jevla timeplanen
   - Se litt på hemmelig-siden  
+    - Legge til in-web view greie på raccoon skate
+  - Legge til 'Elementer'-side
 
 google svg (liten takk for å ha gjort det enkelt): https://fonts.google.com/icons
 svg edit (initiell png): <a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
@@ -144,6 +147,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
    margin: 0px;
    padding: 0px;
   }
+
  .spcity {
    background-color: var(--base-comp);
    border-bottom: 2px solid var(black);
@@ -156,6 +160,54 @@ converter: https://www.aconvert.com/image/png-to-svg/
    border-bottom-left-radius: 5%;
    border-bottom-right-radius: 5%;
    border-bottom: 2px solid black;
+  }
+
+  .calHole {
+    position: fixed;
+    top: 0;
+    width: 3vw;
+    height: 3vw;
+  }
+
+  .down .calHole {
+    height: 2.5vw;
+  }
+
+  #C1.calHole  {
+    left: 20vw;
+  }
+
+  #C2.calHole  {
+    right: 20vw;
+  }
+
+  .hole {
+    position: absolute;
+    border-radius: 50%;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    box-shadow: 
+      0px 0px 3px rgb(0, 0, 0);
+  }
+
+  .plastic {
+    background-color: rgb(194, 192, 192);
+    height: 2.3vw;
+    width: 2vw;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 0.2vw solid rgb(27, 27, 27);
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top: none;
+    box-shadow: 
+      0px 0px 3px rgb(0, 0, 0);
+  }
+
+  .down .plastic {
+    height: 1.8vw;
   }
 
  .spcity.down {
@@ -186,14 +238,18 @@ converter: https://www.aconvert.com/image/png-to-svg/
     font-size: calc(4.5vw - 10px);
   }
 
-  #Layer_1 {
+  #AndstfLogo {
     background-color: white;
     border-radius: 30%;
     border-top-right-radius: 25%;
     border-bottom-left-radius: 2%;
     margin-left: clamp(50px, 10rem, 5vw);
     height: fit-content;
-    width: fit-content;
+    width: 7vw;
+  }
+
+  .down #AndstfLogo  {
+    width: 6.5vw;
   }
 
   /* Darkmode */
@@ -635,6 +691,23 @@ converter: https://www.aconvert.com/image/png-to-svg/
   transform: rotate(180deg);
 }
 
+/* Page 5 */
+
+.flexbox {
+  display: flex;
+  justify-content: center;
+}
+
+.flexchild {
+  border: 2px solid black;
+  width: 70vw;
+  height: fit-content;
+}
+
+.flexchild h2 {
+  border-bottom: 2px solid black;
+}
+
 /* Page2 css */
  </style>
 <!-- =========================================================
@@ -650,7 +723,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
 let clickCount = 0;
 // Update nav button styles based on active page
 function updateNavActive(pageId) {
-  const ids = ['page1','page2','page3','page4', 'Hemmelig'];
+  const ids = ['page1','page2','page3','page4', 'page5', 'Hemmelig'];
   ids.forEach(id => {
     const btn = document.getElementById(id + 'Button');
     if (!btn) return;
@@ -698,6 +771,8 @@ function showPage(pageId) {
       Phead.textContent = "Kodeoppdateringer";
     } else if (pageId === 'Hemmelig') {
       Phead.textContent = "Arbeidsområdet";
+    } else if (pageId === 'page5') {
+      Phead.textContent = "Elementer og sidekilder";
     } else {
       Phead.textContent = "2STF 2026-2027";
     }
@@ -837,10 +912,19 @@ document.addEventListener("DOMContentLoaded", function () {
 <body>
 <button onclick="topFunction()" id="myBtn" title="Go to top">Til toppen</button>
 <title>Ukeplan 2STF 2026-2027</title>
-
 <div id="spcity" class="spcity">
+<div style="height: 30px;">
+  <div class="calHole" id="C1">
+    <div class="hole"></div>
+    <div class="plastic"></div>
+  </div>
+  <div class="calHole" id="C2">
+    <div class="hole"></div>
+    <div class="plastic"></div>
+  </div>
+</div>
 <header>
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
+  <svg version="1.1" id="AndstfLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
   <h1 id="Phead">Ukeplan 2STF 2026-2027</h1>
   <button id="theme-switch" title="Bytt tema">
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
@@ -888,6 +972,10 @@ themeSwitch.addEventListener("click",  () =>{
 
 <li id="page4Button"
   onclick="showPage('page4')">  Oppdateringer
+</li> 
+
+<li id="page5Button"
+  onclick="showPage('page5')">  Elementer
 </li> 
 
 <li id="HemmeligButton" style="display: none;"
@@ -1184,7 +1272,9 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
   el.style.backgroundColor = "var(--active-day)";
 });
 </script> 
-</div>
+
+
+</div><br><br>
 </div>
 
 <!-- =========================================================
@@ -1242,6 +1332,10 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 <p class="updatedate">XX.XX.2026</p>
 <div>
   <h2>2.0</h2>
+  <b>Stort og nytt:</b>
+    <ul>
+      <li>Siden 'Elementer' er lagt til</li>
+    </ul>
   <b>Generell utseende:</b>
     <ul>
       <li>Lagt til svg-er (ikoner)</li>
@@ -1250,6 +1344,7 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
         <ul>
           <li>Toppen minsker seg når man scroller ned </li>
           <li>Og forstørres igjen når man scroller opp</li>
+          <li>Toppen har fått hull som skal likne en kalender (jeg prøvde iallfall)</li>
         </ul>
       <li>Endret layout på sidene:</li>
         <ul>
@@ -1403,6 +1498,25 @@ oppdKnapp.onclick = () => {
 <!-- =========================================================
    6. OPPDATERINGER (P4) STOP
 ========================================================= -->
+
+
+
+<!-- =========================================================
+   7. ELEMENTER START
+========================================================= -->
+<div id="page5" class="page">
+  <div class="flexbox">
+    <div class="flexchild">
+     <h2>Nettside logo:</h2>
+     <a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+    </div>
+  </div>
+</div>
+<!-- =========================================================
+   7. ELEMENTER STOPP
+========================================================= -->
+
+
 
 <!-- =========================================================
    7. HEMMELIG (P?) START
