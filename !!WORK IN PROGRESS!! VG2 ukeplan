@@ -699,13 +699,27 @@ converter: https://www.aconvert.com/image/png-to-svg/
 }
 
 .flexchild {
-  border: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
   width: 70vw;
   height: fit-content;
 }
 
 .flexchild h2 {
   border-bottom: 2px solid black;
+  border-top: 2px solid black;
+  text-align: center;
+  font-size: 2.5vw;
+  background-color: var(--base-comp);
+  border-top-left-radius: 30%;
+  border-top-right-radius: 30%;
+}
+
+.infoBox {
+  width: 90vw;
+  font-size: 12px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 /* Page2 css */
@@ -902,6 +916,8 @@ document.addEventListener("DOMContentLoaded", function () {
    2. JS STOP
 ========================================================= */
 </script>
+  <title>Ukeplan 2STF 2026-2027</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 
 
@@ -911,7 +927,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <body>
 <button onclick="topFunction()" id="myBtn" title="Go to top">Til toppen</button>
-<title>Ukeplan 2STF 2026-2027</title>
 <div id="spcity" class="spcity">
 <div style="height: 30px;">
   <div class="calHole" id="C1">
@@ -1506,9 +1521,20 @@ oppdKnapp.onclick = () => {
 ========================================================= -->
 <div id="page5" class="page">
   <div class="flexbox">
+    <div class="infoBox">OBS!: Verken Horten VGS: Miljø- og teknologilinje eller Horten VGS er tilknyttet denne nettsiden eller kildene oppgitt. 
+      Alle logoer, navn og visuelle elementer brukes kun for visuell virkning, og innebærer ikke sponsing, godkjenning eller kommersiell tilknytning. 
+      Alt innhold til siden er utarbeidet selvstendig av en elev. Horten VGS og Miljø- og teknologilinjen kan ikke holdes ansvarlige for innholdet på denne nettsiden.</div>
+  </div>
+  <br>
+  <div class="flexbox">
     <div class="flexchild">
      <h2>Nettside logo:</h2>
-     <a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+     <ul>
+      <li><a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> ikon fått fra og redigert i <a target="_blank" href="https://icons8.com">Icons8</a></li>
+      <li>Deretter gjort om til svg i <a target="_blank" href="https://www.aconvert.com/image/png-to-svg/">aconvert</a></li>
+      <li>Videre endringer (bakgrunn og omringende linje) er gjort i siden via CSS</li>
+     </ul>
+     <svg version="1.1" id="AndstfLogo2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
     </div>
   </div>
 </div>
