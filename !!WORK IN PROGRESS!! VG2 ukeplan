@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" content="width=device-width, initial-scale=1.0">
 
 <!-- =========================================================
    1. CSS START
@@ -11,38 +11,36 @@
 /*
 SHIT Å GJØRE:
 
-Universelt:
-   - Se å få den nav+header-baren litt animert |||ferdig
-   - Få nav offset til å være normal når man går inn og ut av tabben (reset nav offset hver gang man scroller eller hver gang man går inn) |||ferdig
-   - Chevron shit med meny
-   - Få mobil til å funke
+
+transform: perspective(900px) rotateY(-50deg) rotateX(15deg) rotate(-5deg);
+        transform-style: preserve-3d;
+
+'Settings':
+   -'Abboner på fag' (legge til i innstillinger ekstra fag)
+   - Email meg
+
+Fiks:
+   - Cookies banner
+   - OppDivKnapp shit CSS
+   - Få hemmelig over til en annen side for mindre load (kanskje?)
 
 - Se litt på fargeoppsettet
    - Se dypere inn i planner css
-   - Lage css-ordning for hoveddivene  ||| trenger bare ekstra info og timeplanen
-   - Fikse opp på nav+header-baren |||ferdig
+   - Lage css-ordning for hoveddivene  
 
 - Mørkemodus
   - Andre moduser
-  - Propagandamodus? 
-  - Overskriftbakgrunn i lysmodus |||ferdig
 
-- Spice opp ukeplan-siden
-   - Gjør ting med sideoppsett
+Til Launch:
+   - Sett opp ukeplanen
+   - Gjør ferdig ekstra info
+   - Finn ut av timeplan
 
-- Fikse opp i de andre sidene enn ukeplanen
-  - Den jevla timeplanen
-  - Se litt på hemmelig-siden  
-    - Legge til in-web view greie på raccoon skate |||ferdig
-  - Legge til 'Elementer'-side 
-
-google svg (liten takk for å ha gjort det enkelt): https://fonts.google.com/icons
-svg edit (initiell png): <a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-converter: https://www.aconvert.com/image/png-to-svg/
 */
  :root { 
   --background: teal;
   --base-comp: lightseagreen;
+  --base-secondary: darkcyan;
   --lightup-primary: turquoise;
   --lightup-secondary: darkturquoise;
   --screen-background: white;
@@ -54,7 +52,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   /* For the planner: */
   --fri-colour: var(--lightup-primary);
   --info-colour: var(--text-colour);
-  --innl-colour: red;
+  --vurdering-colour: red;
   --lekse-colour: blue;
   --active-day: #9CECEB;
 
@@ -64,6 +62,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
  .darkmode {
   --background: #091413;
   --base-comp: #044A42;
+  --base-secondary: rgba(1, 77, 77, 0.425);
   --lightup-primary: #408A71;
   --lightup-secondary: #285A48;
   --screen-background: rgb(23, 26, 25);
@@ -75,22 +74,41 @@ converter: https://www.aconvert.com/image/png-to-svg/
   /* For the planner: */
   --fri-colour: var(--lightup-primary);
   --info-colour: var(--text-colour);
-  --innl-colour: rgb(2, 114, 2);
+  --vurdering-colour: rgb(1, 230, 96);
   --lekse-colour: rgb(0, 201, 124);
   --active-day: #30a07e;
 
   /* Special */
  }
 
+
  * { margin: 0; padding: 0; color: var(--text-colour); transition: 0.2s linear; height: auto; width: auto;}
  br { user-select: none;}
- h1 { text-align: center; font-size: 4.5vw; font-family: verdana; } 
- h2 { font-size: 250%; font-family: verdana; margin: 0; padding: 10px; } 
- b { font-size: 120%; font-family: 'Arial Black'; }
+ h2 { font-size: 2em; font-family: verdana; margin: 0; padding: 10px; } 
+ b { font-size: 1.25em; font-family: 'Arial Black'; }
+ p { font-size: 1em;}
  a { all: revert; }
  li { all: revert; color: var(--text-colour); }
  ul { all: revert; color: var(--text-colour); }
+ img {display: block; max-width: 100%;}
 
+ ::-webkit-scrollbar {
+  width: 13px;
+ }
+
+ ::-webkit-scrollbar-track {
+  background: rgb(66, 66, 66);
+  border-radius: 5px;
+ }
+
+ ::-webkit-scrollbar-thumb {
+  background-color: var(--lightup-primary);
+  border-radius: 9px;
+ }
+
+ ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--lightup-secondary);
+ }
  .darkmode a {
   color: lightseagreen;
  }
@@ -105,25 +123,23 @@ converter: https://www.aconvert.com/image/png-to-svg/
     height: fit-content; 
     display: flex; 
     justify-content: center;
-    z-index: 98;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    z-index: 100;
+    padding-bottom: 0.5vh;
+    padding-top: 0.5vh;
     border-top-left-radius: 5%;
     border-top-right-radius: 5%;
     border-top: 1px solid black;
+    box-shadow: 
+      0px 0px 0.2em black;
   }
 
   #non-license {
-    height: 13px;
-    width: 13px;
+    height: 1em;
+    width: auto;
     fill: var(--text-colour);
     margin-right: -3px;
     margin-bottom: -2px;
   }
-
-
- hh {font-size:50%}
- titles { font-size: 140%; padding: 0px;}
  
   html, body {
    margin: 0;
@@ -151,6 +167,75 @@ converter: https://www.aconvert.com/image/png-to-svg/
     z-index: -1;
   }
 
+ /* Cookies */
+ #cookieShade {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0000006b;
+  z-index: 10000; 
+ }
+
+ #cookieBanner {
+  --border-r: 0.4em;
+  
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  width: 70%;
+  height: fit-content;
+  z-index: 10001;
+  background-color: var(--screen-background);
+  max-width: 760px;
+  border-radius: var(--border-r);
+  
+  div {
+    padding: 1em;
+    padding-top: 0;
+  }
+
+  p {
+    margin-left: 10px;
+  }
+
+  .infobox {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .infoBox:hover {
+    transform: none;
+  }
+ }
+
+ #cookiesPic {
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  border-radius: var(--border-r);
+ }
+
+ #cookieButton {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 1.1em;
+  padding: 0.3em;
+  border: none;
+  box-shadow: 
+    1px 1px 4px black;
+  border-radius: var(--border-r);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background-color: #E67400;
+ }
+
+ #cookieButton:hover {
+  background-color: #db9652;
+ }
+
  /* Oppsett */
  .city {
    background-color: var(--base-comp);
@@ -167,10 +252,12 @@ converter: https://www.aconvert.com/image/png-to-svg/
    top: 0;
    width: 100%;
    height: fit-content;
-   z-index: 10;
+   z-index: 100;
    border-bottom-left-radius: 5%;
    border-bottom-right-radius: 5%;
    border-bottom: 2px solid black;
+   box-shadow: 
+      0px 0px 0.2em black;
   }
 
   .calHole {
@@ -223,7 +310,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   }
 
  .spcity.down {
-   padding-bottom: 3px;
+   padding-bottom: 0.5rem;
   }
 
   #Phead {
@@ -233,10 +320,14 @@ converter: https://www.aconvert.com/image/png-to-svg/
     color: var(--text-colour);
     float: left;
     text-wrap: balance;
+    margin-top: calc(2.6vw );
+    height: 1em;
     text-shadow:
     1px 0px 2px var(--text-colour), 
     0px 0px 4px var(--screen-background); 
   }
+
+  h1 { text-align: center; font-size: 4vw; font-family: verdana; } 
 
   .darkmode #Phead {
     color: var(--text-colour);
@@ -246,8 +337,8 @@ converter: https://www.aconvert.com/image/png-to-svg/
     1px 1px 20px var(--lightup-primary); 
   }
 
-  .down #Phead {
-    font-size: calc(4.5vw - 10px);
+  .down h1 {
+    font-size: 3.5vw;
   }
 
   #AndstfLogo {
@@ -255,13 +346,15 @@ converter: https://www.aconvert.com/image/png-to-svg/
     border-radius: 30%;
     border-top-right-radius: 25%;
     border-bottom-left-radius: 2%;
-    margin-left: clamp(50px, 10rem, 5vw);
-    height: fit-content;
+    margin-left: clamp(50px, 10rem, 3.5vw);
+    margin-top: calc(2.5vw );
+    height: 7vw;
     width: 7vw;
   }
 
   .down #AndstfLogo  {
     width: 6.5vw;
+    height: 6.5vw;
   }
 
   /* Darkmode */
@@ -277,10 +370,12 @@ converter: https://www.aconvert.com/image/png-to-svg/
     right: 20px;
     align-items: center;
     justify-content: center;
-    border: 3px solid var(--text-colour);
     transition: border-color 0.3s ease, transform 0.5s ease;;
     overflow: hidden;
     cursor: pointer; 
+    border: none;
+    box-shadow: 
+      0px 0px 0.5em var(--outline-colour);
   }
 
   #theme-switch::before {
@@ -331,6 +426,10 @@ converter: https://www.aconvert.com/image/png-to-svg/
 
   /* Nav bar */
 
+  #navM {
+    display: none;
+  }
+
   nav ul {
     list-style-type: none;
     display: flex;
@@ -342,21 +441,20 @@ converter: https://www.aconvert.com/image/png-to-svg/
   nav li {
     cursor: pointer;
     user-select: none;
-    padding: 1vw 1.5vw;
-    border-radius: 5px;
+    padding: 1em 1.5em;
+    border-radius: 1em;
     background-color: var(--base-comp);
     font-family: 'Century Gothic';
     transition: background-color 0.3s ease, transform 0.2s ease, width 0.2s ease, margin 0.2s ease, font-size 0.2s ease;
     border: 2px var(--base-comp) solid;
-    font-size: 1.2vw;
-    width: 9.4vw;
+    font-size: 1vw;
+    width: 7.4vw;
     height: fit-content;
     text-align: center;
   }
 
   .down nav li {
-    font-size: 1.4vw;
-    padding: 0.9vw 1.4vw;
+    padding: 0.9vw 1.4em;
     margin-top: -10px;
     font-size: 0.9vw;
   }
@@ -364,21 +462,21 @@ converter: https://www.aconvert.com/image/png-to-svg/
  nav li:hover {
     background-color: var(--lightup-primary);
     border: 2px solid var(--secondary-outline);
-    width: 12vw;
+    width: 8vw;
   }
 
   .down nav li:hover {
-    width: 10vw;
+    width: 7vw;
   }
 
   .pagenava {
    background-color: var(--lightup-secondary);
    border: 2px solid var(--outline-colour);
-   width: 13vw;
+   width: 9vw;
   }
 
   .down .pagenava {
-    width: 11vw;
+    width: 8vw;
   }
 
   #HemmeligButton {
@@ -388,58 +486,178 @@ converter: https://www.aconvert.com/image/png-to-svg/
   /*Sidebar*/
 
   .sidebar {
-    flex: 1 1 0;
-    background-color: var(--base-comp);
+    width: 300px;
     max-width: 300px;
-    range: auto;
-    max-height: 55vh;
-    padding: 2rem 1rem;
+    height: 60vh;
+    max-height: 60vh;
+    padding-top: 1.7em;
+    padding-left: 0.1rem;
+    background-color: var(--base-comp);
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: flex-start;
+    flex-direction: column;
+    box-sizing: border-box;
     position: sticky;
     z-index: 1;
     left: 4px;
     top: calc(var(--spcity-height, 0px) + 10px);
     align-self: flex-start;
-    overflow-y: auto;
+    border-radius: 5px;
   }
 
   .sidebar h3 {
-    font-size: 2rem;
+    font-size: 2.3rem;
+    padding-bottom: 0.4rem;
     text-transform: uppercase;
+    padding-left: 0.5rem;
     margin-bottom: 0.5rem;
+    border-bottom: 2px solid var(--text-colour);
+    text-shadow: 
+      0 -1px 1px var(--text-colour);
   }
 
   .sidebar .menu {
-    margin: 0 -1rem;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .sidebar .menu .menu-item {
-    padding: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8em;
+    font-family: Andale Mono, monospace;
+    font-weight: 600;
+    font-size: 1.6em;
+    color: var(--text-colour);
     display: block;
     text-decoration: none;
-    transition: 0.2s linear;
+    border-bottom: 2px solid black;
+    transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear, transform 0.2s ease;
+    margin-right: 2px;
   }
 
-  .sidebar .menu .menu-item:hover,
-  .sidebar .menu .menu-item:is-active {
-    background-color: rgb(243, 245, 245);
+  .sidebar .menu .menu-item:first-child {
+    border-top: 2px solid black;
+  }
+
+  .darkmode .sidebar .menu .menu-item {
+    color: lightseagreen;
+    border-bottom: 2px solid lightseagreen;
+  }
+
+  .darkmode .sidebar .menu .menu-item:first-child {
+    border-top: 2px solid lightseagreen;
+  }
+
+  #NUke {
+    padding: 0.7em;
+    padding-right: 2em;
+    padding-left: 2em;
+    margin-bottom: -0.4em;
+    display: block;
+    text-decoration: none;
+    background-color: var(--lightup-secondary);
+    border: 2px solid var(--outline-colour);
+    border-radius: 4px;
+    width: fit-content;
+    align-self: center;
+    color: var(--text-colour);
+    transition: background-color 0.2s linear, color 0.2s linear, border-color 0.2s linear, transform 0.2s ease;
+  }
+
+  #NUke:hover {
+    background-color: var(--lightup-primary);
     color: rgb(238, 238, 238);
-    border-right: 5px solid var(--outline-colour);
-    transition: 0.2s linear;
+    transform: translateX(2px);
   }
 
+  .sidebar .menu .menu-item:hover {
+    color: rgb(238, 238, 238);
+    border-right: 5px solid white;
+    border-bottom: 2px solid white;
+    background: var(--lightup-primary);
+    transform: translateX(1px);
+  }
+  
   aside {
     float: none; /* float breaks sticky behavior inside flex layout */
+  }
+
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: calc(var(--spcity-height, 0px) + 10px);
+    right: 2rem;
+    width: 6vh;
+    height: 6vh;
+    border-radius: 99px;
+    background-color: var(--base-comp);
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 
+      0px 0px 0.2em var(--outline-colour);
+  }
+
+  .hamburger {
+    position: relative;
+    width: 3.5vh;
+    background-color: #ffff;
+    top: calc(50% - 0.25vh);
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hamburger > span,
+  .hamburger > span::before,
+  .hamburger > span::after {
+    display: block;
+    position: absolute;
+    height: 0.5vh;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 99px;
+    transition-duration: .25s;
+    z-index: 11;
+  }
+
+  .hamburger > span::before {
+    content: '';
+    top: -1vh;
+  }
+  .hamburger > span::after {
+    content: '';
+    top: 1vh;
+  }
+
+  .menu-toggle.aside-active {
+    background: var(--lightup-secondary);
+  }
+
+  .menu-toggle.aside-active .hamburger > span {
+    transform: rotate(45deg);
+  }
+
+  .menu-toggle.aside-active .hamburger > span::before {
+    top: 0;
+    transform: rotate(0deg);
+  }
+  .menu-toggle.aside-active .hamburger > span::after {
+    top: 0;
+    transform: rotate(90deg);
   }
 
   /*Pages and subpages*/
 
  .page {
   display: none;
-  min-height: 100vh;
+  min-height: 100%;
   width: 100%;
  }
 
@@ -458,7 +676,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
 
   /*scroll button*/
 
- #myBtn {
+ #toTop {
    opacity: 0;
    visibility: hidden;
    transform: translateY(20px); /* start slightly below */
@@ -466,24 +684,24 @@ converter: https://www.aconvert.com/image/png-to-svg/
    position: fixed;
    bottom: 20px;
    right: 30px;
-   z-index: 99;
-   font-size: 18px;
+   z-index: 101;
+   font-size: 2vh;
    border: none;
    outline: none;
    background-color: var(--lightup-secondary);
    color: white;
    cursor: pointer;
-   padding: 15px;
-   border-radius: 4px;
+   padding: 1vh;
+   border-radius: 7%;
  } 
  
- #myBtn:hover {
+ #toTop:hover {
   transition: background-color 0.3s ease, transform 0.3s ease;
   background-color: var(--lightup-primary);
   transform: scale(2.05);
  }
 
- #myBtn.show {
+ #toTop.show {
    opacity: 1;
    visibility: visible;
    transform: translateY(0); /* slide into place */
@@ -504,6 +722,10 @@ converter: https://www.aconvert.com/image/png-to-svg/
   max-width: 100%;
  }
 
+.fri::after {
+  content: " (FRI!)";
+}
+
  #page1 table {
   width: 100%;
   border-collapse: separate;
@@ -515,6 +737,10 @@ converter: https://www.aconvert.com/image/png-to-svg/
     border: 1px solid black;
     vertical-align: top;
     padding: 8px;
+  }
+
+  #page1 td.date-cell {
+    width: 8.5em;
   }
 
   #page1 th {
@@ -590,6 +816,8 @@ converter: https://www.aconvert.com/image/png-to-svg/
   background-color: rgba(119, 136, 153, 0.3);
 }
 
+#page1 th.titles { font-size: 170%;}
+
 .updatedate {
   position: relative;
   z-index: 1;
@@ -612,14 +840,23 @@ converter: https://www.aconvert.com/image/png-to-svg/
   z-index: -1;
 }
 
-#page4 h2 {
+#page4 h2,
+#page2 h2 {
   color: var(--text-colour);
   position: relative;
-  z-index: 1;
+  display: block;
   background: var(--screen-secondary);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  font-size: 2.8em;
 }
 
-#page4 h2::before {
+#page2 h2 {
+  font-size: 2em;
+}
+
+#page4 h2::before,
+#page2 h2::before {
   content: '';
   background: linear-gradient(to right, var(--text-colour), var(--screen-secondary));
   height: 2px;
@@ -629,32 +866,63 @@ converter: https://www.aconvert.com/image/png-to-svg/
   left: 0;
 }
 
-#page4 h2::after {
+#page4 h2::after,
+#page2 h2::after {
   content: '';
-  background: linear-gradient(to right, var(--text-colour), var(--screen-secondary));
-  height: 2px;
-  width: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
+  background: linear-gradient(to right, var(--text-colour), var(--screen-secondary));
+  inset: -2px;
+  z-index: -1;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}  
+
+#page4 article,
+#page2 article {
+  background: var(--screen-background);
+  border-radius: 12px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-bottom: 2px solid var(--outline-colour);
+  border-right: 2px solid var(--outline-colour);
+  border-left: 2px solid var(--outline-colour);
+  margin-bottom: 3em;
+  margin-left: 4vw;
+  display: block;
+  width: 800px;
 }
 
-#page4 p + div {
+#page4 aside,
+#page2 aside {
   background: var(--screen-background);
+  border-radius: 12px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
   border-bottom: 2px solid var(--outline-colour);
+  border-right: 2px solid var(--outline-colour);
+  border-left: 2px solid var(--outline-colour);
   margin-bottom: 3em;
+  display: block;
+  margin-left: 10vw;
+  margin-right: 4vw;
+  width: 400px;
+  height: fit-content;
+}
+
+#page4 aside > h2 {
+  font-size: 2.3em;
 }
 
 #page4 ul {
   padding: 1em;
-  padding-left: 1.5rem;
+  padding-left: 2.5rem;
   padding-top: 0.5em;
   margin-top: 0em;
 }
 
 #page4 b {
   padding: 1em;
-  padding-left: 0.5em;
+  padding-left: 1.5em;
 }
 
 #oppDivKnapp {
@@ -665,13 +933,13 @@ converter: https://www.aconvert.com/image/png-to-svg/
 #oppdKnapp {
   cursor: pointer;
   user-select: none;
-  padding: 1vw 1.5vw;
+  padding: 1em 1.5em;
   border-radius: 5px;
   background-color: var(--lightup-secondary);
   font-family: 'Century Gothic';
   transition: background-color 0.5s ease, border 0.5s ease, transform 0.2s ease, padding 0.2s ease, margin 0.2s ease, font-size 0.2s ease;
   border: 2px var(--outline-colour) solid;
-  font-size: 2vw;
+  font-size: 1.3em;
   width: fit-content;
   height: fit-content;
   text-align: center;
@@ -699,7 +967,7 @@ converter: https://www.aconvert.com/image/png-to-svg/
   width: 1em;
 }
 
-.TV.going {
+.going {
   transform: rotate(180deg);
 }
 
@@ -710,29 +978,71 @@ converter: https://www.aconvert.com/image/png-to-svg/
   justify-content: center;
 }
 
-.flexchild {
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
-  width: 70vw;
-  height: fit-content;
+.flexbox.A {
+  flex-direction: row;  
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
 }
 
-.flexchild h2 {
+#page5 .elementCard {
+  height: fit-content;
+  width: 600px;
+  background: var(--screen-background);
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+#page5 article {
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  padding-top: 0;
+}
+
+#page5 article li {
+  padding: 3px;
+}
+
+#page5 article > :first-child {
+  padding-top: 0;
+  margin-block: 0em;
+}
+
+#page5 .elementCard > h2 {
   border-bottom: 2px solid black;
-  border-top: 2px solid black;
+  border-right: 0;
+  border-left: 0;
   text-align: center;
-  font-size: 2.5vw;
+  font-size: 1.7em;
   background-color: var(--base-comp);
-  border-top-left-radius: 30%;
-  border-top-right-radius: 30%;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 7px;
+}
+
+.isolator {
+  padding-left: 4%;
+  padding-right: 4%;
 }
 
 .infoBox {
   width: 90vw;
-  font-size: 12px;
+  font-size: 0.6em;
   color: var(--text-colour);
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.infoBox:hover {
+  transform: scale(1.1);
+}
+
+#elementInf.infoBox:hover {
+  width: 70vw;
+  transform: scale(1.3);
+  transition: 0.7s ease;
+  
 }
 
 .grid-container {
@@ -745,7 +1055,145 @@ converter: https://www.aconvert.com/image/png-to-svg/
   align-items: center;
 }
 
-/* Page2 css */
+@media (pointer: coarse) {
+  /* Cookies */
+  #cookieShade {
+    margin-right: 70vw;
+  }
+  #cookieBanner {
+    width: 80%;
+  }
+
+  /* Generelt */
+  body {
+    font-size: 2.5em;
+    line-height: 1.6;
+    padding-block: 6rem;
+  }
+
+  /* Nav bar */
+  .spcity nav {
+    visibility: hidden;
+  }
+  #navM {
+    visibility: visible;
+    display: block;
+    width: 100%;
+    font-size: 1.4em;
+  }
+  #siderM {
+    visibility: visible;
+    position: fixed;
+    top: calc(var(--spcity-height));
+    left: 3%;
+    width: 90%;
+    height: auto;
+    z-index: 101;
+    background-color: var(--background);
+    border: 2px solid var(--outline-colour);
+    border-radius: 0.6em;
+    padding: calc(0.5em + 4px);
+    ul {
+      margin: 0;
+    };
+    li {
+      list-style-type: none;
+      position: relative;
+      left: 5%;
+      width: 90%;
+      font-size: 1em;
+      padding: 0.5em;
+      margin-left: calc(-0.5em - 3px);
+      border: 2px solid var(--outline-colour);
+    }
+  }
+  .navv.More {
+  fill: var(--text-colour);
+  height: 1em;
+  width: 1em;
+  }
+  /* Phead */
+  h1 {
+    font-size: 2.3vh;
+  }
+
+  /* P1 tables */
+   #page1 td.date-cell {
+    width: 4em;
+  }
+
+  /* P4 flex to grid change */
+  .flexbox.Gr {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    gap: 0.5em;
+    justify-items: center;
+    align-items: center;
+  }
+  #page4 article,
+  #page2 article {
+    width: 80vw;
+  }
+  #page4 aside,
+  #page2 aside {
+    width: 77vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* P1 tables */
+  /* #page1 td.date-cell {
+    width: 4em;
+  } */
+
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    max-width: 200px;
+  }
+  .sidebar h3 {
+    font-size: 1.7rem;
+  }
+  #NUke {
+    padding: 0.5em;
+    padding-right: 0.7em;
+    padding-left: 0.7em;
+  }
+}
+
+@media (max-width: 768px) or (pointer: coarse) /* Ipad height */{
+  
+  /* Sidebar */
+  .menu-toggle {
+    display: block;
+  }
+  .content {
+    padding-top: 8rem;
+  }
+  .sidebar {
+    position: fixed;
+    top: calc(var(--spcity-height) + 10px);
+    left: -70vw;
+    height: 100vh;
+    width: 100%;
+    max-width: 70vw;
+    transition: 0.2s linear;
+  }
+  .sidebar h3 {
+    font-size: 2.5em;
+  }
+  .sidebar.aside-active {
+    left: 4px;
+  }
+  #NUke {
+      padding: 0.7em;
+      padding-right: 2em;
+      padding-left: 2em;
+    }
+}
+
  </style>
 <!-- =========================================================
    1. CSS STOP
@@ -774,6 +1222,7 @@ function updateNavActive(pageId) {
   });
 }
 
+
 function updateNavOffset(){
   const nav = document.querySelector('.spcity');
   const navHeight = nav ? nav.offsetHeight : 0;
@@ -792,7 +1241,11 @@ function showPage(pageId) {
     clickCount = 0;
     window.scrollTo({ top: 0, behavior: "smooth" });
     // Show da pages
-    document.getElementById(pageId).classList.add('active');
+    if (pageId == "Hemmelig" && window.matchMedia('(pointer: coarse)').matches) {
+      return 
+    } else {
+      document.getElementById(pageId).classList.add('active');
+    }
    // ensure nav reflects the current page state
   updateNavOffset();
   function mainHeader(){
@@ -828,6 +1281,9 @@ function showPage(pageId) {
     if (pageId === "Hemmelig" && document.getElementById("tetris").classList.contains("active")) {
     TETRIS.init();
     }
+  if (window.matchMedia('(pointer: coarse)').matches) {
+   siderM.classList.toggle("hidden");
+};
   updateNavActive(pageId);
 }
 document.addEventListener("visibilitychange", () => {
@@ -936,20 +1392,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Spcity down function
     let lastScrollTop = window.scrollY || document.documentElement.scrollTop;
-	  const mybutton = document.getElementById("myBtn");
+    const mybutton = document.getElementById("toTop");
     const spcity = document.getElementById("spcity");
 
   window.addEventListener('scroll', function() {
+    if (!window.matchMedia('(pointer: coarse)').matches) {
       // Get the current scroll position
     const currentScroll = window.scrollY || document.documentElement.scrollTop;
-    (currentScroll > lastScrollTop) ?
+    (currentScroll > lastScrollTop || window.scrollY > 20) ?
       spcity.classList.add("down")
     :
       spcity.classList.remove("down")
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }
   })
   //Da button
-	  window.addEventListener("scroll", function () {
+window.addEventListener("scroll", function () {
 	    (window.scrollY > 20) ?
 	      mybutton.classList.add("show")
 	       
@@ -974,10 +1432,11 @@ document.addEventListener("DOMContentLoaded", function () {
     clickCount++;
     const activePageId = document.querySelector('.page.active')?.id;
     
-    if (activePageId === 'Hemmelig' || clickCount >= 3 && clickCount % 2 !== 0){
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      return
+    } else if (activePageId === 'Hemmelig' || clickCount >= 3 && clickCount % 2 !== 0) {
       button.style.display = "inline-block";
-    }
-    else {
+    } else {
       button.style.display = "none";
     }
   });
@@ -997,9 +1456,43 @@ document.addEventListener("DOMContentLoaded", function () {
 ========================================================= -->
 
 <body>
-<button onclick="topFunction()" id="myBtn" title="Go to top">Til toppen</button>
+  <div id="cookieShade">
+    <div id="cookieBanner">
+      <img src="localstorage-feature.png" alt="cookies picture" id="cookiesPic">
+      <div>
+        <h2>Hei!</h2>
+        <p>Denne nettsiden utnytter localstorage (eller cookies)</p>
+        <p><br>Ikke vær redd; alt det gjør er at browseren din husker ting som temaer eller instillinger du selv velger med egne, bevisste klikk. Ingenting sendes til meg eller noen andre. Med andre ord: jeg ser det bare om jeg kikker over skuldra di. Denne advarselen er her kun fordi reglene så strenge ut. Er den grei?</p>
+        <br>
+        <button id="cookieButton" onclick="hideCookie()">Den er grei sjef</button>
+        <div class="infoBox">Ved å klikke på knappen vil du godta dette.</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let cookies = localStorage.getItem('cookies') //ta vekk denne dersom du skal CSS-e
+    const shade = document.getElementById('cookieShade')
+    const CButton = document.getElementById('cookieButton')
+    document.body.style.overflow = 'hidden';
+    
+    const hideCookie = () => {
+      document.body.style.overflow = 'auto'
+      shade.style.display = 'none'
+      localStorage.setItem('cookies', "active")
+    }
+    if (cookies === "active") {
+      hideCookie();
+    }
+    CButton.addEventListener("click", () => { 
+      cookies = localStorage.getItem('cookies')
+      hideCookie()
+    })
+    
+    
+  </script>
+<button id="toTop" title="Go to top">Til toppen</button>
 <div id="spcity" class="spcity">
-<div style="height: 40px;">
+
   <div class="calHole" id="C1">
     <div class="hole"></div>
     <div class="plastic"></div>
@@ -1008,13 +1501,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="hole"></div>
     <div class="plastic"></div>
   </div>
-</div>
+
 <header>
   <svg version="1.1" id="AndstfLogo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
   <h1 id="Phead">Ukeplan 2STF 2026-2027</h1>
   <button id="theme-switch" title="Bytt tema">
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" height="3vh" viewBox="0 -960 960 960" width="auto" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" height="3vh" viewBox="0 -960 960 960" width="auto" fill="#e3e3e3"><path d="M338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
   </button>
     <script>
     //Darkmode
@@ -1040,7 +1533,6 @@ themeSwitch.addEventListener("click",  () =>{
   </script>
   
 </header>
-<br>
 <br>
 <nav>
 <ul>
@@ -1068,17 +1560,56 @@ themeSwitch.addEventListener("click",  () =>{
   onclick="showPage('Hemmelig')">  Effektivt jobbmiljø
 </li>
 </ul>
+<button id="navM">Sider
+  <svg class="navv More" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-345 240-585l56-56 184 183 184-183 56 56-240 240Z"/></svg>
+  
+</button>
+<div id="siderM" class="hidden">
+    <li id="page1Button"
+  onclick="showPage('page1')"> Ukeplan
+</li> 
+
+<li id="page2Button"
+  onclick="showPage('page2')"> Ekstra info
+</li> 
+
+<li id="page3Button"
+  onclick="showPage('page3')"> Timeplan
+</li> 
+
+<li id="page4Button"
+  onclick="showPage('page4')">  Oppdateringer
+</li> 
+
+<li id="page5Button"
+  onclick="showPage('page5')">  Elementer
+</li> 
+</div>
+<script>
+const navM = document.getElementById('navM')
+const siderM = document.getElementById('siderM')
+const navv = document.querySelectorAll('.navv')
+
+navM.onclick = () => {
+  siderM.classList.toggle("hidden");
+  navv.forEach(navv => navv.classList.toggle('going'));
+}
+
+if (!window.matchMedia('(pointer: coarse)').matches) {
+  navM.classList.remove("hidden");
+}
+</script>
 </nav>
 </div>
 
 <footer>
  
   
-  <span style="font-size:12px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <span style="font-size:0.8em; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
      Uoffisiell side | Til bruk for Horten VGS: Miljø- og teknologilinje | 
-    <svg id="non-license" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m722-352-56-56q26-32 40-70t14-82q0-100-70-170t-170-70q-44 0-82 14t-70 40l-56-56q42-36 95-57t113-21q133 0 226.5 93.5T800-560q0 60-21 113t-57 95ZM580-494 414-660q14-9 31-14.5t35-5.5q50 0 85 35t35 85q0 18-5.5 35T580-494ZM240-40v-308q-38-44-59-97t-21-115q0-29 4.5-55.5T180-668L56-792l56-56 736 736-56 56-72-70v86l-240-80-240 80Zm240-280q11 0 21-1t21-3L244-602q-2 11-3 21t-1 21q0 100 70 170t170 70ZM320-150l160-54 160 54v-56l-52-54q-26 9-52.5 14.5T480-240q-44 0-84-11t-76-31v132Zm160-66Z"/></svg>
+    <svg id="non-license" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="m722-352-56-56q26-32 40-70t14-82q0-100-70-170t-170-70q-44 0-82 14t-70 40l-56-56q42-36 95-57t113-21q133 0 226.5 93.5T800-560q0 60-21 113t-57 95ZM580-494 414-660q14-9 31-14.5t35-5.5q50 0 85 35t35 85q0 18-5.5 35T580-494ZM240-40v-308q-38-44-59-97t-21-115q0-29 4.5-55.5T180-668L56-792l56-56 736 736-56 56-72-70v86l-240-80-240 80Zm240-280q11 0 21-1t21-3L244-602q-2 11-3 21t-1 21q0 100 70 170t170 70ZM320-150l160-54 160 54v-56l-52-54q-26 9-52.5 14.5T480-240q-44 0-84-11t-76-31v132Zm160-66Z"/></svg>
      2026-2027 Designet av 
-    <a href="https://github.com/Cyberman134" style="font-family:'Courier New', Courier, monospace;">RaccInBlacc</a></span></p>
+    <a href="https://github.com/Cyberman134" style="font-family:'Courier New', Courier, monospace;">RaccInBlacc</a></span>
 </footer>
 
 <!-- =========================================================
@@ -1090,32 +1621,42 @@ themeSwitch.addEventListener("click",  () =>{
    4. UKEPLAN
 ========================================================= -->
 <div id="page1" class="page active">
+  <div class="menu-toggle">
+    <div class="hamburger">
+      <span></span>
+    </div>
+  </div>
 <aside class="sidebar"> 
-  <h3>DA WEEKS</h3>
+  <h3>Gå til uker</h3>
   <nav class="menu">
-    <a href="#active-week" 
-     class="menu-item"
-     style="font-family: 'Century Gothic'; 
-            background-color: var(--lightup-secondary); 
-            border: 2px solid black; 
-            padding: 10px 10px; 
-            color: black;"
-            onmousemove="lightup(this)"
-            onmouseout="passive(this)"
-            onclick="scrollToSection(event, this)"
-            title="Nåværende uke">KLIKK FOR NÅVÆRENDE UKE</a>
-    <a href "#" class="menu-item">Hei</a>
-    <a href "#" class="menu-item">På deg</a>
-    <a href "#"  class="menu-item">Din lille</a>
-    <a href "#"  class="menu-item">Sei</a>
-    <a href "#"  class="menu-item">Sei</a>
-    <a href "#"  class="menu-item">Sei</a>
-    <a href "#"  class="menu-item">Sei</a>
-    <a href "#"  class="menu-item">Sei</a>
-    <a href "#"  class="menu-item">Sei</a>
-    <a href "#"  class="menu-item">Sei</a>
-    <a href "#"  class="menu-item">Sei</a>
+    <a href="#active-week"
+     id="NUke"
+     style="font-family: 'Century Gothic';"
+     onclick="scrollToSection(event, this)"
+     title="Gå til nåværende uke">NÅVÆRENDE UKE</a>
+    <div id="sideplanner">
+      <a href "#" class="menu-item">Hei</a>
+      <a href "#" class="menu-item">På deg</a>
+      <a href "#"  class="menu-item">Din lille</a>
+      <a href "#"  class="menu-item">Sei</a>
+      <a href "#"  class="menu-item">Sei</a>
+      <a href "#"  class="menu-item">Sei</a>
+      <a href "#"  class="menu-item">Sei</a>
+      <a href "#"  class="menu-item">Sei</a>
+      <a href "#"  class="menu-item">Sei</a>
+      <a href "#"  class="menu-item">Sei</a>
+      <a href "#"  class="menu-item">Sei</a>
+    </div>
   </nav>
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('aside-active');
+      sidebar.classList.toggle('aside-active');
+})
+  </script>
 </aside>
 
 
@@ -1201,8 +1742,8 @@ const events = [
   { date: "2026-05-12", type: "test", text: "Nat.Fag bioteknologi presentasjon" },
   { date: "2026-05-13", type: "info", text: "Nat.Fag standpunkt" },
   { date: "2026-05-13", type: "test", text: "Nat.Fag bioteknologi presentasjon (siste gruppe)" },
-  { date: "2026-05-14", type: "fri", text: "Kristi himmelfartsdag (FRI!)" },
-  { date: "2026-05-15", type: "fri", text: "Inneklemt dag (FRI!)" },
+  { date: "2026-05-14", type: "fri", text: "Kristi himmelfartsdag" },
+  { date: "2026-05-15", type: "fri", text: "Inneklemt dag" },
   { date: "2026-05-15", type: "test", text: "Geo befolkning og klima innlevering" },
 /*21*/
   { date: "2026-05-19", type: "info", text: "Eksamen" },
@@ -1211,9 +1752,9 @@ const events = [
   { date: "2026-05-20", type: "test", text: "Tysk 2 skriveøkt" },
   { date: "2026-05-21", type: "test", text: "Sam.Fag Arbeids- og næringsliv prøve" },
   { date: "2026-05-21", type: "info", text: "Jobb hjemme i Engelsk" },
-  { date: "2026-05-22", type: "fri", text: "Ingen fagdag (FRI!)" },
+  { date: "2026-05-22", type: "fri", text: "Ingen fagdag" },
 /*22*/
-  { date: "2026-05-25", type: "fri", text: "Andre pinsedag (FRI!)" },
+  { date: "2026-05-25", type: "fri", text: "Andre pinsedag" },
   { date: "2026-05-26", type: "info", text: "2STF presenterer ToF2 prosjekter" },
   { date: "2026-05-26", type: "info", text: "Starten av å rydde klasserom og ToF-rom" },
   { date: "2026-05-26", type: "test", text: "Vise frem ToF produkt (1)" },
@@ -1223,19 +1764,19 @@ const events = [
   { date: "2026-05-29", type: "info", text: "Tysk 2 fagdag" },
   { date: "2026-05-29", type: "info", text: "Muntlig eksamen øving" },
 /*23*/
-  { date: "2026-06-03", type: "fri", text: "Avspasering (FRI!)" },
-  { date: "2026-06-04", type: "fri", text: "Avspasering (FRI!)" },
-  { date: "2026-06-05", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-03", type: "fri", text: "Avspasering" },
+  { date: "2026-06-04", type: "fri", text: "Avspasering" },
+  { date: "2026-06-05", type: "fri", text: "Avspasering" },
 /*24*/
   { date: "2026-06-08", type: "info", text: "Parkdag og aktiviteter (10:00 - 12:30)" },
-  { date: "2026-06-09", type: "fri", text: "Avspasering (FRI!)" },
-  { date: "2026-06-10", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-09", type: "fri", text: "Avspasering" },
+  { date: "2026-06-10", type: "fri", text: "Avspasering" },
   { date: "2026-06-11", type: "info", text: "Sølvkrona (12:00 - 13:30)" },
-  { date: "2026-06-12", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-12", type: "fri", text: "Avspasering" },
 /*25*/
   { date: "2026-06-15", type: "info", text: "Sølvkrona (10:00 - 11:00)" },
   { date: "2026-06-15", type: "info", text: "Bokinnlevering (11:15)" },
-  { date: "2026-06-16", type: "fri", text: "Avspasering (FRI!)" },
+  { date: "2026-06-16", type: "fri", text: "Avspasering" },
   { date: "2026-06-17", type: "info", text: "Sølvkrona (12:00 - 13:00)" },
   { date: "2026-06-18", type: "info", text: "Turdag" },
   { date: "2026-06-19", type: "info", text: "Siste skoledag (09:00 - ca. 11:00)" },
@@ -1260,8 +1801,10 @@ function formatDisplay(dateStr) {
    4.3 BUILD TABLE AUTOMATICALLY
 ========================================================= */
 const planner = document.getElementById("planner");
+const sideplanner = document.getElementById("sideplanner");
 
-let html = "";
+let plannerHTML = "";
+let sideplannerHTML = "";
 
 weeks.forEach(week => {
 
@@ -1279,7 +1822,7 @@ weeks.forEach(week => {
   const isCurrentWeek = today >= weekStart && today <= weekEnd;
   const isFutureWeek = today < weekStart;
 
-  html += `
+  plannerHTML += `
   <div class="${
   isCurrentWeek ? 'active-week'
   : isPastWeek ? 'past-week'
@@ -1294,10 +1837,10 @@ weeks.forEach(week => {
   <table>
     <thead>
       <tr>
-        <th><titles>Dag</titles></th>
-        <th><titles>Info</titles></th>
-        <th><titles>Innlevering / Prøve / Presentasjon</titles></th>
-        <th><titles>Lekse</titles></th>
+        <th class="titles">Dag</th>
+        <th class="titles">Info</th>
+        <th class="titles">Vurdering</th>
+        <th class="titles">Lekse</th>
       </tr>
     </thead>
     <tbody>
@@ -1309,7 +1852,7 @@ weeks.forEach(week => {
     const d = new Date(date);
     const isWeekend = d.getDay() === 0 || d.getDay() === 6;
 
-    html += `
+    plannerHTML += `
       <tr class="${isWeekend ? 'weekend-row' : ''}">
         <td class="date-cell" data-date="${date}" width="10.6%">
           <b>${formatDisplay(date)}</b>
@@ -1321,15 +1864,25 @@ weeks.forEach(week => {
     `;
   }
 
-  html += `
+  plannerHTML += `
       </tbody>
     </table>
     </div>
   `;
 
+  sideplannerHTML += `
+  <a 
+    href="#${isCurrentWeek ? 'active-week' : week.id}"
+    onclick="scrollToSection(event, this)" 
+    class="menu-item"
+    title="Gå til ${week.title.toLowerCase()}">${week.title}
+  </a>
+  `;
+
 });
 
-planner.innerHTML = html;
+planner.innerHTML = plannerHTML;
+sideplanner.innerHTML = sideplannerHTML;
 
 /* =========================================================
    4.4 INJECT EVENTS
@@ -1343,10 +1896,11 @@ events.forEach(e => {
     const div = document.createElement("div");
     div.textContent = "• " + e.text;
 
-    if (e.type === "test") div.style.color = "var(--innl-colour)";
+    if (e.type === "test") div.style.color = "var(--vurdering-colour)";
     if (e.type === "homework") div.style.color = "var(--lekse-colour)";
     if (e.type === "fri") {
     div.style.backgroundColor = "var(--lightup-primary)";
+    div.classList.add("fri")
     div.style.display = "inline-block";
     div.style.color = "white";
     div.style.padding = "2px";
@@ -1379,20 +1933,26 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 ========================================================= -->
 
 <div id="page2" class="page">
+  <div class="flexbox Gr">
 
-<div style="background-color:white;">
-  <h2 style="background-color:lightseagreen;">Ekstra info:</h2>
+<article>
+  <h2>Ekstra info:</h2>
     <ul>
-     <li>Ingenting enda</li>
+     <li>Selve siden er bedre enn det den var i fjor, men nå er det færre fag jeg får til å skrive ned uten eventuell hjelp. Fagene som vil skrives ned er de følgende:</li>
+      <ul>
+        <li>Norsk</li>
+        <li>Matte R1</li>
+        <li>TOF 2</li>
+        <li>Kroppsøving</li>
+      </ul>
     </ul>
-     <hr>
-  </div>
+  </article>
 
- <div style="background-color:white;">
-  <h2 style="background-color:lightseagreen;">Ekstra info til ukeplanoppsett:</h2>
+ <aside>
+  <h2>Til ukeplanoppsett:</h2>
     <ul>
      <li><p>"<i>Dette</i>" er et eksempel på 'Info'</p></li>
-     <li><p>"<i style="color:var(--innl-colour);">Dette</i>" er et eksempel på 'Innlevering (osv...)'</p></li>
+     <li><p>"<i style="color:var(--vurdering-colour);">Dette</i>" er et eksempel på 'Vurdering'</p></li>
      <li><p>"<i style="color:var(--lekse-colour);">Dette</i>" er et eksempel på 'Lekse'</p></li>
      <li><p>"<i style="color:white; 
 			 background-color: var(--fri-colour);
@@ -1400,9 +1960,9 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
 			 padding: 2px">Dette</i>" er et eksempel på 'Fri'</p></li>
     </ul>
      <hr>
+  </aside>
+
   </div>
-
-
 </div>
 <!-- =========================================================
    5. EKSTRA INFO UKEPLAN (P2) STOP
@@ -1422,18 +1982,19 @@ table.calendar {
     border: 1px solid black;
     border-collapse: collapse;
     width: 100%;
+    background-color: var(--screen-background);
  }
 
  table.calendar > thead > tr > th {
     text-align: center;
-    color: black;
+    color: var(--text-colour);
  }
 
  table.calendar > tbody > tr > td {
     height: 20px; 
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    color: black;
+    color: var(--text-colour);
  }
 
  table.calendar > tbody > tr > td > div {
@@ -1450,7 +2011,7 @@ table.calendar {
  }
 
  table.calendar > tbody > tr > td.has-events > div {
-    background-color: lightseagreen;
+    background-color: var(--base-comp);
     transform: scale(0.97);
     z-index: 1;
     color: white;
@@ -1462,12 +2023,12 @@ table.calendar {
  }
 
  table.calendar > tbody > tr > td.has-events > div.practice {
-    background-color: darkcyan;
+    background-color: var(--base-secondary);
     color: white;
  }
 
  table.calendar > tbody > tr > td.has-events > div.fagdag {
-    background-color: turquoise;
+    background-color: var(--lightup-primary);
     color: white;
  }
 
@@ -1499,22 +2060,33 @@ table.calendar {
     background-color: whiteSmoke;
  }
 
+ .timeDag {
+    width: 20%;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black; 
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    background-color: var(--lightup-secondary);
+    font-size: 1.8vw;
+    padding: 3px;
+ }
+
 
 </style>
 
 <!-- =========================================================
    5.2 TIMEPLAN TABLE
 ========================================================= -->
-<div style="background-color:white">
+<div style="padding: 1vw;">
 <table class="calendar table table-bordered">
     <thead>
         <tr>
-            <th style="border: 2px solid black; background-color: darkturquoise">&nbsp;</th>
-            <th width="20%" style="border: 2px solid black; background-color: darkturquoise">Mandag</th>
-            <th width="20%" style="border: 2px solid black; background-color: darkturquoise">Tirsdag</th>
-            <th width="20%" style="border: 2px solid black; background-color: darkturquoise">Onsdag</th>
-            <th width="20%" style="border: 2px solid black; background-color: darkturquoise">Torsdag</th>
-            <th width="20%" style="border: 2px solid black; background-color: darkturquoise">Fredag</th>
+            <th style="border: 2px solid black; background-color: var(--lightup-secondary)">&nbsp;</th>
+            <th class="timeDag">Mandag</th>
+            <th class="timeDag">Tirsdag</th>
+            <th class="timeDag">Onsdag</th>
+            <th class="timeDag">Torsdag</th>
+            <th class="timeDag">Fredag</th>
         </tr>
     </thead>
     <tbody>
@@ -1987,39 +2559,46 @@ table.calendar {
 ========================================================= -->
 <div id="page4" class="page">
 
-
 <p class="updatedate">XX.XX.2026</p>
-<div>
+<div class="flexbox Gr">
+<article>
   <h2>2.0</h2>
   <b>Stort og nytt:</b>
     <ul>
-      <li>Siden 'Elementer' er lagt til</li>
-      <ul>
-        <li>(Fordi en spesifik side ba om credit og det så ikke bra ut med tekst under elementet)</li>
-      </ul>
-    </ul>
-  <b>Generell utseende:</b>
-    <ul>
-      <li>Lagt til svg-er (ikoner)</li>
-      <li>Generelt mange animasjoner</li>
-      <li>Lagt til konstante header + navbar (toppen) og footer (nederst)</li>
+      <li>Lagt til konstante topp- og bunndeler</li>
         <ul>
-          <li>Toppen minsker seg når man scroller ned </li>
-          <li>Og forstørres igjen når man scroller opp</li>
+          <li>Toppen minsker seg når man scroller ned</li>
+          <li>Og forstørres igjen når man scroller opp nok</li>
           <li>Toppen har fått hull som skal likne en kalender (jeg prøvde iallfall)</li>
         </ul>
       <li>Endret layout på sidene:</li>
         <ul>
+          <li>Ukeplan</li>
+          <li>Timeplan</li>
           <li>Oppdateringer</li>
           <li>Arbeidsområdet</li>
         </ul>
+      <li>Siden 'Elementer' er lagt til</li>
+      <ul>
+        <li>(Fordi en spesifik side ba om credit og det så ikke bra ut med tekst under elementet)</li>
+      </ul>
+
     </ul>
   <b>Spesifike visuelle funksjoner:</b>
     <ul>
       <li>Header + navbar, sidebar og footer følger etter scrollen til siden</li>
+      <li>Siden har fått animasjoner</li>
+      <li>Lagt til svg-er (ikoner)</li>
       <li>Knapper har blitt mer reaktive</li>
+      <li>Lagt til en sidebar til siden 'Ukeplan'</li>
       <li>Lagt til en knapp for fargeemneskifte</li>
       <li>Lagt til en knapp for gamle oppdateringer</li>
+      <li>Lagt til en egen scrollebar</li>
+      <li>Lagt til nye formater ettersom hvor stor skjermen er</li>
+      <ul>
+        <li>Knapp til 'uker' menyen</li>
+        <li>Mobilspesefik meny til sidene</li>
+      </ul>
       <li>Lagt til en 'player' til siden 'Arbeidsområdet'</li>
       <ul>
         <li>Lagt til bakgrunnssider til player-en</li>
@@ -2027,7 +2606,10 @@ table.calendar {
     </ul>
   <b>Fikset:</b>
     <ul>
-      <li>Hemmelig-knappen har nå en mer konstant måte å komme opp på</li>
+      <li>Timeplanen har blitt fikset under nytt layout</li>
+      <li>Mobil har fått nytt format som gjør nettsiden bedre å navigere</li>
+      <li>Mange andre små, irriterende ting har blitt fikset under produksjonen av denne oppdateringen...</li>
+      <li>Hemmelig-knappen har nå en mer konstant måte å komme opp på:</li>
         <ul>
           <li>3 klikk for å poppe opp</li>
           <li>1 klikk for å forsvinne på siden/komme tilbake etter å ha forsvunnet</li>
@@ -2035,12 +2617,23 @@ table.calendar {
     </ul>
   <b>Andre kodejusteringer som ikke er like visuelle om de ikke er borte</b> 
     <ul>
-      <li>f.eks kompensasjoner for den følgende layouten</li>
+      <li>f.eks sidens høydekompensasjoner for den følgende layouten</li>
     </ul>
   <b>Usynlige kodejusteringer:</b>
     <ul>
       <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
     </ul>
+</article>
+
+<aside>
+  <h2>OBS! & Annet:</h2>
+    <b>OBS!</b>
+      <ul>
+        <li>Med alt ditt hjerte og sinn, vær så snill å ignorer cookies popupen på mobil. Jeg er bevisst på det, og det gir meg store mengder hodepinne. Takk.</li>
+        <li>Det kan hende at det er noen feil med knappen under 'oppdateringer'-siden. Nærmere sagt <i>er</i> det noen feil med den. Dette håper jeg å fikse ganske fort.</li>
+      </ul>
+  </aside>
+
 </div>
 
 <div id="oppDivKnapp">
@@ -2055,7 +2648,8 @@ table.calendar {
 
 
 <p class="updatedate">24.05.2026</p>
-<div>
+<div class="flexbox Gr">
+<article>
   <h2>1.4</h2>
       <b>Nytt easter egg lagt til:</b>
         <ul>
@@ -2064,10 +2658,19 @@ table.calendar {
           <li><p>Hint: se om du finner noe rart på side 1 og klikk det 3 ganger</p></li>
         </ul>
         </ul>
+  </article>
+
+  <aside>
+  <h2>OBS! & Annet:</h2>
+      <ul>
+        <li>N/A; forhåpentligvis ingen feil!</li>
+      </ul>
+  </aside>
   </div>
 
 <p class="updatedate">18.05.2026</p>
-<div>
+<div class="flexbox Gr">
+<article>
   <h2>1.3</h2>
     <b>Ny oppsett under 'Ukeplan':</b>
       <ul>
@@ -2085,38 +2688,53 @@ table.calendar {
           <li><p>Nåværende uke skifter nå automatisk slik at den ikke trengs å endres manuelt lenger</p></li>
           <li><p>Usynlige kodeendringer er gjort slik at timeplanen kan endres via en database</p></li>
         </ul>
-      <li><b>Usynlige kodejusteringer:</b></li>
+      <b>Usynlige kodejusteringer:</b>
         <ul>
           <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
         </ul>
-          <li><b>Annet:</b></li>
-         <ul>
-           <li><p>'Timeplan' har blitt endret under kodejusteringene ved CSS krangel i filen (++?) og jeg har slitt i flere dager med å få fikse det. Det virket ikke, og jeg må kanskje lage den om igjen. Per nå, vil timeplanen se litt rar ut. Dette håper jeg å fikse i neste oppdatering.</p></li>
-         </ul>
     
+</article>
+
+<aside>
+  <h2>OBS! & Annet:</h2>
+    <b>(FIKSET!) OBS!:</b>
+    <ul>
+      <li>'Timeplan' har blitt endret under kodejusteringene ved CSS krangel i filen (++?) og jeg har slitt i flere dager med å få fikse det. Det virket ikke, og jeg må kanskje lage den om igjen. Per nå, vil timeplanen se litt rar ut. Dette håper jeg å fikse i neste oppdatering.</li>
+    </ul>
+  </aside>
 </div>
 
 <p class="updatedate">27.04.2026</p>
-<div>
+<div class="flexbox Gr">
+<article>
   <h2>1.2</h2>
     
       <b>Ny side 'Timeplan' er lagt til:</b>
         <ul>
           <li><p>Under 'Timeplan' er det lagt til en generell, fast timeplan til året</p></li>
         </ul>
-      <li><b>'Til toppen' knapp lagt til:</b></li>
+      <b>'Til toppen' knapp lagt til:</b>
         <ul>
           <li><p>Dersom du skroller lang nok ned, vil en 'Til toppen' knapp poppe opp på nederst til høyre side</p></li>
         </ul>
-      <li><b>Usynlige kodejusteringer:</b></li>
+      <b>Usynlige kodejusteringer:</b>
         <ul>
           <li><p>Det er blitt gjort små kodejusteringer slik at det er enklere for utvikleren å navigere seg gjennom koden</p></li>
         </ul>
     
+</article>
+
+<aside>
+  <h2>OBS! & Annet:</h2>
+      <ul>
+        <li>N/A; forhåpentligvis ingen feil!</li>
+      </ul>
+  </aside>
 </div>
 
 <p class="updatedate">16.04.2026</p>
-<div>
+<div class="flexbox Gr">
+<article>
  <h2>1.1</h2>
     <b>Flere sider er lagt til:</b>
      <ul>
@@ -2126,7 +2744,7 @@ table.calendar {
         </ul>
        <li><p>Ny side 'Kodeoppdateringer' er lagt til</p></li>
       </ul>
-     <li><b>'Nåværende uke' knapp oppdatert:</b></li>
+     <b>'Nåværende uke' knapp oppdatert:</b>
       <ul>
        <li><p>Knappen er nå en knapp istedenfor en link</p></li>
         <ul>
@@ -2135,10 +2753,16 @@ table.calendar {
         </ul>
        <li><p>Smooth scroll</p></li>
        <li><p>Linken til knappen er blokkert slik at man ikke automatisk kommer til uken etter refresh med den nye koden</p></li>
-        <ul>
-         <li><p>OBS! Slett '/#Uke16' (eller liknende) i linken din for å se denne effekten</p></li>
-        </ul>
       </ul>
+</article>
+
+<aside>
+  <h2>OBS! & Annet:</h2>
+    <b>(FIKSET!) OBS!:</b>
+      <ul>
+        <li>Slett '/#Uke16' (eller liknende) i linken din for å fikse refreshen</li>
+      </ul>
+  </aside>
 </div>
 
 </div>
@@ -2146,7 +2770,7 @@ table.calendar {
 <br>
 <br>
 <br>
-
+</div>
 <script>
   // Tidligere opdateringer knapp
 const oppdKnapp = document.getElementById('oppdKnapp')
@@ -2173,32 +2797,57 @@ oppdKnapp.onclick = () => {
 ========================================================= -->
 <div id="page5" class="page">
   <div class="flexbox">
-    <div class="infoBox">OBS!: Verken Horten VGS: Miljø- og teknologilinje eller Horten VGS er tilknyttet denne nettsiden eller kildene oppgitt. 
+    <div class="infoBox" id="elementInf">OBS!: Verken Horten VGS: Miljø- og teknologilinje eller Horten VGS er tilknyttet denne nettsiden eller kildene oppgitt. 
       Alle logoer, navn og visuelle elementer brukes kun for visuell virkning, og innebærer ikke sponsing, godkjenning eller kommersiell tilknytning. 
       Alt innhold til siden er utarbeidet selvstendig av en elev. Horten VGS og Miljø- og teknologilinjen kan ikke holdes ansvarlige for innholdet på denne nettsiden.</div>
   </div>
-  <br>
-  <div class="flexbox">
-    <div class="flexchild">
-     <h2>Nettside logo:</h2>
-     <ul>
-      <li><a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> ikon fått fra og redigert i <a target="_blank" href="https://icons8.com">Icons8</a></li>
-      <li>Deretter gjort om til svg i <a target="_blank" href="https://www.aconvert.com/image/png-to-svg/">aconvert</a></li>
-      <li>Videre endringer (bakgrunn og omringende linje) er gjort i siden via CSS</li>
-     </ul>
-     <svg version="1.1" id="AndstfLogo2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
-    </div>
-  </div>
-  
+
   <br>
 
-  <div class="flexbox">
-    <div class="flexchild">
-     <h2>Tanuki:</h2>
-     <ul>
-      <li>Stor takk til <a target="_blank" href="https://github.com/Jokarcana">Jokarcana </a>for  <a target="_blank" href="https://github.com/Jokarcana/Tanuki-Sunset">koden til Tanuki Sunset</a></li>
-     </ul>
+  <div class="flexbox A">
+    <div class="elementCard" style="max-width: 30em; min-width: 20em;">
+      <h2>Nettside logo:</h2>
+      <article> 
+       <ul>
+        <li><a target="_blank" href="https://icons8.com/icon/s0bMAtZrtXD3/plus-1-year">Plus 1 Year</a> ikon fått fra og redigert i <a target="_blank" href="https://icons8.com">Icons8</a></li>
+        <li>Deretter gjort om til svg i <a target="_blank" href="https://www.aconvert.com/image/png-to-svg/">aconvert</a></li>
+        <li>Videre endringer (bakgrunn og omringende linje) er gjort i siden via CSS</li>
+       </ul>
+       <svg version="1.1" id="AndstfLogo2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">  <image id="image0" width="96" height="96" x="0" y="0" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oGEBU4BK5NKQIAAAROSURBVHja7ZrfaxxVFMc/u9nWbTAb21hQWn2oLTT+xNKHKoi11kYoUm00Iooo+FCKWBD0L6hYJfgk+lCfKv5AQkhoQR+sFQURuxFBpdT6O2kFqzGJZZUmm68PGaez2Z3fd3ZmYb4Xwj3nzpxzvnPP/bH3BnLkyJGjU3ENI8whq2TPnq+7P21nJhyatueLkQZ38R2atueLOcMOI9orRHa43EV0S7HsFWO6TR1BeK7kAfawhfVc7tCayFKndz97kXt4kB9a5qUMlDD2IqGL4cgOM0FgOIbDDBAY9DDSa5iAvz0XuM9CK3nZg9xAtC5tmz3gYY+v0Mek0R4IYi803nYxUmHIUPjh7Lmg5Epgawud6R2KAXvuY+Bqw8EmBPf1zfF11nEVPzFty5exiSKnmAfKrGp4rUadHoc8Y6rbQq/EVu6V9aYWJS3oRUvzlKYlSb9pt9DzasTT2tEgd5sZLRG+gvXiC5J+14gWJQ0I3aW6pI81Iamma/W4qqrqL0nnVVVVQxaBL1VVVVWV0yZwTtIjQsclHRR6RdKnQiVNSTpgPTUu6bBV32H2y0eehQAocgT4BPgX6ALqQB/d1LifK/g5TlYnjAb+qzUj6V6hW7Ug6Rc9ppKjvbkHdmundqo/8R4ISOA1SZ+rKIT2akaS9L22ehBYwuHECZSCcNnLPi7wJIsAjHKcZ3iO6/iQTZx3eWeUOjCRhRTarFlJj1rSfXpIG4TWaUbSvtQHse9v4h5GqfAOb1nyQd7jCeAsk8CaFL/wEnxT6HX6gTkOAX8wzLvczAG6WMUNwMm04/eA1XWnHUPytFBJRyxpUa96DOJ2pZDvXuh2um1Vjc8AuJ5t1Knyrd1yC2s5yykA1rAFOEHd7ActhFJjfuucEIGkD7YmeZAKBdv9RgpW+c7x1BtsoECBjSZdm8jbXx3T1JJmvy1fOvEYtXX7E1uJI5bBJntjtrzdfmq7rRvLGoGeJnuzrLDkEtMIMW1P5SuYTWAhi4W/mzQVtlm1BT4A4H0WLM1tVMK7aP/p9C67dtTxt7HFCMIuLkHbv7A1vVxkntW2fDLKQtZ+AnXW2roTfGTXr6QehUD7U6jI3Xb9GMfs+j3RYknjhubSOehRBwHDIyC5FBJTLbcFfseLGSIgbmzydlMoXw6ET6GCowTRt8KuAJqASOeWciCAJjbi5KJfCv2z7EC1TK19KWQCZe5okO9cRigE0rroHvCQDCHJFBJfN7R9E3LGcyDeT0q/m3av9jC39B6Rdvz/SuQE0kZOIG0EOl53RQYOvzq+B7JAoLfTCcTaSCR7uBtkJe7jK9ZHjzTdHqgwFDD8sLzIxAwTJNIsjIFYyAmkjZxA2sgJpI1OITDX6QTOdTqBaqcTGHdr6Iy90I/0c7F1U2f0wLNu4XshyAVHe8qhaKzTDvv/8lLULEk7cCHOsMcvzHjHKknhAlNMMMY482mHkiNHjhw5cuTIkWX8B8a668QCeH57AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTA2LTE2VDIxOjU2OjA0KzAwOjAwg3hw+AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0wNi0xNlQyMTo1NjowNCswMDowMPIlyEQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMDYtMTZUMjE6NTY6MDQrMDA6MDClMOmbAAAAAElFTkSuQmCC" /></svg>
+      </article>
     </div>
+  
+    <br>
+
+    <div class="elementCard" style="min-width: 16em; max-width: 18em;">
+      <h2>Tanuki:</h2>
+      <article> 
+       <ul>
+        <li>Stor takk til <a target="_blank" href="https://github.com/Jokarcana">Jokarcana</a> for <a target="_blank" href="https://github.com/Jokarcana/Tanuki-Sunset">koden til Tanuki Sunset</a></li>
+        <li>Bilde fått fra  <a target="_blank" href="https://www.xbox.com/nb-NO/games/store/tanuki-sunset/9p6d1bff58wq">Xbox</a></li>
+       </ul>
+      </article>
+    </div>
+
+    <br>
+
+    <div class="elementCard" style="max-width: 33em; min-width: 22em;">
+      <h2>Videoer & misc:</h2>
+      <article> 
+       <ul>
+        <li>En fin og grundig <a target="_blank" href="https://www.youtube.com/watch?v=HD13eq_Pmp8">introduksjon til HTML</a> laget av <a target="_blank" href="https://www.youtube.com/@BroCodez">Bro Code</a></li>
+        <li>Sjekk ut <a target="_blank" href="https://www.youtube.com/@coding2go">Coding2GO</a> for mye bra om CSS</li>
+        <li>Sjekk ut videoen til <a target="_blank" href="https://www.youtube.com/@coding2go">Coding2Go</a> for en <a target="_blank" href="https://www.youtube.com/watch?v=_gKEUYarehE">mørkemodusknapp</a></li>
+        <li>Sjekk ut videoen til <a target="_blank" href="https://www.youtube.com/@TylerPotts">Tyler Potts</a> for et fint <a target="_blank" href="https://www.youtube.com/watch?v=neb7WcDixoY">sidepaneloppsett</a></li>
+        <li>Noen interessante CSS animasjoner jeg fant men ikke har brukt:</li>
+        <ul>
+         <li>En realistisk <a target="_blank" href="https://www.youtube.com/shorts/0rKvGoUfcJ0">flammeanimasjon</a></li>
+        </ul>
+       </ul>
+      </article>
+    </div>
+
+    <div style="height: 2em;"></div>
   </div>
 </div>
 <!-- =========================================================
@@ -2229,9 +2878,9 @@ oppdKnapp.onclick = () => {
   </div>
 </div>
 
-<div class="playButton" onclick="showSubpage('yolo')"> 
+<!-- <div class="playButton" onclick="showSubpage('yolo')"> 
   <p>Placeholder</p>
-</div> 
+</div>  -->
 
 <div onclick="showSubpage('tanuki')" class="playButton tanuki">
   <p>Tanuki Sunset</p>
@@ -2249,7 +2898,7 @@ oppdKnapp.onclick = () => {
 <div id="tetris" class="subpage">
 <div style="color:white; text-align:center; font-family:Arial;">
   <p id="scoreBoard" style="color:white;">Score: 0</p>
-  <p style="font-size: 0.9vw; color: white;">+10 per blokk<br>
+  <p style="font-size: 0.9em; color: white;">+10 per blokk<br>
      +100 for 1 linje<br>
      +300 for 2 linjer<br>
      +500 for 3 linjer<br>
