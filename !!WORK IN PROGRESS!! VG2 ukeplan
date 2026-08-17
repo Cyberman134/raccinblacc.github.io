@@ -76,7 +76,7 @@ Til Launch:
   --info-colour: var(--text-colour);
   --vurdering-colour: rgb(1, 230, 96);
   --lekse-colour: rgb(0, 201, 124);
-  --active-day: #30a07e;
+  --active-day: #80ccb5d5;
 
   /* Special */
  }
@@ -921,8 +921,10 @@ Til Launch:
 }
 
 #page4 b {
+  display: block;
   padding: 1em;
   padding-left: 1.5em;
+  padding-bottom: 0em;
 }
 
 #oppDivKnapp {
@@ -1667,119 +1669,20 @@ if (!window.matchMedia('(pointer: coarse)').matches) {
 ========================================================= */
 const weeks = [
   {
-    id: "Uke27",
-    title: "Uke 27",
-    startDate: "2026-06-29",
-    days: 7
-  },
-  
-  {
-    id: "Uke26",
-    title: "Uke 26",
-    startDate: "2026-06-22",
-    days: 7
-  },
-  {
-    id: "Uke25",
-    title: "Uke 25",
-    startDate: "2026-06-15",
-    days: 7
-  },
-  {
-    id: "Uke24",
-    title: "Uke 24",
-    startDate: "2026-06-08",
-    days: 7
-  },
-  {
-    id: "Uke23",
-    title: "Uke 23",
-    startDate: "2026-06-01",
-    days: 7
-  },
-  {
-    id: "Uke22",
-    title: "Uke 22",
-    startDate: "2026-05-25",
-    days: 7
-  },
-  {
-    id: "Uke21",
-    title: "Uke 21",
-    startDate: "2026-05-18",
-    days: 7
-  },
-  {
-    id: "Uke20",
-    title: "Uke 20",
-    startDate: "2026-05-11",
-    days: 7
-  },
-  {
-    id: "Uke19",
-    title: "Uke 19",
-    startDate: "2026-05-04",
+    id: "Uke34",
+    title: "Uke 34",
+    startDate: "2026-08-17",
     days: 7
   },
 ];
 
 const events = [ 
-  { date: "2026- ", type: " ", text: " " },
-/*19*/
-  { date: "2026-05-04", type: "info", text: "Bytte makker" },
-  { date: "2026-05-04", type: "test", text: "Presentere Engelsk (1)" },
-  { date: "2026-05-04", type: "homework", text: "Tysk 2 oppg." },
-  { date: "2026-05-06", type: "info", text: "(De som deltar) 14:00-17:00 Matte med ungdomsskole" },
-  { date: "2026-05-06", type: "info", text: "Tysk 2 møt i sølvkrona" },
-  { date: "2026-05-07", type: "homework", text: "Norsk Drama oppg. ON" },
-  { date: "2026-05-07", type: "test", text: "Presentere Engelsk (2)" },
-  { date: "2026-05-07", type: "test", text: "Geo befolkning og klima første utkast" },
-  { date: "2026-05-08", type: "test", text: "Matte terminprøve" },
-  { date: "2026-05-08", type: "info", text: "Matte fagdag" },
-/*20*/
-  { date: "2026-05-11", type: "test", text: "Engelsk presentasjon (3)" },
-  { date: "2026-05-12", type: "info", text: "(De som deltar) 14:00-17:00 Matte med ungdomsskole" },
-  { date: "2026-05-12", type: "test", text: "Nat.Fag bioteknologi presentasjon" },
-  { date: "2026-05-13", type: "info", text: "Nat.Fag standpunkt" },
-  { date: "2026-05-13", type: "test", text: "Nat.Fag bioteknologi presentasjon (siste gruppe)" },
-  { date: "2026-05-14", type: "fri", text: "Kristi himmelfartsdag" },
-  { date: "2026-05-15", type: "fri", text: "Inneklemt dag" },
-  { date: "2026-05-15", type: "test", text: "Geo befolkning og klima innlevering" },
-/*21*/
-  { date: "2026-05-19", type: "info", text: "Eksamen" },
-  { date: "2026-05-19", type: "test", text: "Geo befolkning og klima gruppepresentasjon" },
-  { date: "2026-05-20", type: "info", text: "Nat.Fag karljohansvern hoppekreps" },
-  { date: "2026-05-20", type: "test", text: "Tysk 2 skriveøkt" },
-  { date: "2026-05-21", type: "test", text: "Sam.Fag Arbeids- og næringsliv prøve" },
-  { date: "2026-05-21", type: "info", text: "Jobb hjemme i Engelsk" },
-  { date: "2026-05-22", type: "fri", text: "Ingen fagdag" },
-/*22*/
-  { date: "2026-05-25", type: "fri", text: "Andre pinsedag" },
-  { date: "2026-05-26", type: "info", text: "2STF presenterer ToF2 prosjekter" },
-  { date: "2026-05-26", type: "info", text: "Starten av å rydde klasserom og ToF-rom" },
-  { date: "2026-05-26", type: "test", text: "Vise frem ToF produkt (1)" },
-  { date: "2026-05-27", type: "info", text: "Studenter viser prosjekter på bakkenteigen" },
-  { date: "2026-05-27", type: "test", text: "Vise frem ToF produkt (2)" },
-  { date: "2026-05-27", type: "test", text: "Valgfri matteprøve" },
-  { date: "2026-05-29", type: "info", text: "Tysk 2 fagdag" },
-  { date: "2026-05-29", type: "info", text: "Muntlig eksamen øving" },
-/*23*/
-  { date: "2026-06-03", type: "fri", text: "Avspasering" },
-  { date: "2026-06-04", type: "fri", text: "Avspasering" },
-  { date: "2026-06-05", type: "fri", text: "Avspasering" },
-/*24*/
-  { date: "2026-06-08", type: "info", text: "Parkdag og aktiviteter (10:00 - 12:30)" },
-  { date: "2026-06-09", type: "fri", text: "Avspasering" },
-  { date: "2026-06-10", type: "fri", text: "Avspasering" },
-  { date: "2026-06-11", type: "info", text: "Sølvkrona (12:00 - 13:30)" },
-  { date: "2026-06-12", type: "fri", text: "Avspasering" },
-/*25*/
-  { date: "2026-06-15", type: "info", text: "Sølvkrona (10:00 - 11:00)" },
-  { date: "2026-06-15", type: "info", text: "Bokinnlevering (11:15)" },
-  { date: "2026-06-16", type: "fri", text: "Avspasering" },
-  { date: "2026-06-17", type: "info", text: "Sølvkrona (12:00 - 13:00)" },
-  { date: "2026-06-18", type: "info", text: "Turdag" },
-  { date: "2026-06-19", type: "info", text: "Siste skoledag (09:00 - ca. 11:00)" },
+  // { date: "2026- ", type: " ", text: " " },
+
+// 34
+  { date: "2026-08-17", type: "info", text: "Skolestart (12:20)" },
+  { date: "2026-08-19", type: "info", text: "Kontaktlærer samtale (rom 4429)" },
+  { date: "2026-08-20", type: "info", text: "Hente bøker (13:30)" },
 ];
 
 /* =========================================================
@@ -1940,10 +1843,11 @@ document.querySelectorAll(`[data-date="${today}"]`).forEach(el => {
     <ul>
      <li>Selve siden er bedre enn det den var i fjor, men nå er det færre fag jeg får til å skrive ned uten eventuell hjelp. Fagene som vil skrives ned er de følgende:</li>
       <ul>
-        <li>Norsk</li>
-        <li>Matte R1</li>
-        <li>TOF 2</li>
+        <li>Historie</li>
         <li>Kroppsøving</li>
+        <li>Matte R1</li>
+        <li>Norsk</li>
+        <li>TOF 2</li>
       </ul>
     </ul>
   </article>
@@ -2543,6 +2447,946 @@ table.calendar {
         </tr>
             </tbody>
 </table>
+
+<br>
+<br>
+<b>A-uke</b>
+<table class="calendar table table-bordered" id="AUke">
+    <thead>
+        <tr>
+            <th style="border: 2px solid black; background-color: var(--lightup-secondary)">&nbsp;</th>
+            <th class="timeDag">Mandag</th>
+            <th class="timeDag">Tirsdag</th>
+            <th class="timeDag">Onsdag</th>
+            <th class="timeDag">Torsdag</th>
+            <th class="timeDag">Fredag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 2px solid black">08:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">08:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">08:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">08:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">09:30-10:30</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:40</td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+       
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:40-11:40</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:50</td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Fysikk</span> <span class="lecturer"><a>
+			Inger Lindseth</a></span> <span class="location">4441</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Historie & filosofi</span> <span class="lecturer"><a>
+			Bjørn Y. Tollefsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+      <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:00</td>
+            <td class=" no-events" rowspan="1"></td>
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:20</td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Kroppsøving vg2</span> <span class="lecturer"><a>
+			Kaja Myrvang</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">TOF 2</span> <span class="lecturer"><a>
+			Jan K. T. Qvam, Lars Asbjørnsen</a></span> <span class="location">4433</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Historie</span> <span class="lecturer"><a>
+			Trine M. Fostervoll</a></span> <span class="location">Rom varierer</span> </div></td>
+      <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">16:00</td>
+        </tr>
+            </tbody>
+</table>
+
+<br>
+<br>
+<b>B-uke</b>
+<table class="calendar table table-bordered" id="BUke">
+    <thead>
+        <tr>
+            <th style="border: 2px solid black; background-color: var(--lightup-secondary)">&nbsp;</th>
+            <th class="timeDag">Mandag</th>
+            <th class="timeDag">Tirsdag</th>
+            <th class="timeDag">Onsdag</th>
+            <th class="timeDag">Torsdag</th>
+            <th class="timeDag">Fredag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 2px solid black">08:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">08:40</td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-10:00</span>
+                    <span class="title">Mattematikk 1T</span> <span class="lecturer"><a>
+			Aina Fardal</a></span> <span class="location">4449</span> </div></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-10:00</span>
+                    <span class="title">Mattematikk 1T</span> <span class="lecturer"><a>
+			Aina Fardal</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-10:00</span>
+                    <span class="title">Engelsk vg1</span> <span class="lecturer"><a>
+			Marianne Zalo</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-10:00</span>
+                    <span class="title">Fagdag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">08:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">09:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+       
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:20</td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">10:10-11:40</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:10-11:40</span>
+                    <span class="title">Teknologi og Forskningslære</span> <span class="lecturer"><a>
+			Bjørn Sjøttem Nyborg, <br> Jon Kjeldberg Mathisen</a></span> <span class="location">4433</span></div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">10:10-11:40</span>
+                    <span class="title">Naturfag SF</span> <span class="lecturer"><a>
+			Lars Asbjørnsen</a></span> <span class="location">4449</span> </div></td>
+             <td class=" has-events" rowspan="9">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:10-11:40</span>
+                    <span class="title">Samfunnskunnskap</span> <span class="lecturer"><a>
+			Jo Keim Olsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
+                  <span class="location">10:10-11:40</span>
+                    <span class="title">Fagdag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">10:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">11:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:00</td>
+            <td class=" no-events" rowspan="1"></td>
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:30</td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:50</span>
+                    <span class="title">Kroppsøving vg1</span> <span class="lecturer"><a>
+			Jennie Olsen Østby</a></span> <span class="location">Gymsal</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:50</span>
+                    <span class="title">Naturfag SF</span> <span class="lecturer"><a>
+			Lars Asbjørnsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events conflicts " rowspan="9">
+                <div class="row-fluid practice" style="width: 49.5%; height: 100%;">
+                  <span class="location">ODDETALL</span>
+                  <span class="location">12:20-13:50</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+                        Lærer varierer</a></span> <span class="location">Rom varierer</span>
+                </div>
+                <div class="row-fluid lecture" style="width: 49.5%; height: 100%;">
+                  <span class="location">PARTALL</span>
+                  <span class="location">12:20-13:50</span>
+                    <span class="title">Norsk vg1</span> <span class="lecturer"><a>
+                        Linda Holt</a></span> <span class="location">4449</span>
+                </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:50</span>
+                    <span class="title">Norsk vg1</span> <span class="lecturer"><a>
+			Linda Holt</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:50</span>
+                    <span class="title">Fagdag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">13:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:10</td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">14:00-15:30</span>
+                    <span class="title">Engelsk vg1</span> <span class="lecturer"><a>
+			Marianne Zalo</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">14:00-15:30</span>
+                    <span class="title">Geografi</span> <span class="lecturer"><a>
+			Jo Keim Olsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">14:00-15:30</span>
+                    <span class="title">Teknologi og Forskningslære</span> <span class="lecturer"><a>
+			Bjørn Sjøttem Nyborg, <br> Jon Kjeldberg Mathisen</a></span> <span class="location">4433</span></div></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="9">
+                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
+                  <span class="location">14:00-15:30</span>
+                    <span class="title">Fagdag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                      </td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">14:50</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:00</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:10</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:20</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:30</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">15:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">16:00</td>
+        </tr>
+            </tbody>
+</table>
+
 </div>
 <br>
 <br>
@@ -2615,7 +3459,7 @@ table.calendar {
           <li>1 klikk for å forsvinne på siden/komme tilbake etter å ha forsvunnet</li>
         </ul>
     </ul>
-  <b>Andre kodejusteringer som ikke er like visuelle om de ikke er borte</b> 
+  <b>Andre kodejusteringer som ikke er like visuelle om de ikke er borte:</b> 
     <ul>
       <li>f.eks sidens høydekompensasjoner for den følgende layouten</li>
     </ul>
