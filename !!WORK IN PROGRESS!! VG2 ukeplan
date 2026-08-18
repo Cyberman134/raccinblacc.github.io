@@ -25,16 +25,10 @@ Fiks:
    - Få hemmelig over til en annen side for mindre load (kanskje?)
 
 - Se litt på fargeoppsettet
-   - Se dypere inn i planner css
-   - Lage css-ordning for hoveddivene  
+   - Se dypere inn i planner css  
 
 - Mørkemodus
   - Andre moduser
-
-Til Launch:
-   - Sett opp ukeplanen
-   - Gjør ferdig ekstra info
-   - Finn ut av timeplan
 
 */
  :root { 
@@ -1669,6 +1663,18 @@ if (!window.matchMedia('(pointer: coarse)').matches) {
 ========================================================= */
 const weeks = [
   {
+    id: "Uke36",
+    title: "Uke 36",
+    startDate: "2026-08-31",
+    days: 7
+  },
+  {
+    id: "Uke35",
+    title: "Uke 35",
+    startDate: "2026-08-24",
+    days: 7
+  },
+  {
     id: "Uke34",
     title: "Uke 34",
     startDate: "2026-08-17",
@@ -1679,10 +1685,18 @@ const weeks = [
 const events = [ 
   // { date: "2026- ", type: " ", text: " " },
 
+// 36
+  { date: "2026-09-04", type: "info", text: "TOF2 fagdag" },
+
+// 35
+  { date: "2026-08-28", type: "info", text: "Varierte fag" },
+
 // 34
   { date: "2026-08-17", type: "info", text: "Skolestart (12:20)" },
   { date: "2026-08-19", type: "info", text: "Kontaktlærer samtale (rom 4429)" },
   { date: "2026-08-20", type: "info", text: "Hente bøker (13:30)" },
+  { date: "2026-08-21", type: "info", text: "Programfag fagdag" },
+  
 ];
 
 /* =========================================================
@@ -1982,7 +1996,7 @@ table.calendar {
    5.2 TIMEPLAN TABLE
 ========================================================= -->
 <div style="padding: 1vw;">
-<table class="calendar table table-bordered">
+<!-- <table class="calendar table table-bordered">
     <thead>
         <tr>
             <th style="border: 2px solid black; background-color: var(--lightup-secondary)">&nbsp;</th>
@@ -2446,7 +2460,7 @@ table.calendar {
             <td style="border: 2px solid black">16:00</td>
         </tr>
             </tbody>
-</table>
+</table> -->
 
 <br>
 <br>
@@ -2476,7 +2490,7 @@ table.calendar {
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">08:30-09:30</span>
                     <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
 			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
@@ -2485,11 +2499,16 @@ table.calendar {
                   <span class="location">08:30-09:30</span>
                     <span class="title">Programfag</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
-            <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">08:30-09:30</span>
-                    <span class="title">Programfag</span> <span class="lecturer"><a>
-			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
 
         </tr>
         <tr>
@@ -2539,7 +2558,7 @@ table.calendar {
             <td style="border: 2px solid black">09:30</td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">09:30-10:30</span>
                     <span class="title">Programfag</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
@@ -2561,15 +2580,20 @@ table.calendar {
                     <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
 			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
             <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">09:40-10:40</span>
                     <span class="title">Programfag</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
-            <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">09:40-10:40</span>
-                    <span class="title">Programfag</span> <span class="lecturer"><a>
-			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
             <td class=" no-events" rowspan="1"></td>
 
         </tr>
@@ -2622,8 +2646,6 @@ table.calendar {
                   <span class="location">10:40-11:40</span>
                     <span class="title">Programfag</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
-            
-
         </tr>
         <tr>
             <td style="border: 2px solid black">10:50</td>
@@ -2639,7 +2661,7 @@ table.calendar {
                     <span class="title">Historie & filosofi</span> <span class="lecturer"><a>
 			Bjørn Y. Tollefsen</a></span> <span class="location">4449</span> </div></td>
             <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">10:50-11:50</span>
                     <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
@@ -2648,10 +2670,15 @@ table.calendar {
                   <span class="location">10:50-11:50</span>
                     <span class="title">Programfag</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
-      <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+      <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">10:50-11:50</span>
-                    <span class="title">Programfag</span> <span class="lecturer"><a>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
 
         </tr>
@@ -2724,7 +2751,7 @@ table.calendar {
                     <span class="title">Kroppsøving vg2</span> <span class="lecturer"><a>
 			Kaja Myrvang</a></span> <span class="location">Rom varierer</span> </div></td>
             <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">12:20-13:20</span>
                     <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
@@ -2734,14 +2761,19 @@ table.calendar {
                     <span class="title">TOF 2</span> <span class="lecturer"><a>
 			Jan K. T. Qvam, Lars Asbjørnsen</a></span> <span class="location">4433</span> </div></td>
             <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">12:20-13:20</span>
                     <span class="title">Historie</span> <span class="lecturer"><a>
-			Trine M. Fostervoll</a></span> <span class="location">Rom varierer</span> </div></td>
-      <td class=" has-events" rowspan="6">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+			Trine M. Fostervoll</a></span> <span class="location">4449</span> </div></td>
+      <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">12:20-13:20</span>
-                    <span class="title">Programfag</span> <span class="lecturer"><a>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
         </tr>
         <tr>
@@ -2798,9 +2830,42 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">13:30</td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Kroppsøving vg2</span> <span class="lecturer"><a>
+			Kaja Myrvang</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">TOF 2</span> <span class="lecturer"><a>
+			Jan K. T. Qvam, Lars Asbjørnsen</a></span> <span class="location">4433</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Fysikk</span> <span class="lecturer"><a>
+			Inger Lindseth</a></span> <span class="location">4441</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Historie & filosofi</span> <span class="lecturer"><a>
+			Bjørn Y. Tollefsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
 
         </tr>
         <tr>
@@ -2826,6 +2891,7 @@ table.calendar {
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
 
         </tr>
         <tr>
@@ -2848,9 +2914,42 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">14:30</td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">TOF 2</span> <span class="lecturer"><a>
+			Jan K. T. Qvam, Lars Asbjørnsen</a></span> <span class="location">4433</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Fysikk</span> <span class="lecturer"><a>
+			Inger Lindseth</a></span> <span class="location">4441</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Historie & filosofi</span> <span class="lecturer"><a>
+			Bjørn Y. Tollefsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
 
         </tr>
         <tr>
@@ -2934,7 +3033,7 @@ table.calendar {
     </thead>
     <tbody>
         <tr>
-            <td style="border: 2px solid black">08:30</td>
+            <td style="border: 2px solid black">08:20</td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
@@ -2942,28 +3041,37 @@ table.calendar {
 
         </tr>
         <tr>
-            <td style="border: 2px solid black">08:40</td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
-                  <span class="location">08:30-10:00</span>
-                    <span class="title">Mattematikk 1T</span> <span class="lecturer"><a>
-			Aina Fardal</a></span> <span class="location">4449</span> </div></td>
+            <td style="border: 2px solid black">08:30</td>
             <td class=" no-events" rowspan="1"></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
-                  <span class="location">08:30-10:00</span>
-                    <span class="title">Mattematikk 1T</span> <span class="lecturer"><a>
-			Aina Fardal</a></span> <span class="location">4449</span> </div></td>
-            <td class=" has-events" rowspan="9">
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
                 <div class="row-fluid practice" style="width: 99%; height: 100%;">
-                  <span class="location">08:30-10:00</span>
-                    <span class="title">Engelsk vg1</span> <span class="lecturer"><a>
-			Marianne Zalo</a></span> <span class="location">4449</span> </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
-                  <span class="location">08:30-10:00</span>
-                    <span class="title">Fagdag</span> <span class="lecturer"><a>
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
 			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">08:30-09:30</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
+
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">08:40</td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
         </tr>
         <tr>
             <td style="border: 2px solid black">08:50</td>
@@ -3004,7 +3112,11 @@ table.calendar {
         <tr>
             <td style="border: 2px solid black">09:30</td>
             <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">09:30-10:30</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
@@ -3012,16 +3124,36 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">09:40</td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">09:40-10:40</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
             <td class=" no-events" rowspan="1"></td>
 
         </tr>
         <tr>
             <td style="border: 2px solid black">09:50</td>
-            <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
@@ -3048,31 +3180,11 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">10:20</td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid practice" style="width: 99%; height: 100%;">
-                  <span class="location">10:10-11:40</span>
-                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
-			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
-                  <span class="location">10:10-11:40</span>
-                    <span class="title">Teknologi og Forskningslære</span> <span class="lecturer"><a>
-			Bjørn Sjøttem Nyborg, <br> Jon Kjeldberg Mathisen</a></span> <span class="location">4433</span></div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid practice" style="width: 99%; height: 100%;">
-                  <span class="location">10:10-11:40</span>
-                    <span class="title">Naturfag SF</span> <span class="lecturer"><a>
-			Lars Asbjørnsen</a></span> <span class="location">4449</span> </div></td>
-             <td class=" has-events" rowspan="9">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
-                  <span class="location">10:10-11:40</span>
-                    <span class="title">Samfunnskunnskap</span> <span class="lecturer"><a>
-			Jo Keim Olsen</a></span> <span class="location">4449</span> </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
-                  <span class="location">10:10-11:40</span>
-                    <span class="title">Fagdag</span> <span class="lecturer"><a>
-			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
 
         </tr>
         <tr>
@@ -3084,19 +3196,45 @@ table.calendar {
         <tr>
             <td style="border: 2px solid black">10:40</td>
             <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:40-11:40</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
         </tr>
         <tr>
             <td style="border: 2px solid black">10:50</td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Fysikk</span> <span class="lecturer"><a>
+			Inger Lindseth</a></span> <span class="location">4441</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Historie & filosofi</span> <span class="lecturer"><a>
+			Bjørn Y. Tollefsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+      <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">10:50-11:50</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
 
         </tr>
         <tr>
@@ -3162,47 +3300,44 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">12:20</td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Kroppsøving vg2</span> <span class="lecturer"><a>
+			Kaja Myrvang</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">TOF 2</span> <span class="lecturer"><a>
+			Jan K. T. Qvam, Lars Asbjørnsen</a></span> <span class="location">4433</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Historie</span> <span class="lecturer"><a>
+			Trine M. Fostervoll</a></span> <span class="location">4449</span> </div></td>
+      <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">12:20-13:20</span>
+                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+        </tr>
+        <tr>
+            <td style="border: 2px solid black">12:30</td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
 
-        </tr>
-        <tr>
-            <td style="border: 2px solid black">12:30</td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
-                  <span class="location">12:20-13:50</span>
-                    <span class="title">Kroppsøving vg1</span> <span class="lecturer"><a>
-			Jennie Olsen Østby</a></span> <span class="location">Gymsal</span> </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid practice" style="width: 99%; height: 100%;">
-                  <span class="location">12:20-13:50</span>
-                    <span class="title">Naturfag SF</span> <span class="lecturer"><a>
-			Lars Asbjørnsen</a></span> <span class="location">4449</span> </div></td>
-            <td class=" has-events conflicts " rowspan="9">
-                <div class="row-fluid practice" style="width: 49.5%; height: 100%;">
-                  <span class="location">ODDETALL</span>
-                  <span class="location">12:20-13:50</span>
-                    <span class="title">Fremmedspråk</span> <span class="lecturer"><a>
-                        Lærer varierer</a></span> <span class="location">Rom varierer</span>
-                </div>
-                <div class="row-fluid lecture" style="width: 49.5%; height: 100%;">
-                  <span class="location">PARTALL</span>
-                  <span class="location">12:20-13:50</span>
-                    <span class="title">Norsk vg1</span> <span class="lecturer"><a>
-                        Linda Holt</a></span> <span class="location">4449</span>
-                </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid practice" style="width: 99%; height: 100%;">
-                  <span class="location">12:20-13:50</span>
-                    <span class="title">Norsk vg1</span> <span class="lecturer"><a>
-			Linda Holt</a></span> <span class="location">4449</span> </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
-                  <span class="location">12:20-13:50</span>
-                    <span class="title">Fagdag</span> <span class="lecturer"><a>
-			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
 
         </tr>
         <tr>
@@ -3250,9 +3385,42 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">13:30</td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Historie</span> <span class="lecturer"><a>
+			Trine M. Fostervoll</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">TOF 2</span> <span class="lecturer"><a>
+			Jan K. T. Qvam, Lars Asbjørnsen</a></span> <span class="location">4433</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Fysikk</span> <span class="lecturer"><a>
+			Inger Lindseth</a></span> <span class="location">4441</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Historie & filosofi</span> <span class="lecturer"><a>
+			Bjørn Y. Tollefsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
 
         </tr>
         <tr>
@@ -3278,32 +3446,16 @@ table.calendar {
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
 
         </tr>
         <tr>
             <td style="border: 2px solid black">14:10</td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid practice" style="width: 99%; height: 100%;">
-                  <span class="location">14:00-15:30</span>
-                    <span class="title">Engelsk vg1</span> <span class="lecturer"><a>
-			Marianne Zalo</a></span> <span class="location">4449</span> </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
-                  <span class="location">14:00-15:30</span>
-                    <span class="title">Geografi</span> <span class="lecturer"><a>
-			Jo Keim Olsen</a></span> <span class="location">4449</span> </div></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid practice" style="width: 99%; height: 100%;">
-                  <span class="location">14:00-15:30</span>
-                    <span class="title">Teknologi og Forskningslære</span> <span class="lecturer"><a>
-			Bjørn Sjøttem Nyborg, <br> Jon Kjeldberg Mathisen</a></span> <span class="location">4433</span></div></td>
             <td class=" no-events" rowspan="1"></td>
-            <td class=" has-events" rowspan="9">
-                <div class="row-fluid fagdag" style="width: 99%; height: 100%;">
-                  <span class="location">14:00-15:30</span>
-                    <span class="title">Fagdag</span> <span class="lecturer"><a>
-			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
-                      </td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+            <td class=" no-events" rowspan="1"></td>
+
 
         </tr>
         <tr>
@@ -3317,9 +3469,42 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">14:30</td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid lecture" style="width: 99%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Programfag</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">TOF 2</span> <span class="lecturer"><a>
+			Jan K. T. Qvam, Lars Asbjørnsen</a></span> <span class="location">4433</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Fysikk</span> <span class="lecturer"><a>
+			Inger Lindseth</a></span> <span class="location">4441</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">FOR NOEN</span>
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Historie & filosofi</span> <span class="lecturer"><a>
+			Bjørn Y. Tollefsen</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+            <td class=" has-events conflicts " rowspan="6">
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">FAGDAG</span> <span class="lecturer"><a>
+			Lærer varierer</a></span> <span class="location">Rom varierer</span> </div>
+                <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
+                  <span class="location">EVT</span>
+                  <span class="location">14:35-15:35</span>
+                    <span class="title">Mattematikk R1</span> <span class="lecturer"><a>
+			Rolf U. Isachsen</a></span> <span class="location">4449</span> </div></td>
 
         </tr>
         <tr>
@@ -3386,7 +3571,6 @@ table.calendar {
         </tr>
             </tbody>
 </table>
-
 </div>
 <br>
 <br>
