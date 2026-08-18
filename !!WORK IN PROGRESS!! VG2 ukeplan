@@ -17,7 +17,6 @@ transform: perspective(900px) rotateY(-50deg) rotateX(15deg) rotate(-5deg);
 
 'Settings':
    -'Abboner på fag' (legge til i innstillinger ekstra fag)
-   - Email meg
 
 Fiks:
    - Cookies banner
