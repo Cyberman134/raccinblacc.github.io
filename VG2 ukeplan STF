@@ -17,6 +17,7 @@ transform: perspective(900px) rotateY(-50deg) rotateX(15deg) rotate(-5deg);
 
 'Settings':
    -'Abboner på fag' (legge til i innstillinger ekstra fag)
+   - Email meg
 
 Fiks:
    - Cookies banner
@@ -1694,6 +1695,7 @@ const events = [
   { date: "2026-08-17", type: "info", text: "Skolestart (12:20)" },
   { date: "2026-08-19", type: "info", text: "Kontaktlærer samtale (rom 4429)" },
   { date: "2026-08-20", type: "info", text: "Hente bøker (13:30)" },
+  { date: "2026-08-20", type: "info", text: "Foredrag i sølvkrona" },
   { date: "2026-08-21", type: "info", text: "Programfag fagdag" },
   
 ];
