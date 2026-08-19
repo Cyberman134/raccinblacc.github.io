@@ -1694,8 +1694,8 @@ const events = [
 // 34
   { date: "2026-08-17", type: "info", text: "Skolestart (12:20)" },
   { date: "2026-08-19", type: "info", text: "Kontaktlærer samtale (rom 4429)" },
-  { date: "2026-08-20", type: "info", text: "Hente bøker (13:30)" },
-  { date: "2026-08-20", type: "info", text: "Foredrag i sølvkrona" },
+  { date: "2026-08-20", type: "info", text: "Hente bøker (14:35)" },
+  { date: "2026-08-20", type: "info", text: "Foredrag i sølvkrona (8:30)" },
   { date: "2026-08-21", type: "info", text: "Programfag fagdag" },
   
 ];
