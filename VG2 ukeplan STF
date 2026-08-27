@@ -17,7 +17,6 @@ transform: perspective(900px) rotateY(-50deg) rotateX(15deg) rotate(-5deg);
 
 'Settings':
    -'Abboner på fag' (legge til i innstillinger ekstra fag)
-   - Email meg
 
 Fiks:
    - Cookies banner
@@ -496,6 +495,8 @@ Fiks:
     top: calc(var(--spcity-height, 0px) + 10px);
     align-self: flex-start;
     border-radius: 5px;
+    box-shadow: 
+      0px 0px 0.2em black;
   }
 
   .sidebar h3 {
@@ -1686,6 +1687,7 @@ const events = [
   // { date: "2026- ", type: " ", text: " " },
 
 // 36
+  { date: "2026-08-31", type: "info", text: "FOTSPOR i gym" },
   { date: "2026-09-04", type: "info", text: "TOF2 fagdag" },
 
 // 35
@@ -1694,8 +1696,8 @@ const events = [
 // 34
   { date: "2026-08-17", type: "info", text: "Skolestart (12:20)" },
   { date: "2026-08-19", type: "info", text: "Kontaktlærer samtale (rom 4429)" },
-  { date: "2026-08-20", type: "info", text: "Hente bøker (14:35)" },
   { date: "2026-08-20", type: "info", text: "Foredrag i sølvkrona (8:30)" },
+  { date: "2026-08-20", type: "info", text: "Hente bøker (14:35)" },
   { date: "2026-08-21", type: "info", text: "Programfag fagdag" },
   
 ];
@@ -2465,7 +2467,7 @@ table.calendar {
 
 <br>
 <br>
-<b>A-uke</b>
+<b>A-uke (Som regel oddetall)</b>
 <table class="calendar table table-bordered" id="AUke">
     <thead>
         <tr>
@@ -2856,7 +2858,7 @@ table.calendar {
                 <div class="row-fluid lecture" style="width: 99%; height: 100%;">
                   <span class="location">13:30-14:30</span>
                     <span class="title">Norsk vg2</span> <span class="lecturer"><a>
-			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
             <td class=" has-events conflicts " rowspan="6">
                 <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">13:30-14:30</span>
@@ -2940,7 +2942,7 @@ table.calendar {
                 <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">14:35-15:35</span>
                     <span class="title">Norsk vg2</span> <span class="lecturer"><a>
-			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
             <td class=" has-events conflicts " rowspan="6">
                 <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">14:35-15:35</span>
@@ -3020,7 +3022,7 @@ table.calendar {
 
 <br>
 <br>
-<b>B-uke</b>
+<b>B-uke (Som regel partall)</b>
 <table class="calendar table table-bordered" id="BUke">
     <thead>
         <tr>
@@ -3043,7 +3045,11 @@ table.calendar {
         </tr>
         <tr>
             <td style="border: 2px solid black">08:30</td>
-            <td class=" no-events" rowspan="1"></td>
+            <td class=" has-events" rowspan="6">
+                <div class="row-fluid practice" style="width: 99%; height: 100%;">
+                  <span class="location">13:30-14:30</span>
+                    <span class="title">Historie</span> <span class="lecturer"><a>
+			Trine M. Fostervoll</a></span> <span class="location">4449</span> </div></td>
             <td class=" no-events" rowspan="1"></td>
             <td class=" has-events" rowspan="6">
                 <div class="row-fluid practice" style="width: 99%; height: 100%;">
@@ -3389,8 +3395,8 @@ table.calendar {
             <td class=" has-events" rowspan="6">
                 <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">13:30-14:30</span>
-                    <span class="title">Historie</span> <span class="lecturer"><a>
-			Trine M. Fostervoll</a></span> <span class="location">4449</span> </div></td>
+                    <span class="title">Norsk vg2</span> <span class="lecturer"><a>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
             <td class=" has-events" rowspan="6">
                 <div class="row-fluid lecture" style="width: 99%; height: 100%;">
                   <span class="location">13:30-14:30</span>
@@ -3411,7 +3417,7 @@ table.calendar {
                 <div class="row-fluid lecture" style="width: 99%; height: 100%;">
                   <span class="location">13:30-14:30</span>
                     <span class="title">Norsk vg2</span> <span class="lecturer"><a>
-			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
             <td class=" has-events conflicts " rowspan="6">
                 <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">13:30-14:30</span>
@@ -3495,7 +3501,7 @@ table.calendar {
                 <div class="row-fluid practice" style="width: 99%; height: 100%;">
                   <span class="location">14:35-15:35</span>
                     <span class="title">Norsk vg2</span> <span class="lecturer"><a>
-			Kaja Myrvang</a></span> <span class="location">4449</span> </div></td>
+			Kjersti M. Heldaas</a></span> <span class="location">4449</span> </div></td>
             <td class=" has-events conflicts " rowspan="6">
                 <div class="row-fluid fagdag" style="width: 49.5%; height: 100%;">
                   <span class="location">14:35-15:35</span>
@@ -3986,7 +3992,7 @@ oppdKnapp.onclick = () => {
 
 #spillFlexbox {
   display: none;
-  z-index: 90;
+  z-index: 120;
   top: 0;
   right: 0; 
 }
@@ -4002,17 +4008,17 @@ oppdKnapp.onclick = () => {
 }
 
 .active #spillbox {
-  z-index: 98;
+  position: fixed;
   width: fit-content;
   height: fit-content;
   padding: 30px;
   background-color: black;
   border-radius: 70px;
+  z-index: 130;
 }
 
-#spillbox.active iframe {
+#spillFlexbox.active iframe {
   margin-top: 3vw;
-  z-index: 101;
 }
 
 #gameButtons {
@@ -4102,12 +4108,6 @@ oppdKnapp.onclick = () => {
 <!-- =========================================================
    7.1.2 TETRIS JS
 ========================================================= -->
-<script src="TemplateData/UnityProgress.js"></script>
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/WebGL.json", {onProgress: UnityProgress});
-    </script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
